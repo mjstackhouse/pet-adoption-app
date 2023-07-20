@@ -8,7 +8,10 @@ async function fetchToken() {
     cache: 'no-store'
   });
 
-  if (!tokenResponse.ok) throw new Error('Failed to fetch token');
+  if (!tokenResponse.ok) {
+    console.error('tokenResponse: ', await tokenResponse);
+    throw new Error('Failed to fetch token');
+  } 
 
   const tokenObj = await tokenResponse.json();
 
@@ -17,17 +20,19 @@ async function fetchToken() {
   return tokenObj;
 }
 
-export default async function fetchData(param) {
+export default async function fetchData(...args) {
   const alphaRegex = /[A-Za-z]/;
   const tokenObj = await fetchToken();
 
   let dataResponse;
 
-  console.log('param: ', param);
-  console.log('alphaRegex.test(param): ', alphaRegex.test(param));
+  // console.log('param: ', param);
+  // console.log('alphaRegex.test(param): ', alphaRegex.test(param));
 
-  if (alphaRegex.test(param) === true) {
-      dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${param}`, {
+  if (alphaRegex.test(args[0]) === true) {
+      console.log(`https://api.petfinder.com/v2/animals?type=${args[0]}&location="${args[2]}, ${args[1]}"`);
+
+      dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${await tokenObj.access_token}`
@@ -36,7 +41,9 @@ export default async function fetchData(param) {
     });
   }
   else {
-    dataResponse = await fetch(`https://api.petfinder.com/v2/animals/${param}`, {
+    console.log('in the fetchData else');
+
+    dataResponse = await fetch(`https://api.petfinder.com/v2/animals/${args[0]}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${await tokenObj.access_token}`
