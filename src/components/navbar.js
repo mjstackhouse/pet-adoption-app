@@ -1,6 +1,7 @@
 // 'use client'
 
 import Link from 'next/link';
+import SignInButton from './signin-button';
 
 export default function Navbar() {
   return (
@@ -20,8 +21,7 @@ export default function Navbar() {
             <Link href='/search/other-pets'>Other Pets</Link>
           </li> */}
           <li className='basis-1/2 justify-end flex'>
-            <Link href='/account/login' className='mr-4'>Sign In</Link>
-            <Link href='/account/register'>Register</Link>
+            <SignInButton />
           </li>
         </ul>
       </nav>

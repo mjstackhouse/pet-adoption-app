@@ -5,7 +5,7 @@ import SwipeButton from '@/components/swipe-button';
 export default async function Pets({ params }) {
   const data = await fetchData(params.pets, params.state, params.city);
 
-  console.log('data.animals: ', await data.animals);
+  // console.log('data.animals: ', await data.animals);
 
   return (
     <div className='h-[90vh] h-[90svh] flex flex-wrap items-center'>
@@ -21,8 +21,8 @@ export default async function Pets({ params }) {
                         <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[400px] m-auto'></img>
                       </div>
                       <div className='justify-self-start mx-auto'>
-                        <div className='text-xl sm:text-3xl font-bold'>{element.name.toUpperCase()}</div>
-                        <div>{element.breeds.primary}{element.breeds.secondary !== null ? ` / ${element.breeds.secondary}` : ''}</div>
+                        <div className={`font-bold ${element.name.length >= 22 ? 'text-base sm:text-xl' : 'text-xl sm:text-3xl'}`}>{element.name.toUpperCase()}</div>
+                        <div>{element.breeds.primary}{element.breeds.secondary !== null ? ` Mix` : ''}</div>
                         <div>{element.age} {element.gender} {element.species}</div>
                       </div>
                     </Link>
