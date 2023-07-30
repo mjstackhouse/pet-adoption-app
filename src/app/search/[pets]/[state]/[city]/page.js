@@ -1,9 +1,19 @@
 import fetchData from '../../../../../utilities/fetch-data';
+import checkLiked from '@/utilities/check-liked';
 import Link from 'next/link';
 import SwipeButton from '@/components/swipe-button';
+import LikeButton from '@/components/like-button';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import SignInButtonPopup from '@/components/signin-button-popup';
 
 export default async function Pets({ params }) {
+  let userLikes;
+
   const data = await fetchData(params.pets, params.state, params.city);
+  const session = await getServerSession(authOptions);
+
+  if (session) userLikes = await checkLiked();
 
   // console.log('data.animals: ', await data.animals);
 
@@ -11,7 +21,9 @@ export default async function Pets({ params }) {
     <div className='h-[90vh] h-[90svh] flex flex-wrap items-center'>
       <div id='pet-links-container' className='h-[77vh] h-[77svh] flex items-center text-black overflow-hidden'>
         { await data.animals.map((element) => {
-          return <div className='self-start sm:basis-1/3 md:my-8'><div className='flex flex-wrap w-[100vw] items-center sm:h-[25vh] text-center'>
+          return <div className='relative self-start sm:basis-1/3 md:my-8'><div className='flex flex-wrap w-[100vw] items-center sm:h-[25vh] text-center'>
+                    <LikeButton animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } />
+                    <SignInButtonPopup />
                     <Link href={`/search/${params.state}/${params.city}/${params.pets}/${element.id}`} className='basis-full p-4 shadow-md rounded-b-3xl flex flex-wrap bg-white items-center'>
                       {/* <div className='bg-center bg-no-repeat bg-cover h-[100%]' style={{ backgroundImage: `url('${element.primary_photo_cropped !== null ? element.primary_photo_cropped.small : ''}')` }}></div> */}
                       {/* <div className='basis-full h-[65vh] h-[65svh] w-fit relative overflow-hidden'>

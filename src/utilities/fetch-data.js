@@ -27,28 +27,29 @@ async function fetchToken() {
 export default async function fetchData(...args) {
   const alphaRegex = /[A-Za-z]/;
 
-  console.log('fetchTokenCount: ', fetchTokenCount);
-  console.log('intervalId: ', intervalId);
+  // console.log('fetchTokenCount: ', fetchTokenCount);
+  // console.log('intervalId: ', intervalId);
 
   if (fetchTokenCount === 0) {
-    console.log('fetchObjCount === 0');
+    // console.log('fetchObjCount === 0');
     tokenObj2 = await fetchToken();
     fetchTokenCount += 1;
   }
   else {
     if (intervalId === undefined) {
-      console.log('setInterval');
+      // console.log('setInterval');
       intervalId = setInterval(fetchToken, 3600000);
     }
   }
 
-  console.log('tokenObj: ', await tokenObj2);
+  // console.log('tokenObj: ', await tokenObj2);
 
   let dataResponse;
 
   // console.log('param: ', param);
   // console.log('alphaRegex.test(param): ', alphaRegex.test(param));
 
+  // Type of animal in city/state
   if (alphaRegex.test(args[0]) === true) {
       // console.log(`https://api.petfinder.com/v2/animals?type=${args[0]}&location="${args[2]}, ${args[1]}"`);
 
