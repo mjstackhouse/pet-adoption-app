@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .hdpi.pac-logo:after {
   background-image: none;
 }
@@ -29,3 +28,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+#no-session-feedback {
+   display: none;
+}
