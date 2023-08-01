@@ -69,7 +69,7 @@ export default function LikeButton({ animalId, liked }) {
   }
 
   return (
-    <button className='absolute text-9xl drop-shadow-lg opacity-75' onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>
+    <button className='absolute text-9xl drop-shadow-lg opacity-50' onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>
       <FontAwesomeIcon icon={faHeart} style={{ color: symbolColor }} />
     </button>
     // <button className='absolute text-9xl drop-shadow-lg opacity-75' style={{ color: symbolColor }} onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>{likedSymbol}</button>
