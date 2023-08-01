@@ -13,8 +13,10 @@ export default async function FavoritesPage() {
   
   const likedAnimalsInfoArr = await fetchLikedArr();
 
+  console.log('await fetchLikedArr(): ', await fetchLikedArr());
+
   // const likedAnimalsInfoArr = await likedAnimalsInfo.slice();
-  console.log('likedAnimalsInfoArr: ', await likedAnimalsInfoArr);
+  console.log('likedAnimalsInfoArr: ', likedAnimalsInfoArr);
   const session = await getServerSession(authOptions);
 
   if (session) userLikes = await checkLiked();
@@ -25,7 +27,7 @@ export default async function FavoritesPage() {
   return (
     <div className='h-[90vh] h-[90svh] flex flex-wrap items-center'>
       <div id='pet-links-container' className='h-[77vh] h-[77svh] flex items-center text-black overflow-hidden'>
-        {await likedAnimalsInfoArr.forEach((element) => {
+        {await likedAnimalsInfoArr.map((element) => {
           return <div className='relative self-start sm:basis-1/3 md:my-8'><div className='flex flex-wrap w-[100vw] items-center sm:h-[25vh] text-center'>
                     <LikeButton animalId={element.animal.id} liked={ userLikes !== undefined ? (userLikes.includes(element.animal.id) === true ? true : false) : false } />
                     <Link href={`/search/${element.animal.id}`} className='basis-full p-4 shadow-md rounded-b-3xl flex flex-wrap bg-white items-center'>

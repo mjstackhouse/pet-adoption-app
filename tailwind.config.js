@@ -12,7 +12,11 @@ module.exports = {
       'yellow': '#E0D069',
       'black': '#000000',
       'white': '#FFFFFF',
-      'red': '#FC2634'
+      'red': '#FC2634',
+      'gray': '#EDEDED'
+    },
+    screens: {
+      'xs': '410px'
     },
     extend: {
     },
