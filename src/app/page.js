@@ -1,6 +1,5 @@
 import Search from '@/components/search';
 import Image from 'next/image';
-import petsImg from '../../public/pets-1.jpg';
 import { Bree_Serif } from 'next/font/google';
 import Provider from '@/components/provider';
 
