@@ -1,9 +1,6 @@
 import './globals.css';
 import Navbar from '@/components/navbar';
-import { Inter } from 'next/font/google';
 import Provider from '@/components/provider';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,13 +9,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className=''>
-      <body className='h-screen max-w-[100vw] flex flex-wrap flex-row bg-gradient-to-r from-pink to-yellow text-black'>
+    <html lang='en' className='max-h-fit'>
+      <body className='flex flex-wrap flex-row text-black'>
         <Provider>
           <div className='h-[10vh] basis-full flex self-start'>
             <Navbar />
           </div>
-          <div id='root-layout' className='min-h-[90vh] basis-full flex flex-col items-center justify-center'>
+          <div id='root-layout' className='h-[90vh] basis-full flex flex-col items-center justify-center'>
             {children}
           </div>
         </Provider>

@@ -5,10 +5,19 @@ export default async function fetchLikedArr() {
   let likedAnimalsInfo = [];
   const likedAnimalsIds = await fetchLiked();
 
-  await likedAnimalsIds.forEach(async (element) => {
-    likedAnimalsInfo.push(await fetchData(element));
+  let invalidIdCount = await likedAnimalsIds.length;
 
-    if (likedAnimalsInfo.length === await likedAnimalsIds.length) {
+  await likedAnimalsIds.forEach(async (element) => {
+    console.log('typeof element: ', typeof element);
+    const data = await fetchData(element);
+
+    if (data !== 'Not found') {
+      likedAnimalsInfo.push(data);
+      invalidIdCount -= 1;
+    } 
+
+    if (likedAnimalsInfo.length === await invalidIdCount) {
+      console.log('likedAnimalsInfo: ', likedAnimalsInfo);
       return likedAnimalsInfo;
     }
   });

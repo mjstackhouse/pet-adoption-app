@@ -19,8 +19,6 @@ async function fetchToken() {
 
   const tokenObj1 = await tokenResponse.json();
 
-  // console.log('tokenObj: ', await tokenObj);
-
   return tokenObj1;
 }
 
@@ -64,6 +62,8 @@ export default async function fetchData(...args) {
   else {
     // console.log('in the fetchData else');
 
+    console.log('args[0]: ', args[0]);
+
     dataResponse = await fetch(`https://api.petfinder.com/v2/animals/${args[0]}`, {
       method: 'GET',
       headers: {
@@ -74,11 +74,16 @@ export default async function fetchData(...args) {
   }
 
   if (await !dataResponse.ok) {
-    console.error('dataResponse: ', await dataResponse);
-    // console.log('dataResponse.invalid-params', await dataResponse['invalid-params']);
-    throw new Error('Failed to fetch data');
-  } 
-
+    if (dataResponse.status === 404) {
+      return 'Not found';
+    }
+    else {
+      console.error('dataResponse: ', await dataResponse);
+      // console.log('dataResponse.invalid-params', await dataResponse['invalid-params']);
+      throw new Error('Failed to fetch data');
+    } 
+  }
+    
   const data = await dataResponse.json();
 
   // console.log('data: ', await data);

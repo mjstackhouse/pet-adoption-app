@@ -3,6 +3,8 @@
 import $ from 'jquery';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function LikeButton({ animalId, liked }) {
   
@@ -60,13 +62,16 @@ export default function LikeButton({ animalId, liked }) {
   function sendNoSessionFeedback() {
     console.log('no session feedback');
 
-    $('#no-session-feedback').css('display', 'block');
+    $('.no-session-feedback').css('display', 'block');
     setTimeout(() => {
-      $('#no-session-feedback').css('display', 'none');
+      $('.no-session-feedback').css('display', 'none');
     }, 5000);
   }
 
   return (
-    <button className='absolute top-0 right-0 left-0 bottom-0 text-9xl drop-shadow-lg opacity-75' style={{ color: symbolColor }} onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>{likedSymbol}</button>
+    <button className='absolute text-9xl drop-shadow-lg opacity-75' onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>
+      <FontAwesomeIcon icon={faHeart} style={{ color: symbolColor }} />
+    </button>
+    // <button className='absolute text-9xl drop-shadow-lg opacity-75' style={{ color: symbolColor }} onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>{likedSymbol}</button>
   )
 }

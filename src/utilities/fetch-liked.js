@@ -12,7 +12,7 @@ export default async function fetchLiked() {
     const userCursor = await db.collection('users').findOne({ 'email' : session.user.email });
 
     if (userCursor.likedAnimals) {
-      return userCursor.likedAnimals;
+      return await userCursor.likedAnimals;
     }
     else {
       return 'No favorited animals';

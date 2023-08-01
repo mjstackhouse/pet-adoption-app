@@ -11,8 +11,6 @@ export default async function checkLiked() {
 
     const userCursor = await db.collection('users').findOne({ 'email' : session.user.email });
 
-    console.log('userCursor: ', userCursor);
-
     if (userCursor.likedAnimals) {
       return userCursor.likedAnimals;
     }
