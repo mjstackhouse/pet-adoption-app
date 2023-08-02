@@ -1,5 +1,7 @@
 'use client'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -9,7 +11,7 @@ export default function SignInButton() {
   const [navState, setNavState] = useState('closed');
   const { data: session } = useSession();
 
-  // if (session) console.log('session: ', session);
+  if (session) console.log('session: ', session);
 
   function openOrCloseAccountNav() {
     if (navState === 'closed') {
@@ -32,7 +34,7 @@ export default function SignInButton() {
       {session ? (
         <div>
           <button id='nav-button' className='text-4xl' onClick={() => openOrCloseAccountNav()}>
-            <img className='h-[2rem] rounded-3xl' src={session.user.image} />
+          { session.user.image ? <img className='h-[2rem] rounded-3xl' src={session.user.image} /> : <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue' />}
           </button>
           <div id='account-nav-container' className='flex text-right shadow-md z-20 pb-2'>
             <div className='basis-full mx-4 md:mx-16 leading-loose'>

@@ -10,12 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en' className='max-h-fit'>
-      <body className='flex flex-wrap flex-row text-black'>
+      <body className='flex flex-wrap flex-row text-black bg-gray'>
         <Provider>
           <div className='h-[10vh] basis-full flex self-start'>
             <Navbar />
           </div>
-          <div id='root-layout' className='h-[90vh] basis-full flex flex-col items-center justify-center'>
+          <div id='root-layout' className='h-[90vh] basis-full flex flex-wrap flex-col mx-auto items-center justify-center max-w-[900px]'>
             {children}
           </div>
         </Provider>

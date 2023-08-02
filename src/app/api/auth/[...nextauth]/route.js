@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import clientPromise from '@/utilities/client-promise';
 import GoogleProvider from 'next-auth/providers/google';
+import EmailProvider from 'next-auth/providers/email';
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise, {
@@ -12,11 +13,23 @@ export const authOptions = {
     GoogleProvider ({
       clientId: process.env.GOOGLE_OAUTH_ID,
       clientSecret: process.env.GOOGLE_OAUTH_SECRET
+    }),
+    EmailProvider ({
+      server: {
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
+      },
+      from: process.env.EMAIL_SERVER_USER
     })
   ],
   pages: {
     signIn: '/signin',
-    signOut: '/'
+    signOut: '/',
+    verifyRequest: '/verify-request',
+    newUser: '/new-user'
   }
 }
 
