@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
           <div className='h-[10vh] basis-full flex self-start'>
             <Navbar />
           </div>
-          <div id='root-layout' className='h-[90vh] basis-full flex flex-wrap flex-col mx-auto items-center justify-center max-w-[900px]'>
+          <div id='root-layout' className='basis-full flex flex-wrap flex-col mx-auto items-center justify-center max-w-[900px]'>
             {children}
           </div>
         </Provider>
