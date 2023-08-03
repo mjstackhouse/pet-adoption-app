@@ -34,21 +34,21 @@ export default function SignInButton() {
       {session ? (
         <div>
           <button id='nav-button' className='text-4xl' onClick={() => openOrCloseAccountNav()}>
-            <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue' />
+            <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue hover:text-darker-blue' />
           {/* { session.user.image ? <img className='h-[2rem] rounded-3xl' src={session.user.image} /> : <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue' />} */}
           </button>
           <div id='account-nav-container' className='flex text-right shadow-md z-20 pb-2'>
             <div className='basis-full mx-4 md:mx-16 leading-loose'>
-              <Link href='/account/favorites'>Favorites</Link>
-              <Link href='/account' className='block'>Account</Link>
+              <Link href='/account/favorites' className='hover:text-darker-gray'>Favorites</Link>
+              <Link href='/account' className='block hover:text-darker-gray'>Account</Link>
               <div>
-                <button onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})}>Sign Out</button>
+                <button className='hover:text-darker-gray' onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})}>Sign Out</button>
               </div>
             </div>
           </div>
         </div>
         ) : (
-        <button onClick={() => signIn()}>Sign In</button>
+        <button className='hover:text-darker-gray' onClick={() => signIn()}>Sign In</button>
         )}
     </div>
   )

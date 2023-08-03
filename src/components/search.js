@@ -32,7 +32,7 @@ export default function Search() {
         <option value='cat'>Cats</option>
       </select>
       <input id='autocomplete' className='text-base h-[2.5rem] basis-full max-w-[90%] text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' required></input>
-      <button className='bg-blue text-black px-4 py-2 rounded-3xl shadow-sm' type='submit' onClick={handleSubmit}>Search</button>
+      <button className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-sm' type='submit' onClick={handleSubmit}>Search</button>
     </form>
   )
 }

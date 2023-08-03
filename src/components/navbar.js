@@ -18,7 +18,7 @@ const philosopher = Philosopher({ weight: '700', subsets: ['latin'] });
 export default function Navbar() {
 
   return (
-    <div className='sticky top-0 flex items-center justify-evenly basis-full bg-black text-white z-20'>
+    <div className='sticky top-0 flex items-center justify-evenly basis-full bg-black text-white z-20 shadow-lg'>
       <nav className='flex basis-full'>
         <ul className='basis-full flex items-center justify-evenly h-16 mx-4 md:mx-16'>
           <li className='basis-1/2'>
