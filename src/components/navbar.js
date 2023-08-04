@@ -18,23 +18,14 @@ const philosopher = Philosopher({ weight: '700', subsets: ['latin'] });
 export default function Navbar() {
 
   return (
-    <div className='flex items-center justify-evenly basis-full bg-black text-white'>
+    <div className='sticky top-0 flex items-center justify-evenly basis-full bg-black text-white z-20 shadow-lg'>
       <nav className='flex basis-full'>
         <ul className='basis-full flex items-center justify-evenly h-16 mx-4 md:mx-16'>
           <li className='basis-1/2'>
-            <Link href='/' className={`text-xl ${philosopher.className}`}>
-              <Image src={logo} />
+            <Link href='/' className={`${philosopher.className}`}>
+              <Image src={logo} className='h-[1rem] sm:h-[1.5rem] w-auto' />
             </Link>
           </li>
-          {/* <li>
-            <Link href='/search/dog'>Dogs</Link>
-          </li>
-          <li>
-            <Link href='/search/cat'>Cats</Link>
-          </li>
-          <li>
-            <Link href='/search/other-pets'>Other Pets</Link>
-          </li> */}
           <li className='basis-1/2 justify-end flex'>
             <SignInButton />
           </li>

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-x: hidden;
+}
+
 .hdpi.pac-logo:after {
   background-image: none;
 }
@@ -29,12 +33,19 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
+#adoption-tips-container {
+  /* background-image: url('../../public/adoption-img-1.jpg'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 #intro-heading {
-  line-height: 1.625;
+  line-height: 1.15;
 }
 
 #intro-bottom {
-  background-image: url('../../public/pets-5.png');
+  background-image: url('../../public/pets-3.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;

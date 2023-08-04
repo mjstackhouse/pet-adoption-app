@@ -37,8 +37,8 @@ export default function SwipeButton() {
 
   return (
     <div id='swipe-button-container' className='bg-gray grow my-auto w-[100vw] flex items-center'>
-      <button className='basis-1/2 bg-blue ml-4 mr-4 text-black shadow-md px-4 py-2 rounded-3xl' onClick={scrollLeft}>Previous</button>
-      <button className='basis-1/2 bg-blue mr-4 ml-4 text-black shadow-md px-4 py-2 rounded-3xl' onClick={scrollRight}>Next</button>
+      <button className='font-bold tracking-wide basis-1/2 bg-blue hover:bg-darker-blue ml-4 mr-4 text-black shadow-md px-4 py-2 rounded-3xl' onClick={scrollLeft}>Previous</button>
+      <button className='font-bold tracking-wide basis-1/2 bg-blue hover:bg-darker-blue mr-4 ml-4 text-black shadow-md px-4 py-2 rounded-3xl' onClick={scrollRight}>Next</button>
     </div>
   )
 }
