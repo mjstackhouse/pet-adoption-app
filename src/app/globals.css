@@ -40,12 +40,27 @@ body {
   background-position: center;
 }
 
+#search-bg {
+  background-image: url('../../public/homepage-bg-1d.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#intro-heading-container {
+  /* background-color: rgba(255, 255, 255, 0.5); */
+}
+
 #intro-heading {
   line-height: 1.15;
 }
 
+#pink-bg-shape {
+  max-width: none;
+}
+
 #intro-bottom {
-  background-image: url('../../public/pets-3.png');
+  /* background-image: url('../../public/pets-3.png'); */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
