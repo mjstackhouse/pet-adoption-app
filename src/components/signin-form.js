@@ -32,7 +32,7 @@ export default function SigninForm() {
       <form method='post' className='basis-full flex flex-wrap justify-start items-center'>
         <div className='basis-full flex flex items-center text-center mb-6'>
           {/* <label htmlFor='email' className='mr-2'>Email:</label> */}
-          <input id='email' type='email' name='email' placeholder='Enter your email address...' onInput={(e) => setUserEmail(e.target.value)} className='text-base h-[2.5rem] basis-full max-w-[100%] text-black sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' required></input>
+          <input id='email' type='email' name='email' placeholder='Enter your email address...' onInput={(e) => setUserEmail(e.target.value)} className='text-base h-[2.5rem] basis-full max-w-[100%] text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
         </div>
         <button className='font-bold tracking-wider hover:bg-darker-gray bg-white border-2 text-black px-4 py-2 mx-auto rounded-3xl shadow-md mb-4' onClick={() => signIn('email', { email: `${userEmail}` })}>
           <FontAwesomeIcon icon={faEnvelope} className='h-[1rem] mr-2' />
