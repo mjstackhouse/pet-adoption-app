@@ -1,4 +1,4 @@
-import fetchData from '../../../../../../utilities/fetch-data';
+import fetchData from '../../../utilities/fetch-data';
 
 export default async function PetPage({ params }) {
   console.log('params', params);

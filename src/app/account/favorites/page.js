@@ -40,7 +40,7 @@ export default async function FavoritesPage() {
         {await likedAnimalsInfoArrFiltered.map((element) => {
           return <div className='relative self-start sm:self-auto w-[100%] basis-full sm:basis-1/3 mx-auto mb-8 md:my-8'><div className='flex flex-wrap justify-center items-center text-center'>
                     {/* <LikeButton animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } /> */}
-                    <Link href={`/search/${element.contact.address.state.toLowerCase()}/${element.contact.address.city.toLowerCase()}/${element.type.toLowerCase()}/${element.id}`} className='basis-full p-4 shadow-md rounded-3xl flex flex-wrap bg-white items-center'>
+                    <Link href={`/animal/${element.id}`} className='basis-full p-4 shadow-md rounded-3xl flex flex-wrap bg-white items-center'>
                       <div className='basis-full'>
                         <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[200px] m-auto rounded-3xl border-2 border-pink'></img>
                       </div>
