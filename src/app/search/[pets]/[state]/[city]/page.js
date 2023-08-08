@@ -6,18 +6,18 @@ import LikeButton from '@/components/like-button';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import SignInButtonPopup from '@/components/signin-button-popup';
+import ChangePageButton from '@/components/change-page-button';
 
-export default async function Pets({ params }) {
+export default async function Pets({ params, searchParams }) {
   let userLikes;
 
-  const data = await fetchData(params.pets, params.state, params.city);
+  console.log('params: ', params);
+  console.log('searchParams: ', searchParams);
+
+  const data = await fetchData(params.pets, params.state, params.city, searchParams.hasOwnProperty('page') ? searchParams.page : 1);
   const session = await getServerSession(authOptions);
 
   if (session) userLikes = await checkLiked();
-
-  // Find way to pass already fetched data down to the individual pet pages to avoid re-fetching
-
-  // console.log('data.animals: ', await data.animals);
 
   return (
     <div className='h-[90vh] h-[90svh] flex flex-wrap flex-col items-center'>
@@ -26,11 +26,7 @@ export default async function Pets({ params }) {
           return <div className='relative self-start sm:basis-1/3 md:my-8'><div className='flex flex-wrap w-[100vw] justify-center items-center sm:h-[25vh] text-center'>
                     <LikeButton animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } />
                     <SignInButtonPopup />
-                    <Link href={`/search/${params.state}/${params.city}/${params.pets}/${element.id}`} className='basis-full p-4 flex flex-wrap bg-white items-center'>
-                      {/* <div className='bg-center bg-no-repeat bg-cover h-[100%]' style={{ backgroundImage: `url('${element.primary_photo_cropped !== null ? element.primary_photo_cropped.small : ''}')` }}></div> */}
-                      {/* <div className='basis-full h-[65vh] h-[65svh] w-fit relative overflow-hidden'>
-                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.small : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='w-[300px] absolute top-[-9999px] right-[-9999px] bottom-[-9999px] left-[-9999px] m-auto'></img>
-                      </div> */}
+                    <Link href={`/animal/${element.id}`} className='basis-full p-4 flex flex-wrap bg-white items-center'>
                       <div className='basis-full'>
                         <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[60vh] m-auto border-2 border-pink'></img>
                       </div>
@@ -42,8 +38,12 @@ export default async function Pets({ params }) {
                     </Link>
                   </div></div>;
         })}
+        <div className='w-[100vw] flex'>
+          <ChangePageButton parameters={params} searchParameters={searchParams} />
+        </div>
       </div>
       <SwipeButton />
+      {/* <ChangePageButton parameters={params} searchParameters={searchParams} /> */}
     </div>
   )
 }

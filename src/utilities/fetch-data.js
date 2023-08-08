@@ -7,6 +7,7 @@ async function fetchToken() {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: `grant_type=client_credentials&client_id=${process.env.PET_FINDER_API_KEY}&client_secret=${process.env.PET_FINDER_SECRET}`,
+    // cache: 'no-store'
     next: { revalidate: 3600 }
   });
 
@@ -25,11 +26,14 @@ export default async function fetchData(...args) {
 
   tokenObj2 = await fetchToken();
 
+  console.log('tokenObj2: ', tokenObj2);
+  console.log('...args: ', [...args]);
+
   let dataResponse;
 
   // Type of animal in city/state
   if (alphaRegex.test(args[0]) === true) {
-      dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}`, {
+      dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${await tokenObj2.access_token}`
@@ -49,8 +53,10 @@ export default async function fetchData(...args) {
     if (dataResponse.status === 404) {
       return 'Not found';
     }
-    if (dataResponse.status === 401) {
-      fetchData(...args);
+    else if (dataResponse.status === 401) {
+      console.log('401');
+      return 'Not found';
+      // fetchData(...args);
     }
     else {
       console.error('dataResponse: ', await dataResponse);
@@ -59,6 +65,8 @@ export default async function fetchData(...args) {
   }
     
   const data = await dataResponse.json();
+
+  // console.log('data: ', await data);
 
   return await data;
 }
