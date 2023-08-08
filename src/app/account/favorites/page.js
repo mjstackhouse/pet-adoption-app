@@ -13,10 +13,15 @@ const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
 export default async function FavoritesPage() {
   let userLikes;
-  
+  let likedAnimalsInfoArrFiltered;
+
   // const likedAnimalsInfoArr = await fetchLikedArr();
   const likedAnimalsInfoArr = await fetchLikedArr();
-  const likedAnimalsInfoArrFiltered = await likedAnimalsInfoArr.filter((element) => element !== 'Not found');
+  console.log('likedAnimalsInfoArr: ', await likedAnimalsInfoArr);
+
+  if (likedAnimalsInfoArr !== 'No favorited animals') {
+    likedAnimalsInfoArrFiltered = await likedAnimalsInfoArr.filter((element) => element !== 'Not found');
+  }
 
   console.log('likedAnimalsInfoArrFiltered: ', likedAnimalsInfoArrFiltered);
 
@@ -37,7 +42,7 @@ export default async function FavoritesPage() {
         Your Favorited Animals
       </h1>
       <div id='pet-links-container' className='flex flex-wrap flex-col sm:flex-row mx-auto justify-center items-center text-black overflow-hidden'>
-        {await likedAnimalsInfoArrFiltered.map((element) => {
+        { likedAnimalsInfoArr === 'No favorited animals' ? <div>No favorited animals</div> : await likedAnimalsInfoArrFiltered.map((element) => {
           return <div className='relative self-start sm:self-auto w-[100%] basis-full sm:basis-1/3 mx-auto mb-8 md:my-8'><div className='flex flex-wrap justify-center items-center text-center'>
                     {/* <LikeButton animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } /> */}
                     <Link href={`/animal/${element.id}`} className='basis-full p-4 shadow-md rounded-3xl flex flex-wrap bg-white items-center'>

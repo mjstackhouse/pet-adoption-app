@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import clientPromise from '@/utilities/client-promise';
 import GoogleProvider from 'next-auth/providers/google';
+import FacebookProvider from 'next-auth/providers/facebook';
 import EmailProvider from 'next-auth/providers/email';
 
 export const authOptions = {
@@ -13,6 +14,10 @@ export const authOptions = {
     GoogleProvider ({
       clientId: process.env.GOOGLE_OAUTH_ID,
       clientSecret: process.env.GOOGLE_OAUTH_SECRET
+    }),
+    FacebookProvider ({
+      clientId: process.env.FACEBOOK_OAUTH_ID,
+      clientSecret: process.env.FACEBOOK_OAUTH_SECRET
     }),
     EmailProvider ({
       server: {

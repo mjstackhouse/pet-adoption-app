@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export default function SigninForm() {
@@ -19,9 +19,13 @@ export default function SigninForm() {
   return (
     <div className='max-h-[60%] flex flex-wrap justify-start items-center bg-white text-base max-w-fit mx-4 sm:mx-auto px-4 py-6 sm:px-6 sm:py-6 rounded-3xl border-blue border-solid border-2'>
       <div className='basis-full text-center mb-6'>
-        <button className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-md' onClick={() => signIn('google', { callbackUrl })}>
+        <button className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-md mb-4' onClick={() => signIn('google', { callbackUrl })}>
           <FontAwesomeIcon icon={faGoogle} className='h-[1rem] mr-2' />
           Continue with Google
+        </button>
+        <button className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-md' onClick={() => signIn('facebook', { callbackUrl })}>
+          <FontAwesomeIcon icon={faFacebook} className='h-[1rem] mr-2' />
+          Continue with Facebook
         </button>
       </div>
       <div className='basis-full flex justify-center items-center text-center mb-6'>

@@ -20,9 +20,9 @@ export default function ChangePageButton({ parameters, searchParameters }) {
   }
 
   return (
-    <div className='w-[100vw] flex flex-wrap place-items-center text-center'>
-      <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-6xl tracking-wide mb-4`}>Continue looking by clicking below:</h1>
-      <Link id='change-page-button' href={{ query: { page: pageNum } }} passHref shallow onClick={() => {setPageNum(pageNum + 1); scrollToStart();}} className='font-bold tracking-wider hover:bg-darker-gray bg-white border-2 text-black px-4 py-2 mx-auto rounded-3xl shadow-md mb-4'>
+    <div className='w-[100vw] sm:w-[900px] flex flex-wrap place-items-center text-center'>
+      <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-6xl tracking-wide mb-4 sm:hidden`}>Continue looking by clicking below:</h1>
+      <Link id='change-page-button' href={{ query: { page: pageNum } }} passHref shallow onClick={() => {setPageNum(pageNum + 1); scrollToStart();}} className='font-bold tracking-wider hover:bg-darker-gray bg-white border-2 text-black px-4 py-2 mx-auto sm:mt-8 sm:mb-8 rounded-3xl shadow-md mb-4'>
         Load next page
       </Link>
     </div>
