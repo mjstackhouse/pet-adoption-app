@@ -21,12 +21,12 @@ export default async function Pets({ params, searchParams }) {
 
   return (
     <div className='h-[90vh] h-[90svh] sm:h-auto flex flex-wrap flex-col items-center'>
-      <div id='pet-links-container' className='w-[100vw] sm:w-[900px] flex sm:flex-wrap items-center text-black overflow-hidden self-start shadow-md sm:shadow-none rounded-b-3xl z-10'>
+      <div id='pet-links-container' className='relative w-[100vw] sm:w-[900px] flex sm:flex-wrap items-center text-black overflow-hidden self-start rounded-b-3xl sm:rounded-b-none z-10 sm:z-0'>
         { await data.animals.map((element) => {
-          return <div className='relative self-start sm:basis-1/3'><div className='flex flex-wrap sm:flex-col w-[100vw] sm:w-auto justify-center items-center sm:h-[45vh] text-center sm:m-4 sm:shadow-md sm:rounded-b-3xl'>
+          return <div className='relative self-start sm:basis-1/3'><div className='flex flex-wrap bg-white sm:flex-col w-[100vw] sm:w-auto justify-center items-center sm:h-[45vh] text-center sm:m-4 hover:shadow-md rounded-b-3xl sm:rounded-b-0 rounded-none sm:rounded-3xl'>
                     <LikeButton animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } />
                     <SignInButtonPopup />
-                    <Link href={`/animal/${element.id}`} className='basis-full p-4 flex flex-wrap bg-white items-center'>
+                    <Link href={`/animal/${element.id}`} className='basis-full p-4 flex flex-wrap bg-transparent items-center'>
                       <div className='basis-full'>
                         <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[60vh] sm:h-[30vh] m-auto border-2 border-pink'></img>
                       </div>

@@ -43,7 +43,7 @@ export default function Search() {
       </select>
       <input id='autocomplete' className='text-base h-[2.5rem] basis-full max-w-[90%] text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' required></input>
       {/* <Link href={`/search/${animalType}/${state.current}/${city.current}?page=1`} onClick={handleSubmit} className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-sm' >Search</Link> */}
-      <button type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-sm' onClick={handleSubmit}>Search</button>
+      <button type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>Search</button>
     </form>
   )
 }

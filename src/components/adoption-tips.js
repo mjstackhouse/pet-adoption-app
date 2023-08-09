@@ -19,14 +19,14 @@ export default function AdoptionTips() {
               <p className='text-base sm:text-2xl leading-relaxed tracking-wide sm:mb-8'>
                 We're here to help you through this process with tips and advice.
               </p>
-              <Link href='/adoption-tips' className='hidden sm:inline relative font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-sm z-10'>Learn more</Link>
+              <Link href='/adoption-tips' className='hidden sm:inline relative font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
             </div>
           </div>
           <div className='relative sm:basis-1/2 mb-4 sm:mb-0'>
             <Image src={adoptionImg} className='relative mx-auto w-auto rounded-3xl z-10 border-pink border-2' />
             {/* <Image src={pinkBgShape} className='absolute top-0 bottom-1.5 left-0 right-0 z-0 ' /> */}
           </div>
-          <Link href='/adoption-tips' className='block sm:hidden mx-auto font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl shadow-sm z-10'>Learn more</Link>
+          <Link href='/adoption-tips' className='block sm:hidden mx-auto font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
         </div>
         {/* <Image id='pink-bg-shape' src={pinkBgShape} className='absolute top-0 bottom-0 left-0 right-0 z-0 my-auto h-[100%] rotate-90 sm:rotate-0' /> */}
       </div>
