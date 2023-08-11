@@ -31,15 +31,45 @@ export default async function fetchData(...args) {
 
   let dataResponse;
 
-  // Type of animal in city/state
-  if (alphaRegex.test(args[0]) === true) {
-      dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}`, {
+  // Retrieve type of animal in city/state
+  if ([...args].length === 4) {
+    dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${await tokenObj2.access_token}`
+      }
+    });
+  }
+  // Retrieve all breed options
+  else if ([...args].length === 1 && alphaRegex.test(args[0])) {
+    dataResponse = await fetch(`https://api.petfinder.com/v2/types/${args[0]}/breeds`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${await tokenObj2.access_token}`
+      }
+    });
+  }
+  // Retrieve filtered animal results
+  else if ([...args].length === 5) {
+    console.log('args[4]: ', args[4]);
+
+    const queryKeys = Object.keys(args[4]).slice();
+    const queryValues = Object.values(args[4]).slice();
+
+    let queryParams = '';
+
+    for (let i = 0; i < queryKeys.length; i++) {
+      queryParams += `&${queryKeys[i]}=${queryValues[i]}`;
+    }
+
+    dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}${queryParams}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${await tokenObj2.access_token}`
         }
-    });
+      });
   }
+  // Retrieve single animal
   else {
     dataResponse = await fetch(`https://api.petfinder.com/v2/animals/${args[0]}`, {
       method: 'GET',
