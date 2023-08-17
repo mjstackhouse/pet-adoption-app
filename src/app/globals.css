@@ -41,7 +41,7 @@ body {
 }
 
 #search-bg {
-  background-image: url('../../public/homepage-bg-1d.jpg');
+  background-image: url('../../public/homepage-bg-2i.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -90,4 +90,11 @@ body {
 
 #nav-button {
   /* transform: rotate(0deg); */
+}
+
+@media screen and (min-width: 640px) {
+  #search-bg {
+    background-image: url('../../public/homepage-bg-2-desktop-g.jpg');
+    background-position: center;
+  }  
 }
