@@ -88,6 +88,9 @@ export default async function fetchData(...args) {
       return 'Not found';
       // fetchData(...args);
     }
+    else if (dataResponse.status === 400) {
+      return 'Not found';
+    }
     else {
       console.error('dataResponse: ', await dataResponse);
       throw new Error('Failed to fetch data');
