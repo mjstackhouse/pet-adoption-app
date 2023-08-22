@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div className='basis-full'>
-      <div id='search-bg' className='bg-gray shadow-lg z-10'>
+      <div id='search-bg' className='bg-gray shadow-lg z-10 bg-fixed bg-top bg-no-repeat bg-cover'>
         <div id='search-container' className='flex flex-col items-center h-[90vh] max-w-[900px] mx-auto'>
           <div className='basis-full flex flex-wrap justify-center content-center'>
             <div className='flex flex-wrap justify-center items-end text-center mb-4 sm:mb-8 sm:mx-auto'>

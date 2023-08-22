@@ -8,7 +8,7 @@ export default function SigninPage() {
   return (
     <div className='bg-gray mx-auto h-[90vh] flex flex-wrap flex-col justify-center items-center'>
       <div className='flex justify-center'>
-        <h1 id='intro-heading' className={`${bree.className} mx-auto font-bold text-3xl sm:text-6xl leading-loose tracking-wide mb-8`}>
+        <h1 id='intro-heading' className={`${bree.className} mx-auto font-bold text-3xl sm:text-4xl leading-loose tracking-wide mb-8`}>
           Sign in to your account
         </h1>
       </div>

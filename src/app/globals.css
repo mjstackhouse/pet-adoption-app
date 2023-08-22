@@ -9,6 +9,7 @@ html {
 .hdpi.pac-logo:after {
   background-image: none;
 }
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -42,9 +43,9 @@ body {
 
 #search-bg {
   background-image: url('../../public/homepage-bg-2i.jpg');
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 
 #intro-heading-container {
@@ -96,5 +97,5 @@ body {
   #search-bg {
     background-image: url('../../public/homepage-bg-2-desktop-g.jpg');
     background-position: center;
-  }  
+  }
 }
