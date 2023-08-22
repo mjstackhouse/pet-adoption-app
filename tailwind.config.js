@@ -15,7 +15,8 @@ module.exports = {
       'white': '#FFFFFF',
       'red': '#FC2634',
       'gray': '#EDEDED',
-      'darker-gray': '#D9D9D9'
+      'darker-gray': '#D9D9D9',
+      'green': '#25B31B'
     },
     screens: {
       'xs': '410px',
@@ -30,5 +31,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 }

@@ -7,8 +7,8 @@ async function fetchToken() {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: `grant_type=client_credentials&client_id=${process.env.PET_FINDER_API_KEY}&client_secret=${process.env.PET_FINDER_SECRET}`,
-    // cache: 'no-store'
-    next: { revalidate: 3600 }
+    cache: 'no-store',
+    // next: { revalidate: 3600 }
   });
 
   if (!tokenResponse.ok) {
@@ -79,14 +79,16 @@ export default async function fetchData(...args) {
     });
   }
 
+  // console.log('dataResponse: ', dataResponse);
+
   if (await !dataResponse.ok) {
     if (dataResponse.status === 404) {
       return 'Not found';
     }
     else if (dataResponse.status === 401) {
       console.log('401');
-      return 'Not found';
       // fetchData(...args);
+      return 'Not found';
     }
     else if (dataResponse.status === 400) {
       return 'Not found';
