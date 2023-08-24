@@ -51,23 +51,35 @@ export default async function fetchData(...args) {
   }
   // Retrieve filtered animal results
   else if ([...args].length === 5) {
-    console.log('args[4]: ', args[4]);
+    if (typeof args[4] === 'object') {
+      console.log('args[4]: ', args[4]);
 
-    const queryKeys = Object.keys(args[4]).slice();
-    const queryValues = Object.values(args[4]).slice();
+      const queryKeys = Object.keys(args[4]).slice();
+      const queryValues = Object.values(args[4]).slice();
 
-    let queryParams = '';
+      let queryParams = '';
 
-    for (let i = 0; i < queryKeys.length; i++) {
-      queryParams += `&${queryKeys[i]}=${queryValues[i]}`;
-    }
+      for (let i = 0; i < queryKeys.length; i++) {
+        queryParams += `&${queryKeys[i]}=${queryValues[i]}`;
+      }
 
-    dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}${queryParams}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${await tokenObj2.access_token}`
-        }
-      });
+      dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}${queryParams}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${await tokenObj2.access_token}`
+          }
+        });
+      }
+      else {
+        console.log('limit=50');
+
+        dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}&limit=${args[4]}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${await tokenObj2.access_token}`
+          }
+        });
+      }
   }
   // Retrieve single animal
   else {

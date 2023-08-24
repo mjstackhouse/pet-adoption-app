@@ -47,7 +47,6 @@ export default function LikeButton({ animalId, liked, parameters }) {
   }
 
   function sendAnimalId(id) {
-    console.log('animalId: ', animalId);
     fetch('../../../api/db', {
       method: 'POST',
       mode: 'cors',

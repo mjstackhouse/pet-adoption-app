@@ -21,9 +21,11 @@ export default async function Pets({ params, searchParams }) {
 
   if (searchParams.breed || searchParams.age || searchParams.size) {
     data = await fetchData(params.pets, params.state, params.city, searchParams.hasOwnProperty('page') ? searchParams.page : 1, searchParams);
+    // console.log('data: ', await data);
   }
   else {
     data = await fetchData(params.pets, params.state, params.city, searchParams.hasOwnProperty('page') ? searchParams.page : 1);
+    // console.log('data: ', await data);
   }
   
   const breedData = await fetchData(params.pets);

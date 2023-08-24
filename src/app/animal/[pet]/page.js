@@ -19,7 +19,7 @@ export default async function PetPage({ params }) {
 
   const data = await fetchData(params.pet);
 
-  console.log('dog data', await data.animal);
+  console.log('data.animal.description: ', await data.animal.description);
 
   return (
     <div className='flex flex-wrap items-center content-center max-w-[900px]'>

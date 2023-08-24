@@ -85,7 +85,7 @@ export default function SearchFiltersButton({ breeds }) {
             <option value='large'>Large</option>
             <option value='xlarge'>Xlarge</option>
           </select>
-          <Link href={{ query: queryParams }} passHref shallow onClick={() => {closeFilters(); scrollToStart();}} className='font-bold tracking-wider hover:bg-darker-gray bg-white border-2 text-black px-4 py-2 mx-auto sm:mt-8 sm:mb-8 rounded-3xl shadow-md mb-4'>
+          <Link href={{ query: queryParams }} passHref shallow onClick={() => {closeFilters(); scrollToStart();}} className='font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white border-2 text-black px-4 py-2 mx-auto sm:mt-8 sm:mb-8 rounded-3xl shadow-md mb-4'>
             Update filters
           </Link>
         </form>

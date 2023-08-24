@@ -39,16 +39,16 @@ export default function SignInButton() {
           </button>
           <div id='account-nav-container' className='flex text-right shadow-md z-20 pb-2'>
             <div className='basis-full mx-4 md:mx-16 leading-loose'>
-              <Link href='/account/favorites' className='hover:text-darker-gray'>Favorites</Link>
-              <Link href='/account' className='block hover:text-darker-gray'>Account</Link>
+              <Link href='/account/favorites' className='hover:text-darker-gray hover:underline underline-offset-4'>Favorites</Link>
+              <Link href='/account' className='block hover:text-darker-gray hover:underline underline-offset-4'>Account</Link>
               <div>
-                <button className='hover:text-darker-gray' onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})}>Sign Out</button>
+                <button className='hover:text-darker-gray hover:underline underline-offset-4' onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})}>Sign Out</button>
               </div>
             </div>
           </div>
         </div>
         ) : (
-        <button className='hover:text-darker-gray' onClick={() => signIn()}>Sign In</button>
+        <button className='hover:text-darker-gray hover:underline underline-offset-4' onClick={() => signIn()}>Sign In</button>
         )}
     </div>
   )

@@ -38,7 +38,7 @@ export default function SigninForm() {
           {/* <label htmlFor='email' className='mr-2'>Email:</label> */}
           <input id='email' type='email' name='email' placeholder='Enter your email address...' onInput={(e) => setUserEmail(e.target.value)} className='text-base h-[2.5rem] basis-full max-w-[100%] sm:mx-auto text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
         </div>
-        <button className='font-bold tracking-wider hover:bg-darker-gray hover:shadow-md bg-white border-2 text-black px-4 py-2 mx-auto rounded-3xl' onClick={() => signIn('email', { email: `${userEmail}` })}>
+        <button className='font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 hover:shadow-md bg-white border-2 text-black px-4 py-2 mx-auto rounded-3xl' onClick={() => signIn('email', { email: `${userEmail}` })}>
           <FontAwesomeIcon icon={faEnvelope} className='h-[1rem] mr-2' />
           Continue with email
         </button>
