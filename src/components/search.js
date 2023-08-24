@@ -3,22 +3,51 @@
 import { useEffect, useState } from 'react';
 import loadAuto from '@/utilities/google-api';
 import fetchLocation from '@/utilities/fetch-location';
+import fetchData from '@/utilities/fetch-data';
+import Image from 'next/image';
+import yellowWave from '../../public/yellow-wave-1.svg';
+import yellowWave2 from '../../public/yellow-wave-2.svg';
+import yellowWave3 from '../../public/yellow-wave-3.svg';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch, faLocationArrow, faMagnifyingGlass, faPaw, faRightLong } from '@fortawesome/free-solid-svg-icons';
+import { faCircleRight } from '@fortawesome/free-regular-svg-icons';
 import $ from 'jquery';
+import { Bree_Serif } from 'next/font/google';
+
+const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
 let locationReformatted = '';
 
 export default function Search() {
 
-  const [animalType, setAnimalType] = useState('');
+  const [animalType, setAnimalType] = useState('dog');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [location, setLocation] = useState(locationReformatted);
   const [locationBtnText, setLocationBtnText] = useState('Allow location in the browser');
+  const [animalsNearbyHeading, setAnimalsNearbyHeading] = useState('Finding animals near you...');
+  const [animalsNearby, setAnimalsNearby] = useState();
+
+  const [animalsNearby1Name, setAnimalsNearby1Name] = useState(null);
+  const [animalsNearby1Img, setAnimalsNearby1Img] = useState(null);
+  const [animalsNearby1Id, setAnimalsNearby1Id] = useState(null);
+
+  const [animalsNearby2Name, setAnimalsNearby2Name] = useState(null);
+  const [animalsNearby2Img, setAnimalsNearby2Img] = useState(null);
+  const [animalsNearby2Id, setAnimalsNearby2Id] = useState(null);
+
+  const [animalsNearby3Name, setAnimalsNearby3Name] = useState(null);
+  const [animalsNearby3Img, setAnimalsNearby3Img] = useState(null);
+  const [animalsNearby3Id, setAnimalsNearby3Id] = useState(null);
+
+  const [animalsNearby4Name, setAnimalsNearby4Name] = useState(null);
+  const [animalsNearby4Img, setAnimalsNearby4Img] = useState(null);
+  const [animalsNearby4Id, setAnimalsNearby4Id] = useState(null);
 
   useEffect(() => {
     $('#location-btn').attr('disabled', 'true');
+    $('#animals-nearby-btn').attr('disabled', 'true');
 
     if (document.getElementsByClassName('pac-container') !== undefined) loadAuto();
 
@@ -82,10 +111,14 @@ export default function Search() {
         setLocationBtnText('Use my location');
       }
       else if (permissionStatus.state === 'denied') {
+        setAnimalsNearbyHeading('No animals found nearby');
         $('#location-btn').attr('disabled', 'true');
         $('#location-btn').css('background-color', '#D9D9D9');
         $('#loading-icon').css('display', 'none');
         $('#location-icon').css('display', 'inline');
+        $('#allow-location-text').css('display', 'block');
+        $('#animals-nearby-btn').attr('disabled', 'true');
+        $('.animals-nearby-link').removeClass('animate-pulse');
       }
 
       permissionStatus.onchange = () => {
@@ -94,11 +127,18 @@ export default function Search() {
           $('#location-btn').css('background-color', '#D9D9D9');
           $('#loading-icon').css('display', 'inline');
           $('#location-icon').css('display', 'none');
+          $('#allow-location-text').css('display', 'none');
+          setAnimalsNearbyHeading('Finding animals near you...');
+          $('.animals-nearby-link').addClass('animate-pulse');
           getUserLocation();
         }
         else if (permissionStatus.state === 'denied') {
+          setAnimalsNearbyHeading('No animals found nearby');
           $('#location-btn').attr('disabled', 'true');
           $('#location-btn').css('background-color', '#D9D9D9');
+          $('#allow-location-text').css('display', 'block');
+          $('#animals-nearby-btn').attr('disabled', 'true');
+          $('.animals-nearby-link').removeClass('animate-pulse');
           setLocationBtnText('Allow location in the browser');
         }
       }
@@ -131,6 +171,13 @@ export default function Search() {
             $('#location-btn').css('background-color', 'white');
             $('#loading-icon').css('display', 'none');
             $('#location-icon').css('display', 'inline');
+
+            const locationSplit = locationReformatted.split(', ');
+
+            setCity(locationSplit[0].toLowerCase());
+            setState(locationSplit[1].toLowerCase());
+
+            fetchAnimalsNearby(animalType, locationSplit[1].toLowerCase(), locationSplit[0].toLowerCase());
           } 
         }
       });
@@ -142,36 +189,206 @@ export default function Search() {
               $('#location-btn').css('background-color', '#D9D9D9');
               $('#loading-icon').css('display', 'inline');
               $('#location-icon').css('display', 'none');
+              $('#allow-location-text').css('display', 'none');
+              setAnimalsNearbyHeading('Finding animals near you...');
+              $('.animals-nearby-link').addClass('animate-pulse');
               getUserLocation();
             }
             else if (permissionStatus.state === 'denied') {
               $('#location-btn').attr('disabled', 'true');
               $('#location-btn').css('background-color', '#D9D9D9');
+              $('#allow-location-text').css('display', 'block');
+              $('#animals-nearby-btn').attr('disabled', 'true');
+              $('.animals-nearby-link').removeClass('animate-pulse');
+              setAnimalsNearbyHeading('No animals found nearby');
               setLocationBtnText('Allow location in the browser');
             }
           }
         }));
     }, { enableHighAccuracy: true });
   }
+
+  function fetchAnimalsNearby(type, stateArg, cityArg) {
+
+    setAnimalsNearbyHeading('Finding animals near you...');
+    $('#animals-nearby-btn, .animals-nearby-link').css('pointer-events', 'none');
+    $('#animals-nearby-btn').attr('disabled', 'true');
+    $('.animals-nearby-link').addClass('animate-pulse');
+
+    console.log('type argument: ', type);
+
+    fetch('../../../api/data', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ type : type, state : stateArg, city: cityArg })
+    })
+    .then(async (response) => {
+      console.log('response: ', response);
+
+      const responseData = await response.json();
+      let responseDataArr = [];
+
+      console.log('responseData: ', responseData);
+
+      for (let i = 0; i < responseData.animals.length; i++) {
+        if (responseData.animals[i].primary_photo_cropped !== null && responseDataArr.length < 4) {
+          responseDataArr.push(responseData.animals[i]);
+        }
+      }
+
+      setAnimalsNearbyHeading('Adoptable animals near you');
+
+      $('.animals-nearby-link').removeClass('animate-pulse');
+
+      setAnimalsNearby1Name(responseDataArr[0].name.toUpperCase());
+      setAnimalsNearby1Img(responseDataArr[0].primary_photo_cropped.medium);
+      setAnimalsNearby1Id(responseDataArr[0].id);
+
+      setAnimalsNearby2Name(responseDataArr[1].name.toUpperCase());
+      setAnimalsNearby2Img(responseDataArr[1].primary_photo_cropped.medium);
+      setAnimalsNearby2Id(responseDataArr[1].id);
+
+      setAnimalsNearby3Name(responseDataArr[2].name.toUpperCase());
+      setAnimalsNearby3Img(responseDataArr[2].primary_photo_cropped.medium);
+      setAnimalsNearby3Id(responseDataArr[2].id);
+
+      setAnimalsNearby4Name(responseDataArr[3].name.toUpperCase());
+      setAnimalsNearby4Img(responseDataArr[3].primary_photo_cropped.medium);
+      setAnimalsNearby4Id(responseDataArr[3].id);
+
+      $('.animals-nearby-link').css('background-color', 'white');
+      $('#animals-nearby-btn, .animals-nearby-link').css('pointer-events', 'auto');
+      $('#animals-nearby-btn').attr('disabled', null);
+
+      return response;
+    })
+    .catch((error) => {
+      return console.log(error);
+    })
+  }
   
   return (
     <div>
-      <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
-        <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' value={animalType} onChange={e => setAnimalType(e.target.value)} required>
-          <option value=''>Select an animal type</option>
-          <option value='dog'>Dogs</option>
-          <option value='cat'>Cats</option>
-        </select>
-        <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
-          <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
-          <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
-            <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
-            <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
-            {locationBtnText}
-          </button>
+      <div id='search-bg' className='bg-gray shadow-lg bg-fixed bg-top bg-no-repeat bg-cover'>
+        <div id='search-container' className='flex flex-col items-center h-[90svh] h-[90vh] max-w-[900px] mx-auto'>
+          <div className='basis-full flex flex-wrap place-content-start sm:place-content-center'>
+            <div className='flex flex-wrap justify-center items-end text-center mb-4 sm:mb-8 sm:mx-auto'>
+              <div id='intro-heading-container' className='text-white relative'>
+                <h1 id='intro-heading' className={`${bree.className} font-bold text-5xl xs:text-6xl tracking-wider drop-shadow-2xl mb-2 sm:mb-4`}>
+                  Welcome to PawfectMatch
+                </h1>
+                <h2 className='text-base sm:text-2xl leading-relaxed tracking-wide drop-shadow-lg mx-4 sm:mx-auto'>
+                  Where loving homes and animals in need find their perfect companionship.
+                </h2>
+              </div>
+            </div>
+            <div className='flex flex-wrap max-w-fit flex-col mx-4 sm:mx-auto px-2 py-4 sm:px-6 sm:py-6 items-center justify-center bg-white rounded-3xl border-blue border-solid shadow-lg'>
+              <h1 className='font-bold mb-4 tracking-wider'>Search for adoptable animals</h1>  
+              <div>
+                <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
+                  <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); } } required>
+                    <option value=''>Select an animal type</option>
+                    <option value='dog'>Dogs</option>
+                    <option value='cat'>Cats</option>
+                  </select>
+                  <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
+                    <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
+                    <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
+                      <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
+                      <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
+                      {locationBtnText}
+                    </button>
+                  </div>
+                  <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2' />
+                    Find your companion
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>Search</button>
-      </form>
+      </div>
+      <div id='animals-nearby-bg' className='relative bg-gray overflow-y-hidden'>
+        <div id='animals-nearby-body' className='relative z-10 flex flex-col sm:flex-row sm:flex-wrap place-content-center h-[100vh] sm:h-[50vh] max-w-[900px] mx-4 sm:mx-auto'>
+          <p id='allow-location-text' className='bg-white absolute top-[50%] sm:left-[25%] sm:right-[25%] z-20 text-center px-4 py-2 leading-relaxed tracking-wide mx-auto rounded-md shadow-md hidden'>
+            Allow location in the browser to see animals nearby.
+          </p>
+          <div className='basis-1/6 sm:basis-full my-4 sm:my-8 flex flex-wrap'>
+            <p className={`${bree.className} self-center mx-auto font-bold text-4xl xs:text-6xl tracking-wide text-center sm:mb-4`}>
+              {animalsNearbyHeading}
+            </p>
+          </div>
+          <div className='sm:basis-full flex flex-wrap'>
+            <span className='basis-1/2 sm:basis-1/5 pr-2 sm:pr-4 mb-4 sm:mb-8'>
+              <Link href={`/animal/${animalsNearby1Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+                <div className='h-[25vh] flex self-start'>
+                  <img className='grow object-cover' src={animalsNearby1Img} />
+                </div>
+                <div className='grow flex items-center'>
+                  <p id='animals-nearby-1-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                    {animalsNearby1Name}
+                  </p>
+                </div>
+              </Link>
+            </span>
+            <span className='basis-1/2 sm:basis-1/5 pl-2 sm:pl-0 sm:pr-4 mb-4'>
+              <Link href={`/animal/${animalsNearby2Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+                <div className='h-[25vh] flex self-start'>
+                  <img className='grow object-cover' src={animalsNearby2Img} />
+                </div>
+                <div className='grow flex items-center'>
+                  <p id='animals-nearby-2-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                    {animalsNearby2Name}
+                  </p>
+                </div>
+              </Link>
+            </span>
+            <span className='basis-1/2 sm:basis-1/5 pr-2 sm:pr-4 flex'>
+              <Link href={`/animal/${animalsNearby3Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+                <div className='h-[25vh] flex self-start'>
+                  <img className='grow object-cover' src={animalsNearby3Img} />
+                </div>
+                <div className='grow flex items-center'>
+                  <p id='animals-nearby-3-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                    {animalsNearby3Name}
+                  </p>
+                </div>
+              </Link>
+            </span>
+            <span className='basis-1/2 sm:basis-1/5 pl-2 sm:pl-0 sm:pr-4 flex mb-8'>
+              <Link href={`/animal/${animalsNearby4Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+                <div className='h-[25vh] flex self-start'>
+                  <img className='grow object-cover' src={animalsNearby4Img} />
+                </div>
+                <div className='grow flex items-center'>
+                  <p id='animals-nearby-4-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                    {animalsNearby4Name}
+                  </p>
+                </div>
+              </Link>
+            </span>
+            <span className='basis-full sm:basis-1/5 flex sm:inline-flex mb-4 sm:mb-8 rounded-3xl'>
+              <form className='flex flex-col basis-full' action={`/search/${animalType}/${state}/${city}`} method='GET'>
+                <button id='animals-nearby-btn' className='sm:text-4xl grow flex flex-col flex-wrap place-content-center disabled:bg-darker-gray disabled:text-[#B5B5B5] mx-auto text-left self-center font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl'>
+                  Meet more animals nearby
+                  {/* <FontAwesomeIcon icon={faRightLong} className='inline sm:blockh-[1.5rem] sm:h-[2.5rem]' /> */}
+                </button>
+              </form>
+              {/* <Link id='animals-nearby-btn' href={`/search/${animalType}/${state}/${city}`} className='flex place-items-center pointer-events-none text-left self-center mx-auto font-bold tracking-wider bg-blue hover:bg-darker-blue text-black px-4 py-2 rounded-3xl'> */}
+                {/* Meet more animals nearby */}
+                {/* <FontAwesomeIcon icon={faCircleRight} className='h-[2.5rem] ml-2' /> */}
+              {/* </Link> */}
+            </span>
+          </div>
+        </div>
+        <Image id='yellow-wave-2' src={yellowWave2} className='absolute bottom-0 z-0 my-auto w-[100vw] object-cover' />
+        {/* <Image src={yellowWave3} className='absolute top-[20vh] left-0 bottom-0 right-0 z-0 w-[100vw]' /> */}
+      </div>
     </div>
   )
 }

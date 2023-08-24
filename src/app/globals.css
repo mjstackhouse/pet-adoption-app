@@ -6,9 +6,19 @@ html {
   overflow-x: hidden;
 }
 
-.hdpi.pac-logo:after {
-  background-image: none;
+/* Jeff Wooden: https://stackoverflow.com/questions/12906789/preventing-an-image-from-being-draggable-or-selectable-without-using-js */
+#yellow-wave-2 {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
+
+/* .hdpi.pac-logo:after {
+  background-image: none;
+} */
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
