@@ -78,7 +78,7 @@ export default function SwipeButton() {
   }
 
   return (
-    <div id='swipe-button-container' className='relative grow my-auto w-[100vw] flex items-center sm:hidden z-0'>
+    <div id='swipe-button-container' className='relative grow my-auto w-[100vw] flex items-center md:hidden z-0'>
       <button id='previous-button' className='font-bold tracking-wider basis-1/2 bg-blue hover:bg-darker-blue disabled:bg-darker-gray ml-4 mr-4 text-black px-4 py-2 rounded-3xl' onClick={scrollLeft}>Previous</button>
       <button id='next-button' className='font-bold tracking-wider basis-1/2 bg-blue hover:bg-darker-blue disabled:bg-darker-gray mr-4 ml-4 text-black px-4 py-2 rounded-3xl' onClick={scrollRight}>Next</button>
     </div>

@@ -26,7 +26,7 @@ export default function Search({ types }) {
   const [state, setState] = useState('');
   const [location, setLocation] = useState(locationReformatted);
   const [locationBtnText, setLocationBtnText] = useState('Allow location in the browser');
-  const [animalsNearbyHeading, setAnimalsNearbyHeading] = useState('Finding animals near you...');
+  const [animalsNearbyHeading, setAnimalsNearbyHeading] = useState('Finding animals nearby...');
   const [animalsNearby, setAnimalsNearby] = useState();
   const [locationFeedbackText, setLocationFeedbackText] = useState();
 
@@ -130,7 +130,7 @@ export default function Search({ types }) {
           $('#loading-icon').css('display', 'inline');
           $('#location-icon').css('display', 'none');
           $('#allow-location-text').css('display', 'none');
-          setAnimalsNearbyHeading('Finding animals near you...');
+          setAnimalsNearbyHeading('Finding animals nearby...');
           $('.animals-nearby-link').addClass('animate-pulse');
           getUserLocation();
         }
@@ -193,7 +193,7 @@ export default function Search({ types }) {
               $('#loading-icon').css('display', 'inline');
               $('#location-icon').css('display', 'none');
               $('#allow-location-text').css('display', 'none');
-              setAnimalsNearbyHeading('Finding animals near you...');
+              setAnimalsNearbyHeading('Finding animals nearby...');
               $('.animals-nearby-link').addClass('animate-pulse');
               getUserLocation();
             }
@@ -215,7 +215,7 @@ export default function Search({ types }) {
   function fetchAnimalsNearby(type, stateArg, cityArg) {
 
     $('#allow-location-text').css('display', 'none');
-    setAnimalsNearbyHeading('Finding animals near you...');
+    setAnimalsNearbyHeading('Finding animals nearby...');
     $('#animals-nearby-btn, .animals-nearby-link').css('pointer-events', 'none');
     $('#animals-nearby-btn').attr('disabled', 'true');
     $('.animals-nearby-link').addClass('animate-pulse');
@@ -279,7 +279,7 @@ export default function Search({ types }) {
           }
         }
 
-        setAnimalsNearbyHeading('Adoptable animals near you');
+        setAnimalsNearbyHeading('Adoptable animals nearby');
 
         $('.animals-nearby-link').removeClass('animate-pulse');
 
@@ -355,67 +355,67 @@ export default function Search({ types }) {
         </div>
       </div>
       <div id='animals-nearby-bg' className='relative bg-gray overflow-y-hidden'>
-        <div id='animals-nearby-body' className='relative z-10 flex flex-col sm:flex-row sm:flex-wrap place-content-center h-[100vh] sm:h-[50vh] max-w-[900px] mx-4 sm:mx-auto'>
+        <div id='animals-nearby-body' className='relative z-10 flex flex-col sm:flex-row sm:flex-wrap place-content-center h-[100vh] md:h-[50vh] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[900px] mx-4 sm:mx-auto'>
           <p id='allow-location-text' className='bg-white absolute top-[50%] left-[7%] sm:left-[25%] right-[7%] sm:right-[25%] z-20 text-center px-4 py-2 leading-relaxed tracking-wide mx-auto rounded-md shadow-md hidden'>
             {locationFeedbackText}
           </p>
           <div className='basis-1/6 sm:basis-full my-4 sm:my-8 flex flex-wrap'>
-            <p className={`${bree.className} self-center mx-auto font-bold text-4xl xs:text-6xl tracking-wide text-center sm:mb-4`}>
+            <p className={`${bree.className} self-center mx-auto font-bold text-4xl xs:text-5xl tracking-wide text-center sm:mb-4`}>
               {animalsNearbyHeading}
             </p>
           </div>
-          <div className='sm:basis-full flex flex-wrap'>
-            <span className='basis-1/2 sm:basis-1/4 pr-2 sm:pr-4 mb-4 sm:mb-8'>
+          <div className='md:basis-full flex flex-wrap'>
+            <span className='basis-1/2 md:basis-1/4 pr-2 md:pr-4 mb-4 md:mb-8'>
               <Link href={`/animal/${animalsNearby1Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby1Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-1-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-1-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
                     {animalsNearby1Name}
                   </p>
                 </div>
               </Link>
             </span>
-            <span className='basis-1/2 sm:basis-1/4 pl-2 sm:pl-0 sm:pr-4 mb-4'>
+            <span className='basis-1/2 md:basis-1/4 pl-2 md:pl-0 md:pr-4 mb-4'>
               <Link href={`/animal/${animalsNearby2Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby2Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-2-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-2-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
                     {animalsNearby2Name}
                   </p>
                 </div>
               </Link>
             </span>
-            <span className='basis-1/2 sm:basis-1/4 pr-2 sm:pr-4 flex sm:mb-8'>
+            <span className='basis-1/2 md:basis-1/4 pr-2 md:pr-4 flex md:mb-8'>
               <Link href={`/animal/${animalsNearby3Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby3Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-3-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-3-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
                     {animalsNearby3Name}
                   </p>
                 </div>
               </Link>
             </span>
-            <span className='basis-1/2 sm:basis-1/5 pl-2 sm:pl-0 sm:pr-4 flex mb-8 sm:hidden'>
+            <span className='basis-1/2 pl-2 md:pl-0 md:pr-4 flex mb-8 md:hidden'>
               <Link href={`/animal/${animalsNearby4Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby4Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-4-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] sm:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-4-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
                     {animalsNearby4Name}
                   </p>
                 </div>
               </Link>
             </span>
-            <span className='basis-full sm:basis-1/4 flex sm:inline-flex mb-4 sm:mb-8 rounded-3xl'>
+            <span className='basis-full md:basis-1/4 flex md:inline-flex mb-4 md:mb-8 rounded-3xl'>
               <form className='flex flex-col basis-full' action={`/search/${animalType}/${state}/${city}`} method='GET'>
-                <button id='animals-nearby-btn' className='sm:text-4xl grow flex flex-col flex-wrap place-content-center disabled:bg-darker-gray disabled:text-[#B5B5B5] mx-auto text-left self-center font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl'>
+                <button id='animals-nearby-btn' className='md:text-4xl grow flex flex-col flex-wrap place-content-center disabled:bg-darker-gray disabled:text-[#B5B5B5] mx-auto text-left self-center font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl'>
                   Meet more animals nearby
                   {/* <FontAwesomeIcon icon={faRightLong} className='inline sm:blockh-[1.5rem] sm:h-[2.5rem]' /> */}
                 </button>
