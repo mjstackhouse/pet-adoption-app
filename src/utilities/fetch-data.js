@@ -82,8 +82,16 @@ export default async function fetchData(...args) {
       }
   }
   // Retrieve single animal
-  else {
+  else if ([...args].length === 1 && alphaRegex.test(args[0]) === false) {
     dataResponse = await fetch(`https://api.petfinder.com/v2/animals/${args[0]}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${await tokenObj2.access_token}`
+      }
+    });
+  }
+  else {
+    dataResponse = await fetch('https://api.petfinder.com/v2/types', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${await tokenObj2.access_token}`
@@ -95,6 +103,7 @@ export default async function fetchData(...args) {
 
   if (await !dataResponse.ok) {
     if (dataResponse.status === 404) {
+      console.log('404');
       return 'Not found';
     }
     else if (dataResponse.status === 401) {
@@ -103,6 +112,7 @@ export default async function fetchData(...args) {
       return 'Not found';
     }
     else if (dataResponse.status === 400) {
+      console.log('400');
       return 'Not found';
     }
     else {

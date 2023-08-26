@@ -4,10 +4,13 @@ import Image from 'next/image';
 import yellowWave from '../../public/yellow-wave-1.svg';
 import { Bree_Serif } from 'next/font/google';
 import AnimalsNearby from '@/components/animals-nearby';
+import fetchData from '../utilities/fetch-data';
 
 const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
-export default function Home() {
+export default async function Home() {
+
+  const types = await fetchData();
 
   return (
     <div className='basis-full'>
@@ -28,7 +31,7 @@ export default function Home() {
           </div>
         </div>
       </div> */}
-      <Search />
+      <Search types={await types} />
       <div className='relative bg-yellow basis-full w-[100vw] mx-auto'>
         <AdoptionTips />
       </div>

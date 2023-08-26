@@ -19,7 +19,7 @@ const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
 let locationReformatted = '';
 
-export default function Search() {
+export default function Search({ types }) {
 
   const [animalType, setAnimalType] = useState('dog');
   const [city, setCity] = useState('');
@@ -28,6 +28,7 @@ export default function Search() {
   const [locationBtnText, setLocationBtnText] = useState('Allow location in the browser');
   const [animalsNearbyHeading, setAnimalsNearbyHeading] = useState('Finding animals near you...');
   const [animalsNearby, setAnimalsNearby] = useState();
+  const [locationFeedbackText, setLocationFeedbackText] = useState();
 
   const [animalsNearby1Name, setAnimalsNearby1Name] = useState(null);
   const [animalsNearby1Img, setAnimalsNearby1Img] = useState(null);
@@ -119,6 +120,7 @@ export default function Search() {
         $('#allow-location-text').css('display', 'block');
         $('#animals-nearby-btn').attr('disabled', 'true');
         $('.animals-nearby-link').removeClass('animate-pulse');
+        setLocationFeedbackText('Allow location in the browser to see animals nearby.');
       }
 
       permissionStatus.onchange = () => {
@@ -139,6 +141,7 @@ export default function Search() {
           $('#allow-location-text').css('display', 'block');
           $('#animals-nearby-btn').attr('disabled', 'true');
           $('.animals-nearby-link').removeClass('animate-pulse');
+          setLocationFeedbackText('Allow location in the browser to see animals nearby.');
           setLocationBtnText('Allow location in the browser');
         }
       }
@@ -200,6 +203,7 @@ export default function Search() {
               $('#allow-location-text').css('display', 'block');
               $('#animals-nearby-btn').attr('disabled', 'true');
               $('.animals-nearby-link').removeClass('animate-pulse');
+              setLocationFeedbackText('Allow location in the browser to see animals nearby.');
               setAnimalsNearbyHeading('No animals found nearby');
               setLocationBtnText('Allow location in the browser');
             }
@@ -210,12 +214,20 @@ export default function Search() {
 
   function fetchAnimalsNearby(type, stateArg, cityArg) {
 
+    $('#allow-location-text').css('display', 'none');
     setAnimalsNearbyHeading('Finding animals near you...');
     $('#animals-nearby-btn, .animals-nearby-link').css('pointer-events', 'none');
     $('#animals-nearby-btn').attr('disabled', 'true');
     $('.animals-nearby-link').addClass('animate-pulse');
 
     console.log('type argument: ', type);
+
+    const spaceRegex = /\s+/;
+    let noSpacesType = '';
+
+    if (spaceRegex.test(type)) {
+      noSpacesType += encodeURIComponent(type);
+    }
 
     fetch('../../../api/data', {
       method: 'POST',
@@ -224,7 +236,7 @@ export default function Search() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ type : type, state : stateArg, city: cityArg })
+      body: JSON.stringify({ type : noSpacesType !== '' ? noSpacesType : type, state : stateArg, city: cityArg })
     })
     .then(async (response) => {
       console.log('response: ', response);
@@ -234,35 +246,63 @@ export default function Search() {
 
       console.log('responseData: ', responseData);
 
-      for (let i = 0; i < responseData.animals.length; i++) {
-        if (responseData.animals[i].primary_photo_cropped !== null && responseDataArr.length < 4) {
-          responseDataArr.push(responseData.animals[i]);
-        }
+      if (responseData.animals.length === 0) {
+        $('#location-btn').attr('disabled', 'true');
+        $('#location-btn').css('background-color', '#D9D9D9');
+        $('#animals-nearby-btn').attr('disabled', 'true');
+        $('.animals-nearby-link').removeClass('animate-pulse');
+        $('.animals-nearby-link').css('background-color', '#D9D9D9');
+        $('#allow-location-text').css('display', 'block');
+        setLocationFeedbackText('Try changing the animal category.');
+        setAnimalsNearbyHeading('No animals found nearby');
+
+        setAnimalsNearby1Name(null);
+        setAnimalsNearby1Img(null);
+        setAnimalsNearby1Id(null);
+
+        setAnimalsNearby2Name(null);
+        setAnimalsNearby2Img(null);
+        setAnimalsNearby2Id(null);
+
+        setAnimalsNearby3Name(null);
+        setAnimalsNearby3Img(null);
+        setAnimalsNearby3Id(null);
+
+        setAnimalsNearby4Name(null);
+        setAnimalsNearby4Img(null);
+        setAnimalsNearby4Id(null);
       }
+      else {
+        for (let i = 0; i < responseData.animals.length; i++) {
+          if (responseData.animals[i].primary_photo_cropped !== null && responseDataArr.length < 4) {
+            responseDataArr.push(responseData.animals[i]);
+          }
+        }
 
-      setAnimalsNearbyHeading('Adoptable animals near you');
+        setAnimalsNearbyHeading('Adoptable animals near you');
 
-      $('.animals-nearby-link').removeClass('animate-pulse');
+        $('.animals-nearby-link').removeClass('animate-pulse');
 
-      setAnimalsNearby1Name(responseDataArr[0].name.toUpperCase());
-      setAnimalsNearby1Img(responseDataArr[0].primary_photo_cropped.medium);
-      setAnimalsNearby1Id(responseDataArr[0].id);
+        setAnimalsNearby1Name(responseDataArr[0].name.toUpperCase());
+        setAnimalsNearby1Img(responseDataArr[0].primary_photo_cropped.medium);
+        setAnimalsNearby1Id(responseDataArr[0].id);
 
-      setAnimalsNearby2Name(responseDataArr[1].name.toUpperCase());
-      setAnimalsNearby2Img(responseDataArr[1].primary_photo_cropped.medium);
-      setAnimalsNearby2Id(responseDataArr[1].id);
+        setAnimalsNearby2Name(responseDataArr[1].name.toUpperCase());
+        setAnimalsNearby2Img(responseDataArr[1].primary_photo_cropped.medium);
+        setAnimalsNearby2Id(responseDataArr[1].id);
 
-      setAnimalsNearby3Name(responseDataArr[2].name.toUpperCase());
-      setAnimalsNearby3Img(responseDataArr[2].primary_photo_cropped.medium);
-      setAnimalsNearby3Id(responseDataArr[2].id);
+        setAnimalsNearby3Name(responseDataArr[2].name.toUpperCase());
+        setAnimalsNearby3Img(responseDataArr[2].primary_photo_cropped.medium);
+        setAnimalsNearby3Id(responseDataArr[2].id);
 
-      setAnimalsNearby4Name(responseDataArr[3].name.toUpperCase());
-      setAnimalsNearby4Img(responseDataArr[3].primary_photo_cropped.medium);
-      setAnimalsNearby4Id(responseDataArr[3].id);
+        setAnimalsNearby4Name(responseDataArr[3].name.toUpperCase());
+        setAnimalsNearby4Img(responseDataArr[3].primary_photo_cropped.medium);
+        setAnimalsNearby4Id(responseDataArr[3].id);
 
-      $('.animals-nearby-link').css('background-color', 'white');
-      $('#animals-nearby-btn, .animals-nearby-link').css('pointer-events', 'auto');
-      $('#animals-nearby-btn').attr('disabled', null);
+        $('.animals-nearby-link').css('background-color', 'white');
+        $('#animals-nearby-btn, .animals-nearby-link').css('pointer-events', 'auto');
+        $('#animals-nearby-btn').attr('disabled', null);
+      }
 
       return response;
     })
@@ -292,8 +332,9 @@ export default function Search() {
                 <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
                   <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); } } required>
                     <option value=''>Select an animal type</option>
-                    <option value='dog'>Dogs</option>
-                    <option value='cat'>Cats</option>
+                    { types.types.map((element) => {
+                      return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
+                    }) }
                   </select>
                   <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
                     <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
@@ -315,8 +356,8 @@ export default function Search() {
       </div>
       <div id='animals-nearby-bg' className='relative bg-gray overflow-y-hidden'>
         <div id='animals-nearby-body' className='relative z-10 flex flex-col sm:flex-row sm:flex-wrap place-content-center h-[100vh] sm:h-[50vh] max-w-[900px] mx-4 sm:mx-auto'>
-          <p id='allow-location-text' className='bg-white absolute top-[50%] sm:left-[25%] sm:right-[25%] z-20 text-center px-4 py-2 leading-relaxed tracking-wide mx-auto rounded-md shadow-md hidden'>
-            Allow location in the browser to see animals nearby.
+          <p id='allow-location-text' className='bg-white absolute top-[50%] left-[7%] sm:left-[25%] right-[7%] sm:right-[25%] z-20 text-center px-4 py-2 leading-relaxed tracking-wide mx-auto rounded-md shadow-md hidden'>
+            {locationFeedbackText}
           </p>
           <div className='basis-1/6 sm:basis-full my-4 sm:my-8 flex flex-wrap'>
             <p className={`${bree.className} self-center mx-auto font-bold text-4xl xs:text-6xl tracking-wide text-center sm:mb-4`}>
@@ -324,7 +365,7 @@ export default function Search() {
             </p>
           </div>
           <div className='sm:basis-full flex flex-wrap'>
-            <span className='basis-1/2 sm:basis-1/5 pr-2 sm:pr-4 mb-4 sm:mb-8'>
+            <span className='basis-1/2 sm:basis-1/4 pr-2 sm:pr-4 mb-4 sm:mb-8'>
               <Link href={`/animal/${animalsNearby1Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby1Img} />
@@ -336,7 +377,7 @@ export default function Search() {
                 </div>
               </Link>
             </span>
-            <span className='basis-1/2 sm:basis-1/5 pl-2 sm:pl-0 sm:pr-4 mb-4'>
+            <span className='basis-1/2 sm:basis-1/4 pl-2 sm:pl-0 sm:pr-4 mb-4'>
               <Link href={`/animal/${animalsNearby2Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby2Img} />
@@ -348,7 +389,7 @@ export default function Search() {
                 </div>
               </Link>
             </span>
-            <span className='basis-1/2 sm:basis-1/5 pr-2 sm:pr-4 flex'>
+            <span className='basis-1/2 sm:basis-1/4 pr-2 sm:pr-4 flex sm:mb-8'>
               <Link href={`/animal/${animalsNearby3Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby3Img} />
@@ -360,7 +401,7 @@ export default function Search() {
                 </div>
               </Link>
             </span>
-            <span className='basis-1/2 sm:basis-1/5 pl-2 sm:pl-0 sm:pr-4 flex mb-8'>
+            <span className='basis-1/2 sm:basis-1/5 pl-2 sm:pl-0 sm:pr-4 flex mb-8 sm:hidden'>
               <Link href={`/animal/${animalsNearby4Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby4Img} />
@@ -372,7 +413,7 @@ export default function Search() {
                 </div>
               </Link>
             </span>
-            <span className='basis-full sm:basis-1/5 flex sm:inline-flex mb-4 sm:mb-8 rounded-3xl'>
+            <span className='basis-full sm:basis-1/4 flex sm:inline-flex mb-4 sm:mb-8 rounded-3xl'>
               <form className='flex flex-col basis-full' action={`/search/${animalType}/${state}/${city}`} method='GET'>
                 <button id='animals-nearby-btn' className='sm:text-4xl grow flex flex-col flex-wrap place-content-center disabled:bg-darker-gray disabled:text-[#B5B5B5] mx-auto text-left self-center font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl'>
                   Meet more animals nearby
