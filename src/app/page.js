@@ -13,7 +13,7 @@ export default async function Home() {
   const types = await fetchData();
 
   return (
-    <div className='basis-full'>
+    <div className='basis-full max-w-screen flex flex-wrap'>
       {/* <div id='search-bg' className='bg-gray shadow-lg z-10 bg-fixed bg-top bg-no-repeat bg-cover'>
         <div id='search-container' className='flex flex-col items-center h-[90vh] max-w-[900px] mx-auto'>
           <div className='basis-full flex flex-wrap place-content-start'>
@@ -32,7 +32,7 @@ export default async function Home() {
         </div>
       </div> */}
       <Search types={await types} />
-      <div className='relative bg-yellow basis-full w-[100vw] mx-auto'>
+      <div className='relative bg-yellow max-w-full basis-full'>
         <AdoptionTips />
       </div>
       {/* <div className='basis-full bg-[url("../../public/adoption-img-1.jpg")] bg-no-repeat bg-cover bg-center w-[100vw] mx-auto'>

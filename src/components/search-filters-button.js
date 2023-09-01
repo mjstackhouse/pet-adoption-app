@@ -3,19 +3,59 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import $ from 'jquery';
 import { Bree_Serif } from 'next/font/google';
 
 const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
-export default function SearchFiltersButton({ breeds }) {
+export default function SearchFiltersButton({ parameters, breeds, searchParameters }) {
 
   const [age, setAge] = useState('');
   const [breed, setBreed] = useState('');
   const [size, setSize] = useState('');
 
-  const [queryParams, setQueryParams] = useState({});
+  const [queryParams, setQueryParams] = useState(searchParameters);
+
+  useEffect(() => {
+    // console.log('useEffect');
+
+    // && Object.keys(searchParameters).includes('page') !== true
+    if (Object.keys(searchParameters).length > 0
+    && (Object.keys(searchParameters).includes('breed') || Object.keys(searchParameters).includes('age') || Object.keys(searchParameters).includes('size'))) {
+
+      console.log('search-filters-button - if (Object.keys(searchParameters).length > 0)');
+
+      // setAge(prevState => prevState);
+      // setBreed(prevState => prevState);
+      // setSize(prevState => prevState);
+
+      const searchParamKeys = Object.keys(searchParameters);
+
+      for (let i = 0; i < searchParamKeys.length; i++) {
+        console.log('filters useEffect() for loop count: ', i);
+
+        if (searchParamKeys[i] === 'age') {
+          setAge(searchParameters.age);
+        }
+        else if (searchParamKeys[i] === 'breed') {
+          console.log('else if (searchParamKeys[i] === breed)');
+
+          setBreed(searchParameters.breed);
+        }
+        else if (searchParamKeys[i] === 'size') {
+          setSize(searchParameters.size);
+        }
+      }
+    }
+    else {
+      console.log('else');
+
+      document.getElementById('breed').value = '';
+      document.getElementById('age').value = '';
+      document.getElementById('size').value = '';
+    }
+  }, [searchParameters])
 
   function scrollToStart() {
     const petLinksContainer = document.getElementById('pet-links-container');
@@ -36,18 +76,27 @@ export default function SearchFiltersButton({ breeds }) {
   function addToQueryParams(propName, propValue) {
     let updatedQueryParams = queryParams;
 
+    console.log('queryParams before: ', updatedQueryParams);
+
     if (propName === 'breed') {
-      updatedQueryParams.breed = propValue;
-      setQueryParams(updatedQueryParams);
+      if (propValue === '') delete updatedQueryParams.breed;
+      else updatedQueryParams.breed = propValue;
     }
     else if (propName === 'age') {
-      updatedQueryParams.age = propValue;
-      setQueryParams(updatedQueryParams);
+      if (propValue === '') delete updatedQueryParams.age;
+      else updatedQueryParams.age = propValue;
     }
-    else {
-      updatedQueryParams.size = propValue;
-      setQueryParams(updatedQueryParams);
+    else if (propName === 'size') {
+      if (propValue === '') delete updatedQueryParams.size;
+      else updatedQueryParams.size = propValue;
     }
+    else if (propName === 'page') {
+      delete updatedQueryParams.page;
+    }
+
+    console.log('queryParams after: ', updatedQueryParams);
+
+    setQueryParams(updatedQueryParams);
   }
 
   // Additional Filters
@@ -56,7 +105,7 @@ export default function SearchFiltersButton({ breeds }) {
   //    Color
 
   return (
-    <div className='absolute xl:sticky xl:self-start top-0 left-0 p-2 xl:p-0 z-20'>
+    <div className='fixed xl:sticky xl:self-start top-[10vh] left-0 p-2 sm:p-8 sm:p-4 xl:p-0 z-20'>
       <div id='filters-container' className='xl:pt-8 absolute xl:static top-0 xl:top-[10vh] bottom-0 left-0 right-0 mx-auto bg-black xl:bg-gray h-[100vh] xl:h-auto w-[100vw] xl:w-[315px] hidden xl:block'>
         <button className='mt-4 ml-4 mb-4 xl:hidden' onClick={() => closeFilters()}>
           <FontAwesomeIcon icon={faXmark} className='h-[2rem] text-white hover:text-darker-gray' />
@@ -85,14 +134,14 @@ export default function SearchFiltersButton({ breeds }) {
             <option value='large'>Large</option>
             <option value='xlarge'>Xlarge</option>
           </select>
-          <Link href={{ query: queryParams }} passHref shallow onClick={() => {closeFilters(); scrollToStart();}} className='font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white xl:bg-blue xl:hover:bg-darker-blue xl:border-0 border-2 text-black px-4 py-2 mx-auto rounded-3xl hover:shadow-md mb-4'>
+          <Link id='update-filters-btn' href={ Object.keys(queryParams).length !== 0 ? { query: queryParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { addToQueryParams('page', searchParameters?.page); closeFilters(); scrollToStart(); }} className='font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white xl:bg-blue xl:hover:bg-darker-blue xl:border-0 border-2 text-black px-4 py-2 mx-auto rounded-3xl hover:shadow-md mb-4'>
             Update filters
           </Link>
         </form>
       </div>
-      <button onClick={() => openFilters()} className='flex xl:hidden xl:pointer-events-none items-center bg-white hover:bg-gray p-2 rounded-lg font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 text-black px-4 py-2 mx-auto shadow-md'>
-        Filters
-        <FontAwesomeIcon icon={faSliders} className='ml-2 h-[2rem] text-blue hover:text-darker-blue'/>
+      <button onClick={() => openFilters()} className='flex xl:hidden xl:pointer-events-none items-center bg-blue hover:bg-darker-blue p-2 rounded-lg font-bold tracking-wider hover:underline underline-offset-4 text-black px-4 py-2 mx-auto shadow-md'>
+        <span className='hidden sm:inline'>Filters</span>
+        <FontAwesomeIcon icon={faSliders} className='sm:ml-2 h-[2rem] text-black'/>
       </button>
     </div>
   )
