@@ -1,17 +1,34 @@
 'use client'
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleRight, faCircleLeft, faCircleChevronRight, faCircleChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import $ from 'jquery';
 
-export default function SwipeButton() {
+export default function SwipeButton({ dataLength }) {
 
+  const [previousBtnDisabled, setPreviousButtonDisabled] = useState('true');
+  const [nextBtnDisabled, setNextButtonDisabled] = useState(null);
+  // $('#previous-button').attr('disabled', 'true');
+  // $('#next-button').attr('disabled', null);
+  
   const scrollCount = useRef(1);
 
   useEffect(() => {
+    // console.log('useEffect dataLength: ', dataLength);
+
     if (document) {
-      if (document.getElementById('change-page-button')) {
-        const changePageButton = document.getElementById('change-page-button');
-        changePageButton.addEventListener('click', () => {
+      if (document.getElementById('next-page-button')) {
+        const nextPageBtn = document.getElementById('next-page-button');
+        const previousPageBtn = document.getElementById('previous-page-button');
+
+        nextPageBtn.addEventListener('click', () => {
+          scrollCount.current = 1;
+          $('#previous-button').attr('disabled', 'true');
+          $('#next-button').attr('disabled', null);
+        })
+
+        previousPageBtn.addEventListener('click', () => {
           scrollCount.current = 1;
           $('#previous-button').attr('disabled', 'true');
           $('#next-button').attr('disabled', null);
@@ -19,8 +36,10 @@ export default function SwipeButton() {
         $('#previous-button').attr('disabled', 'true');
         $('#next-button').attr('disabled', null);
       }
+      $('#previous-button').attr('disabled', 'true');
+      $('#next-button').attr('disabled', null);
     }
-  }, []);
+  }, [dataLength]);
   
   
   function scrollRight() {
@@ -30,12 +49,13 @@ export default function SwipeButton() {
 
     petLinksContainer.scrollTo({
       top: 0,
-      left: htmlWidth * scrollCount.current,
-      behavior: 'smooth'
+      left: htmlWidth * scrollCount.current
     });
 
-    const fullScrollWidth = htmlWidth * 19;
+    const fullScrollWidth = htmlWidth * (dataLength);
     const scrollPosition = petLinksContainer.scrollLeft;
+
+    // console.log('scrollPosition: ', scrollPosition);
 
     if (scrollPosition === fullScrollWidth) {
       $('#next-button').attr('disabled', 'true');
@@ -58,11 +78,10 @@ export default function SwipeButton() {
 
     petLinksContainer.scrollTo({
       top: 0,
-      left: (htmlWidth * scrollCount.current) - (htmlWidth * 2),
-      behavior: 'smooth'
+      left: (htmlWidth * scrollCount.current) - (htmlWidth * 2)
     })
 
-    const fullScrollWidth = htmlWidth * 19;
+    const fullScrollWidth = htmlWidth * (dataLength);
     const scrollPosition = petLinksContainer.scrollLeft;
 
     if (scrollPosition < fullScrollWidth || scrollPosition === fullScrollWidth + htmlWidth) {
@@ -79,8 +98,18 @@ export default function SwipeButton() {
 
   return (
     <div id='swipe-button-container' className='relative grow my-auto w-[100vw] flex items-center md:hidden z-0'>
-      <button id='previous-button' className='font-bold tracking-wider basis-1/2 bg-blue hover:bg-darker-blue disabled:bg-darker-gray ml-4 mr-4 text-black px-4 py-2 rounded-3xl' onClick={scrollLeft}>Previous</button>
-      <button id='next-button' className='font-bold tracking-wider basis-1/2 bg-blue hover:bg-darker-blue disabled:bg-darker-gray mr-4 ml-4 text-black px-4 py-2 rounded-3xl' onClick={scrollRight}>Next</button>
+      <span className='basis-1/2 text-left pl-8'>
+        <button id='previous-button' className='font-bold tracking-wider basis-1/2 bg-blue active:bg-darker-blue disabled:bg-darker-gray text-black rounded-3xl px-4 py-2' onClick={scrollLeft}>
+          Previous
+          {/* <FontAwesomeIcon icon={faCircleChevronLeft} className='h-[3rem]'/> */}
+        </button>
+      </span>
+      <span className='basis-1/2 text-right pr-8'>
+        <button id='next-button' className='font-bold tracking-wider basis-1/2 bg-blue active:bg-darker-blue disabled:bg-darker-gray text-black rounded-3xl px-4 py-2' onClick={scrollRight}>
+          Next
+          {/* <FontAwesomeIcon icon={faCircleChevronRight} className='h-[3rem]'/> */}
+        </button>
+      </span>
     </div>
   )
 }

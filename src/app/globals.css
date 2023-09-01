@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 html {
-  width: 100vw;
-  overflow-x: hidden;
+  /* width: 100vw; */
+  /* overflow-x: hidden; */
+  /* box-sizing: border-box; */
 }
 
 /* Jeff Wooden: https://stackoverflow.com/questions/12906789/preventing-an-image-from-being-draggable-or-selectable-without-using-js */

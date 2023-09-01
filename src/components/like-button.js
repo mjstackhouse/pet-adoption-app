@@ -8,7 +8,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function LikeButton({ animalId, liked, parameters }) {
 
-  console.log('parameters: ', parameters);
+  // console.log('parameters: ', parameters);
   
   const [symbolColor, setSymbolColor] = useState(null);
   const [likedStatus, setLikedStatus] = useState(liked);

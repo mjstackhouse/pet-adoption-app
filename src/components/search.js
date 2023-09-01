@@ -312,13 +312,13 @@ export default function Search({ types }) {
   }
   
   return (
-    <div>
+    <div className='basis-full max-w-full'>
       <div id='search-bg' className='bg-gray shadow-lg bg-fixed bg-top bg-no-repeat bg-cover'>
         <div id='search-container' className='flex flex-col items-center h-[90svh] h-[90vh] max-w-[900px] mx-auto'>
-          <div className='basis-full flex flex-wrap place-content-start sm:place-content-center'>
-            <div className='flex flex-wrap justify-center items-end text-center mb-4 sm:mb-8 sm:mx-auto'>
+          <div className='basis-full flex flex-wrap flex-col'>
+            <div className='basis-1/3 flex flex-wrap justify-center items-end text-center sm:mx-auto'>
               <div id='intro-heading-container' className='text-white relative'>
-                <h1 id='intro-heading' className={`${bree.className} font-bold text-5xl xs:text-6xl tracking-wider drop-shadow-2xl mb-2 sm:mb-4`}>
+                <h1 id='intro-heading' className={`${bree.className} font-bold text-[2.5rem] xs:text-5xl sm:text-6xl tracking-wider drop-shadow-2xl mb-2`}>
                   Welcome to PawfectMatch
                 </h1>
                 <h2 className='text-base sm:text-2xl leading-relaxed tracking-wide drop-shadow-lg mx-4 sm:mx-auto'>
@@ -326,29 +326,31 @@ export default function Search({ types }) {
                 </h2>
               </div>
             </div>
-            <div className='flex flex-wrap max-w-fit flex-col mx-4 sm:mx-auto px-2 py-4 sm:px-6 sm:py-6 items-center justify-center bg-white rounded-3xl border-blue border-solid shadow-lg'>
-              <h1 className='font-bold mb-4 tracking-wider'>Search for adoptable animals</h1>  
-              <div>
-                <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
-                  <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); } } required>
-                    <option value=''>Select an animal type</option>
-                    { types.types.map((element) => {
-                      return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
-                    }) }
-                  </select>
-                  <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
-                    <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
-                    <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
-                      <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
-                      <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
-                      {locationBtnText}
+            <div className='basis-1/3 mt-8'>
+              <div className='flex flex-wrap max-w-fit flex-col mx-4 sm:mx-auto px-2 py-4 sm:px-6 sm:py-6 items-center justify-center bg-white rounded-3xl border-blue border-solid shadow-lg'>
+                <h1 className='font-bold mb-4 tracking-wider'>Search for adoptable animals</h1>  
+                <div>
+                  <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
+                    <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); } } required>
+                      <option value=''>Select an animal type</option>
+                      { types.types.map((element) => {
+                        return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
+                      }) }
+                    </select>
+                    <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
+                      <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
+                      <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
+                        <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
+                        <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
+                        {locationBtnText}
+                      </button>
+                    </div>
+                    <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>
+                      <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2' />
+                      Find your companion
                     </button>
-                  </div>
-                  <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2' />
-                    Find your companion
-                  </button>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
