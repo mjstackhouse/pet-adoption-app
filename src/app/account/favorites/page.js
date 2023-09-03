@@ -47,7 +47,7 @@ export default async function FavoritesPage() {
                     {/* <LikeButton animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } /> */}
                     <Link href={`/animal/${element.id}`} className='basis-full p-4 hover:shadow-md rounded-3xl flex flex-wrap bg-white items-center'>
                       <div className='basis-full'>
-                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[200px] m-auto rounded-3xl border-2 border-pink'></img>
+                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[200px] m-auto border-2 border-pink'></img>
                       </div>
                       <div className='justify-self-start mx-auto'>
                         <div className={`font-bold ${element.name.length >= 22 ? 'text-base sm:text-xl' : 'text-xl sm:text-2xl'}`}>{element.name.toUpperCase()}</div>

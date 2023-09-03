@@ -3,6 +3,7 @@ import checkLiked from '@/utilities/check-liked';
 import Link from 'next/link';
 import SwipeButton from '@/components/swipe-button';
 import LikeButton from '@/components/like-button';
+import SigninForm from '@/components/signin-form';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import SignInButtonPopup from '@/components/signin-button-popup';
@@ -16,16 +17,11 @@ export default async function Pets({ params, searchParams }) {
   let userLikes;
   let data;
 
-  console.log('params: ', params);
-  console.log('searchParams: ', searchParams);
-
   if (searchParams.breed || searchParams.age || searchParams.size) {
     data = await fetchData(params.pets, params.state, params.city, searchParams.hasOwnProperty('page') ? searchParams.page : 1, searchParams);
-    // console.log('data: ', await data);
   }
   else {
     data = await fetchData(params.pets, params.state, params.city, searchParams.hasOwnProperty('page') ? searchParams.page : 1);
-    // console.log('data: ', await data);
   }
   
   const breedData = await fetchData(params.pets);
@@ -34,13 +30,13 @@ export default async function Pets({ params, searchParams }) {
   if (session) userLikes = await checkLiked();
 
   return (
-    <div className='relative h-[90vh] h-[90svh] md:h-auto xl:w-[1280px] flex flex-wrap flex-col xl:flex-row items-center xl:justify-center xl:mx-auto'>
+    <div id='search-results' className='relative h-[90vh] h-[90svh] md:h-auto xl:w-[1280px] flex flex-wrap flex-col xl:flex-row items-center xl:justify-center xl:mx-auto'>
       <SearchFiltersButton parameters={params} breeds={breedData} searchParameters={searchParams} />
-      <div id='pet-links-container' className='relative xl:self-end w-[100vw] md:max-w-[768px]  lg:max-w-[960px] xl:w-[960px] my-auto flex flex-wrap items-center overflow-x-hidden text-black self-start rounded-3xl z-10 md:z-0'>
+      <div id='pet-links-container' className='relative xl:self-end w-[100vw] md:max-w-[768px] lg:max-w-[960px] xl:w-[960px] my-auto flex flex-wrap items-center overflow-x-hidden text-black self-start rounded-3xl z-10 md:z-0'>
         { await data.animals.length > 0 ? await data.animals.map((element) => {
-          return <div id='pet-link' className='relative self-start md:basis-1/2 lg:basis-1/3 xl:basis-auto w-[100vw] xl:w-[315px] md:p-4'><div className='flex flex-wrap bg-white m-4 sm:m-0 md:flex-col md:w-auto justify-center items-center md:h-[45vh] text-center hover:shadow-md rounded-3xl'>
+          return <div id='pet-link' className='relative self-start md:basis-1/2 lg:basis-1/3 xl:basis-auto w-[100vw] xl:w-[315px] md:p-4'>
+                  <div className='flex flex-wrap bg-white m-4 sm:m-0 md:flex-col md:w-auto justify-center items-center md:h-[45vh] text-center hover:shadow-md rounded-3xl'>
                     <LikeButton parameters={params} animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } />
-                    <SignInButtonPopup parameters={params} />
                     <Link href={`/animal/${element.id}`} className='basis-full p-4 flex flex-wrap bg-transparent items-center'>
                       <div className='basis-full'>
                         <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[60vh] mb-2 md:mb-0 md:h-[30vh] m-auto border-2 border-pink'></img>
@@ -51,7 +47,8 @@ export default async function Pets({ params, searchParams }) {
                         <div>{element.age} {element.gender} {element.species}</div>
                       </div>
                     </Link>
-                  </div></div>;
+                  </div>
+                </div>;
         }) : <div className='h-full m-auto text-center'>
                 <h1 className={`${bree.className} font-bold text-3xl md:text-4xl leading-snug tracking-wide mb-2`}>Sorry, no animals found matching those filters.</h1>
                 <p className='basis-full text-base md:text-lg'>Try changing the filters.</p>
@@ -60,8 +57,6 @@ export default async function Pets({ params, searchParams }) {
           <ChangePageButtons parameters={params} searchParameters={searchParams} dataLength={await data.animals.length} />
         </div> : '' }
       </div>
-      {/* { data.animals.length > 0 ? <SwipeButton dataLength={await data.animals.length} /> : '' } */}
-      {/* <SearchFiltersButton breeds={breedData} /> */}
     </div>
   )
 }

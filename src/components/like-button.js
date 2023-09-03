@@ -1,7 +1,7 @@
 'use client'
 
 import $ from 'jquery';
-import { useSession } from 'next-auth/react';
+import { useSession, signIn } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -70,12 +70,13 @@ export default function LikeButton({ animalId, liked, parameters }) {
   }
 
   function sendNoSessionFeedback() {
-    console.log('no session feedback');
-
-    $('.no-session-feedback').css('display', 'block');
-    setTimeout(() => {
-      $('.no-session-feedback').css('display', 'none');
-    }, 5000);
+    $('#inner-body-container').css('filter', 'brightness(0.5)');
+    $('#inner-body-container *').css('pointer-events', 'none');
+    $('#inner-body-container *').css('touch-action', 'none');
+    $('html').css('overflow', 'hidden');
+    $('.signin-form-container').eq(0).css('display', 'flex');
+    $('.signin-to-favorite').eq(0).css('display', 'block');
+    $('.close-signin-btn').eq(0).css('display', 'block');
   }
 
   return (

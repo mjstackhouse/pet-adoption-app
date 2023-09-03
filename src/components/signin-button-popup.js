@@ -16,6 +16,6 @@ export default function SignInButtonPopup({ parameters }) {
   }, []);
 
   return (
-    <button onClick={() => signIn()} className='no-session-feedback font-bold tracking-wider bg-red text-black absolute z-20 px-2 py-2 rounded-md shadow-md hover:underline underline-offset-4'>Please sign in to favorite animals</button>
+    <button onClick={() => signIn()} className='fixed xl:self-start top-[50%] sm:right-[25%] sm:left-[25%] lg:right-[35%] lg:left-[35%] z-20 no-session-feedback font-bold tracking-wider bg-white border-2 border-red text-black px-2 py-2 rounded-md hover:underline underline-offset-4'>Please sign in to favorite animals</button>
   )
 }
