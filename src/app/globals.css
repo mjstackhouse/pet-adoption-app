@@ -8,6 +8,10 @@ html {
   /* box-sizing: border-box; */
 }
 
+/* .dark-overlay {
+  position: fixed;
+} */
+
 /* Jeff Wooden: https://stackoverflow.com/questions/12906789/preventing-an-image-from-being-draggable-or-selectable-without-using-js */
 #yellow-wave-2 {
   user-drag: none;
@@ -99,10 +103,6 @@ body {
   background-color: black;
   z-index: 10;
   touch-action: none;
-}
-
-#nav-button {
-  /* transform: rotate(0deg); */
 }
 
 @media screen and (min-width: 640px) {
