@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({ children, params }) {
   return (
-    <html lang='en' className='max-h-fit'>
+    <html lang='en' className='max-h-fit bg-gray'>
       <body className='relative max-w-screen flex flex-wrap flex-col justify-center text-black'>
         <Provider>
           <SigninForm parameters={params} />
