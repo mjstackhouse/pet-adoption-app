@@ -245,8 +245,6 @@ export default function Search({ types }) {
       console.log('responseData: ', responseData);
 
       if (responseData.animals.length === 0) {
-        $('#location-btn').attr('disabled', 'true');
-        $('#location-btn').css('background-color', '#D9D9D9');
         $('#animals-nearby-btn').attr('disabled', 'true');
         $('.animals-nearby-link').removeClass('animate-pulse');
         $('.animals-nearby-link').css('background-color', '#D9D9D9');
@@ -325,6 +323,23 @@ export default function Search({ types }) {
     else if (type === 'bird') {
       if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/bird-bg-desktop.jpg' + '")');
       else $('#search-bg').css('background-image', 'url("' + '/bird-bg-mobile.jpg' + '")');
+    }
+    else if (type === 'horse') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/horse-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/horse-bg-mobile.jpg' + '")');
+    }
+    else if (type === 'scales, fins & other') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/scalesfinsandother-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/scalesfinsandother-bg-mobile.jpg' + '")');
+    }
+    // All conditions below here have not been updated with the correct image files
+    else if (type === 'small & furry') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/smallandfurry-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/smallandfurry-bg-mobile.jpg' + '")');
+    }
+    else if (type === 'barnyard') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/barnyard-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/barnyard-bg-mobile.jpg' + '")');
     }
   }
   

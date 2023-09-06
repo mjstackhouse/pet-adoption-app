@@ -59,7 +59,7 @@ body {
 
 #search-bg {
   background-image: url('../../public/dog-bg-mobile.jpg');
-  transition: background-image 1s;
+  transition: background-image 1s linear 0.5s;
 }
 
 #intro-heading-container {
