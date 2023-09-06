@@ -45,7 +45,7 @@ export default function SigninForm({ parameters }) {
     $('#inner-body-container').css('filter', 'brightness(1)');
     $('#inner-body-container *').css('pointer-events', 'auto');
     $('#inner-body-container *').css('touch-action', 'auto');
-    $('html').css('overflow', 'visible');
+    $('html').css('overflow-y', 'visible');
   }
 
   return (
