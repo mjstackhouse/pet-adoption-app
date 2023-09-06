@@ -5,9 +5,7 @@ import loadAuto from '@/utilities/google-api';
 import fetchLocation from '@/utilities/fetch-location';
 import fetchData from '@/utilities/fetch-data';
 import Image from 'next/image';
-import yellowWave from '../../public/yellow-wave-1.svg';
 import yellowWave2 from '../../public/yellow-wave-2.svg';
-import yellowWave3 from '../../public/yellow-wave-3.svg';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch, faLocationArrow, faMagnifyingGlass, faPaw, faRightLong } from '@fortawesome/free-solid-svg-icons';
@@ -310,49 +308,70 @@ export default function Search({ types }) {
       return console.log(error);
     })
   }
+
+  function setSearchBackground(type) {
+    if (type === 'cat') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/cat-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/cat-bg-mobile.jpg' + '")');
+    }
+    else if (type === 'dog') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/dog-bg-desktop.png' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/dog-bg-mobile.jpg' + '")');
+    }
+    else if (type === 'rabbit') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/rabbit-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/rabbit-bg-mobile.jpg' + '")');
+    }
+    else if (type === 'bird') {
+      if (window.innerWidth >= 1024) $('#search-bg').css('background-image', 'url("' + '/bird-bg-desktop.jpg' + '")');
+      else $('#search-bg').css('background-image', 'url("' + '/bird-bg-mobile.jpg' + '")');
+    }
+  }
   
   return (
     <div className='basis-full max-w-full'>
-      <div id='search-bg' className='bg-gray shadow-lg bg-fixed bg-top bg-no-repeat bg-cover'>
+      <div id='search-bg' className='bg-gray shadow-lg bg-fixed bg-center bg-no-repeat bg-cover'>
         <div id='search-container' className='flex flex-col items-center h-[90svh] h-[90vh] max-w-[900px] mx-auto'>
-          <div className='basis-full flex flex-wrap flex-col'>
-            <div className='basis-1/3 flex flex-wrap justify-center items-end text-center sm:mx-auto'>
-              <div id='intro-heading-container' className='text-white relative'>
-                <h1 id='intro-heading' className={`${bree.className} font-bold text-[2.5rem] xs:text-5xl sm:text-6xl tracking-wider drop-shadow-2xl mb-2`}>
-                  Welcome to PawfectMatch
-                </h1>
-                <h2 className='text-base sm:text-2xl leading-relaxed tracking-wide drop-shadow-lg mx-4 sm:mx-auto'>
-                  Where loving homes and animals in need find their perfect companionship.
-                </h2>
+          <div className='basis-full flex flex-wrap flex-col place-content-center'>
+            <div id='search-inner-container' className='bg-center bg-no-repeat bg-cover sm:px-8 sm:py-8 rounded-3xl mx-4 sm:mx-auto'>
+              <div className='basis-1/2 flex flex-wrap justify-center items-end text-center sm:mx-auto mb-4'>
+                <div id='intro-heading-container' className='text-white relative'>
+                  <h1 id='intro-heading' className={`${bree.className} font-bold text-[2.5rem] xs:text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-tight tracking-wider drop-shadow-2xl mb-2 md:mb-4`}>
+                    Welcome to PawfectMatch
+                  </h1>
+                  <h2 className='text-base sm:text-2xl leading-relaxed tracking-wide drop-shadow-lg mx-4 sm:mx-auto'>
+                    Where loving homes and animals in need find their perfect companionship
+                  </h2>
+                </div>
               </div>
-            </div>
-            <div className='basis-1/3 mt-8'>
-              <div className='flex flex-wrap max-w-fit flex-col mx-4 sm:mx-auto px-2 py-4 sm:px-6 sm:py-6 items-center justify-center bg-white rounded-3xl border-blue border-solid shadow-lg'>
-                <h1 className='font-bold mb-4 tracking-wider'>Search for adoptable animals</h1>  
-                <div>
-                  <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
-                    <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl border-black border-2' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); } } required>
-                      <option value=''>Select an animal type</option>
-                      { types.types.map((element) => {
-                        return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
-                      }) }
-                    </select>
-                    <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
-                      <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl border-black border-2' required></input>
-                      <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
-                        <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
-                        <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
-                        {locationBtnText}
+              <div className='basis-1/2'>
+                <div className='flex flex-wrap max-w-fit flex-col px-2 py-4 sm:px-6 sm:py-8 mx-auto items-center justify-center'>
+                  <div>
+                    <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
+                      <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); setSearchBackground(e.target.value); } } required>
+                        <option value=''>Select an animal type</option>
+                        { types.types.map((element) => {
+                          return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
+                        }) }
+                      </select>
+                      <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
+                        <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl' required></input>
+                        <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
+                          <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
+                          <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
+                          {locationBtnText}
+                        </button>
+                      </div>
+                      <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2' />
+                        Find your companion
                       </button>
-                    </div>
-                    <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>
-                      <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2' />
-                      Find your companion
-                    </button>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
+            {/* <div id='search-bottom' className='basis-1/3 bg-center bg-no-repeat bg-cover'></div> */}
           </div>
         </div>
       </div>
@@ -430,7 +449,6 @@ export default function Search({ types }) {
           </div>
         </div>
         <Image id='yellow-wave-2' src={yellowWave2} className='absolute bottom-0 z-0 my-auto w-[100vw] object-cover' />
-        {/* <Image src={yellowWave3} className='absolute top-[20vh] left-0 bottom-0 right-0 z-0 w-[100vw]' /> */}
       </div>
     </div>
   )
