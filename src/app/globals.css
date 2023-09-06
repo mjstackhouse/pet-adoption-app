@@ -58,18 +58,12 @@ body {
 }
 
 #search-bg {
-  background-image: url('../../public/homepage-bg-2i.jpg');
-  /* background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center; */
+  background-image: url('../../public/dog-bg-mobile.jpg');
+  transition: background-image 1s;
 }
 
 #intro-heading-container {
   /* background-color: rgba(255, 255, 255, 0.5); */
-}
-
-#intro-heading {
-  line-height: 1.15;
 }
 
 #pink-bg-shape {
@@ -105,9 +99,17 @@ body {
   touch-action: none;
 }
 
-@media screen and (min-width: 640px) {
+#search-container {
+  /* background-image: url('../../public/homepage-bg-split-2.png'); */
+}
+
+#search-inner-container {
+  /* background-image: url('../../public/search-bg-1.jpg'); */
+  background-position: center;
+}
+
+@media screen and (min-width: 1024px) {
   #search-bg {
-    background-image: url('../../public/homepage-bg-2-desktop-g.jpg');
-    background-position: center;
+    background-image: url('../../public/dog-bg-desktop.png');
   }
 }

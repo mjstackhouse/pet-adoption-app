@@ -48,7 +48,7 @@ export default function SignInButton() {
           </div>
         </div>
         ) : (
-        <button className='hover:text-darker-gray hover:underline underline-offset-4' onClick={() => signIn()}>Sign In</button>
+        <button className='font-bold border-2 border-white tracking-wider bg-black hover:bg-[#2E2E2E] hover:underline underline-offset-4 text-white px-4 py-2 rounded-3xl' onClick={() => signIn()}>Sign In</button>
         )}
     </div>
   )

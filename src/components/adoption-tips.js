@@ -2,7 +2,6 @@ import { Bree_Serif } from 'next/font/google';
 import Link from 'next/link';
 import Image from 'next/image';
 import adoptionImg from '../../public/adoption-img-1.jpg';
-import pinkBgShape from '../../public/pink-bg-shape-1.svg';
 
 const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
@@ -24,11 +23,9 @@ export default function AdoptionTips() {
           </div>
           <div className='relative sm:basis-1/2 mb-4 sm:mb-0'>
             <Image src={adoptionImg} className='relative mx-auto w-auto z-10 border-pink border-2' />
-            {/* <Image src={pinkBgShape} className='absolute top-0 bottom-1.5 left-0 right-0 z-0 ' /> */}
           </div>
           <Link href='/adoption-tips' className='block sm:hidden mx-auto font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
         </div>
-        {/* <Image id='pink-bg-shape' src={pinkBgShape} className='absolute top-0 bottom-0 left-0 right-0 z-0 my-auto h-[100%] rotate-90 sm:rotate-0' /> */}
       </div>
     // </div>
   )
