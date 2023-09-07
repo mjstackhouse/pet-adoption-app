@@ -22,6 +22,10 @@ html {
   -ms-user-select: none;
 }
 
+/* .thumbnail {
+  transition: object-fit 1s linear;
+} */
+
 /* .hdpi.pac-logo:after {
   background-image: none;
 } */

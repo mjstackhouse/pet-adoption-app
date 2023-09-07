@@ -69,6 +69,14 @@ export default function LikeButton({ animalId, liked, parameters }) {
     checkLikedStatus();
   }
 
+  function closeFilters() {
+    $('.signin-form-container').eq(0).css('display', 'none');
+    $('#inner-body-container').css('filter', 'brightness(1)');
+    $('#inner-body-container *').css('pointer-events', 'auto');
+    $('#inner-body-container *').css('touch-action', 'auto');
+    $('html').css('overflow-y', 'visible');
+  }
+
   function sendNoSessionFeedback() {
     $('#inner-body-container').css('filter', 'brightness(0.5)');
     $('#inner-body-container *').css('pointer-events', 'none');
@@ -77,6 +85,13 @@ export default function LikeButton({ animalId, liked, parameters }) {
     $('.signin-form-container').eq(0).css('display', 'flex');
     $('.signin-to-favorite').eq(0).css('display', 'block');
     $('.close-signin-btn').eq(0).css('display', 'block');
+
+    document.getElementById('inner-body-container').addEventListener('click', () => {
+      closeFilters();
+      document.getElementById('inner-body-container').removeEventListener('click', () => {
+        closeFilters();
+      })
+    })
   }
 
   return (
