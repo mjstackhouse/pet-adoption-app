@@ -7,6 +7,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Bree_Serif } from 'next/font/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faX, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+import AnimalPhotoGallery from '@/components/animal-photo-gallery';
 
 const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
 
@@ -27,10 +28,11 @@ export default async function PetPage({ params }) {
         <div className='flex flex-wrap bg-white rounded-b-3xl px-4 sm:px-8 py-4 sm:py-8 mb-4'>
           <div className='basis-full text-center pb-4 mb-4 border-b-[1px]'>
             <h1 className={`${bree.className} text-center basis-full font-bold text-3xl sm:text-4xl mb-4 leading-snug tracking-wide`}>{await data.animal.name.toUpperCase()}</h1>
-            <div className='flex justify-start bg-gradient-to-r from-blue via-pink to-yellow bg-local w-full h-[50vh] overflow-x-scroll scrollbar-thin scrollbar-thumb-black hover:scrollbar-thumb-darker-gray scrollbar-track-gray mb-2 '>
-              { await data.animal.photos.length > 0 ? data.animal.photos.map((element) => {
+            <div className='flex justify-start bg-local w-full h-[50vh] mb-2 sm:mb-4'>
+              {/* { await data.animal.photos.length > 0 ? data.animal.photos.map((element) => {
                 return <img src={element.large !== null ? element.large : null} className='basis-full w-full shadow-lg mx-4 my-4 object-cover' />
-              }) : <img src='https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg' className='basis-full w-full shadow-lg my-4 object-cover' /> }
+              }) : <img src='https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg' className='basis-full w-full shadow-lg my-4 object-cover' /> } */}
+              { await data.animal.photos.length > 0 ? <AnimalPhotoGallery photos={data.animal.photos} /> : <img src='https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg' className='basis-full w-full shadow-lg my-4 object-cover' /> }
             </div>
             { await data.animal.description !== null ? <p>{data.animal.description}</p> : null }
           </div>
@@ -58,10 +60,10 @@ export default async function PetPage({ params }) {
             { await data.animal.environment.cats === true ? <p className='basis-full'><FontAwesomeIcon className='inline h-[1.25rem] w-[1rem] mr-2 text-green' icon={faCheck} />Good with cats</p> : data.animal.environment.cats !== null ? <p className='basis-full'><FontAwesomeIcon className='inline h-[1.25rem] w-[1rem] mr-2 text-red' icon={faX} />Good with cats</p> : null }
           </div>
           : null}
-          <div className='basis-full sm:basis-1/2 flex flex-wrap pb-4 mb-4 border-b-[1px]'>
+          <div className='basis-full sm:basis-1/2 pb-4 mb-4 border-b-[1px]'>
             <p className='font-bold tracking-wider'>Contact -</p>
-            { await data.animal.contact.email !== null ? <a href={`mailto:${data.animal.contact.email}`} className='basis-full'><FontAwesomeIcon className='inline h-[1.25rem] mr-2' icon={faEnvelope} />{data.animal.contact.email}</a> : null }
-            { await data.animal.contact.phone !== null ? <p className='basis-full'><FontAwesomeIcon className='inline h-[1.25rem] mr-2' icon={faPhone} />{data.animal.contact.phone}</p> : null}
+            { await data.animal.contact.email !== null ? <a href={`mailto:${data.animal.contact.email}`} className='w-full'><FontAwesomeIcon className='inline h-[1.25rem] mr-2' icon={faEnvelope} />{data.animal.contact.email}</a> : null }
+            { await data.animal.contact.phone !== null ? <p className='w-full'><FontAwesomeIcon className='inline h-[1.25rem] mr-2' icon={faPhone} />{data.animal.contact.phone}</p> : null}
           </div>
         </div>
         <div className='sticky bottom-[1rem] sm:bottom-[4rem] flex items-center justify-end'>

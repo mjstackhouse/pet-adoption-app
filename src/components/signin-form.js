@@ -33,11 +33,14 @@ export default function SigninForm({ parameters }) {
       $('.signin-form-container').addClass('fixed h-[100vh] w-screen md:h-auto md:w-auto md:inset-x-[5%] lg:inset-x-[15%] md:inset-y-[25%] z-30 hidden rounded-none md:rounded-3xl');
     }
 
-    if (document.getElementById('inner-body-container') !== null) {
-      document.getElementById('inner-body-container').addEventListener('click', () => {
-        closeFilters();
-      })
-    }
+    // if (document.getElementById('inner-body-container') !== null) {
+    //   document.getElementById('inner-body-container').addEventListener('click', () => {
+    //     closeFilters();
+    //     document.getElementById('inner-body-container').removeEventListener('click', () => {
+    //       closeFilters();
+    //     })
+    //   })
+    // }
   }, []);
 
   function closeFilters() {
