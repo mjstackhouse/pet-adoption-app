@@ -24,8 +24,8 @@ export default function LikeButton({ animalId, liked, parameters }) {
     }
 
     if (parameters.hasOwnProperty('city')) {
-      $('.like-button').addClass('absolute');
-      $('.heart-icon').addClass('h-[4.5rem] drop-shadow-lg');
+      $('.like-button').addClass('absolute top-[1.5%] right-[3%] sm:top-[5%] sm:right-[7.5%] flex place-items-center bg-darker-gray p-4 rounded-full');
+      $('.heart-icon').addClass('h-[3.5rem] sm:h-[3rem]');
       $('.favorites-text').css('display', 'none');
     }
     else {
@@ -97,7 +97,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
   return (
     <button className='like-button' onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>
       <p className='favorites-text inline font-bold tracking-wider mr-2 hidden'>Add to favorites</p>
-      <FontAwesomeIcon className='heart-icon opacity-50' icon={faHeart} style={{ color: symbolColor }} />
+      <FontAwesomeIcon className='heart-icon opacity-50 hover:opacity-100 hover:scale-110 transition-[color] duration-500' icon={faHeart} style={{ color: symbolColor }} />
     </button>
   )
 }
