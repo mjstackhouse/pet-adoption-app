@@ -39,10 +39,10 @@ export default async function Pets({ params, searchParams }) {
                     <LikeButton parameters={params} animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } />
                     <Link href={`/animal/${element.id}`} className='basis-full p-4 flex flex-wrap bg-transparent items-center'>
                       <div className='basis-full'>
-                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[60vh] mb-2 md:mb-0 md:h-[30vh] m-auto border-2 border-pink'></img>
+                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : 'https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg'} className='object-cover h-[60vh] mb-2 md:mb-0 md:h-[30vh] m-auto border-2 border-pink rounded-3xl'></img>
                       </div>
                       <div className='justify-self-start mx-auto'>
-                        <div className={`${bree.className} font-bold mx-auto text-ellipsis whitespace-nowrap overflow-hidden w-[85vw] md:w-[175px] lg:w-[200px] ${element.name.length >= 22 ? 'text-base md:text-xl' : 'text-xl md:text-3xl'}`}>{element.name.toUpperCase()}</div>
+                        <div className={`${bree.className} font-bold mx-auto text-ellipsis whitespace-nowrap overflow-hidden w-[85vw] md:w-[175px] lg:w-[200px] ${element.name.length >= 22 ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'}`}>{element.name.toUpperCase()}</div>
                         <div className='mx-auto text-ellipsis whitespace-nowrap overflow-hidden w-[85vw] md:w-[175px] lg:w-[200px]'>{element.breeds.primary}{element.breeds.secondary !== null ? ` Mix` : ''}</div>
                         <div>{element.age} {element.gender} {element.species}</div>
                       </div>
