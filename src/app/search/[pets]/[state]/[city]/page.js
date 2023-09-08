@@ -30,12 +30,12 @@ export default async function Pets({ params, searchParams }) {
   if (session) userLikes = await checkLiked();
 
   return (
-    <div id='search-results' className='relative h-[90vh] h-[90svh] md:h-auto xl:w-[1280px] flex flex-wrap flex-col xl:flex-row items-center xl:justify-center xl:mx-auto'>
+    <div id='search-results' className='relative md:h-auto xl:w-[1280px] flex flex-wrap flex-col xl:flex-row items-center xl:justify-center xl:mx-auto'>
       <SearchFiltersButton parameters={params} breeds={breedData} searchParameters={searchParams} />
       <div id='pet-links-container' className='relative xl:self-end w-[100vw] md:max-w-[768px] lg:max-w-[960px] xl:w-[960px] my-auto flex flex-wrap items-center overflow-x-hidden text-black self-start rounded-3xl z-10 md:z-0'>
         { await data.animals.length > 0 ? await data.animals.map((element) => {
           return <div id='pet-link' className='relative self-start md:basis-1/2 lg:basis-1/3 xl:basis-auto w-[100vw] xl:w-[315px] md:p-4'>
-                  <div className='flex flex-wrap bg-white m-4 sm:m-0 md:flex-col md:w-auto justify-center items-center md:h-[45vh] text-center hover:shadow-md rounded-3xl'>
+                  <div className='flex flex-wrap bg-white m-4 sm:m-0 md:flex-col md:w-auto justify-center items-center md:h-[45vh] min-h-[330px] md:max-h-[500px] text-center hover:shadow-md rounded-3xl'>
                     <LikeButton parameters={params} animalId={element.id} liked={ userLikes !== undefined ? (userLikes.includes(element.id) === true ? true : false) : false } />
                     <Link href={`/animal/${element.id}`} className='basis-full p-4 flex flex-wrap bg-transparent items-center'>
                       <div className='basis-full'>

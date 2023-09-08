@@ -94,8 +94,6 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
       delete updatedQueryParams.page;
     }
 
-    console.log('queryParams after: ', updatedQueryParams);
-
     setQueryParams(updatedQueryParams);
   }
 
@@ -105,20 +103,20 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
   //    Color
 
   return (
-    <div className='fixed xl:sticky xl:self-start top-[10vh] left-0 p-2 sm:p-8 sm:p-4 xl:p-0 z-20'>
-      <div id='filters-container' className='xl:pt-8 absolute xl:static top-0 xl:top-[10vh] bottom-0 left-0 right-0 mx-auto bg-black xl:bg-gray h-[100vh] xl:h-auto w-[100vw] xl:w-[315px] hidden xl:block'>
+    <div className='fixed xl:sticky xl:self-start top-[80px] sm:top-[90px] left-0 p-2 sm:p-8 sm:p-4 xl:p-0 z-20'>
+      <div id='filters-container' className='xl:pt-8 absolute xl:static top-0 xl:top-[90px] bottom-0 left-0 right-0 mx-auto bg-gray h-[100vh] xl:h-auto w-[100vw] xl:w-[315px] hidden xl:block'>
         <button className='mt-4 ml-4 mb-4 xl:hidden' onClick={() => closeFilters()}>
-          <FontAwesomeIcon icon={faXmark} className='h-[2rem] text-white hover:text-darker-gray' />
+          <FontAwesomeIcon icon={faXmark} className='h-[2rem] text-black hover:text-darker-gray' />
         </button>
         <form className='flex flex-wrap'>
-          <label htmlFor='breed' className={`${bree.className} basis-full text-center text-white xl:text-black font-bold tracking-wider mx-auto mb-2`}>Breed</label>
+          <label htmlFor='breed' className={`${bree.className} basis-full text-center text-black font-bold tracking-wider mx-auto mb-2`}>Breed</label>
           <select id='breed' className='basis-full text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mx-auto px-3 py-1 rounded-3xl border-black border-2' value={breed} onChange={e => {setBreed(e.target.value); addToQueryParams('breed', e.target.value);}} required>
             <option value=''>Any breed</option>
             { breeds.breeds.map((element) => {
               return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
             })}
           </select>
-          <label htmlFor='age' className={`${bree.className} basis-full text-center text-white xl:text-black font-bold tracking-wider mx-auto mb-2`}>Age</label>
+          <label htmlFor='age' className={`${bree.className} basis-full text-center text-black font-bold tracking-wider mx-auto mb-2`}>Age</label>
           <select id='age' className='basis-full text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mx-auto px-3 py-1 rounded-3xl border-black border-2' value={age} onChange={e => {setAge(e.target.value); addToQueryParams('age', e.target.value);}} required>
             <option value=''>Any age</option>
             <option value='baby'>Baby</option>
@@ -126,7 +124,7 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
             <option value='adult'>Adult</option>
             <option value='senior'>Senior</option>
           </select>
-          <label htmlFor='size' className={`${bree.className} basis-full text-center text-white xl:text-black font-bold tracking-wider mx-auto mb-2`}>Size</label>
+          <label htmlFor='size' className={`${bree.className} basis-full text-center text-black font-bold tracking-wider mx-auto mb-2`}>Size</label>
           <select id='size' className='basis-full text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-8 sm:mx-auto px-3 py-1 rounded-3xl border-black border-2' value={size} onChange={e => {setSize(e.target.value); addToQueryParams('size', e.target.value);}} required>
             <option value=''>Any size</option>
             <option value='small'>Small</option>
@@ -134,7 +132,7 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
             <option value='large'>Large</option>
             <option value='xlarge'>Xlarge</option>
           </select>
-          <Link id='update-filters-btn' href={ Object.keys(queryParams).length !== 0 ? { query: queryParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { addToQueryParams('page', searchParameters?.page); closeFilters(); scrollToStart(); }} className='font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white xl:bg-blue xl:hover:bg-darker-blue xl:border-0 border-2 text-black px-4 py-2 mx-auto rounded-3xl hover:shadow-md mb-4'>
+          <Link id='update-filters-btn' href={ Object.keys(queryParams).length !== 0 ? { query: queryParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { addToQueryParams('page', searchParameters?.page); closeFilters(); scrollToStart(); }} className='font-bold tracking-wider hover:underline underline-offset-4 bg-blue hover:bg-darker-blue text-black px-4 py-2 mx-auto rounded-3xl hover:shadow-md mb-4'>
             Update filters
           </Link>
         </form>
