@@ -1,5 +1,6 @@
 import './globals.css';
 import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 import Provider from '@/components/provider';
 import SigninForm from '@/components/signin-form';
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children, params }) {
             <div id='root-layout' className='basis-full max-w-full flex flex-wrap flex-row items-center justify-center'>
               {children}
             </div>
+            <Footer />
           </div>
         </Provider>
       </body>
