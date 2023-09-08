@@ -20,7 +20,7 @@ export default async function PetPage({ params }) {
 
   const data = await fetchData(params.pet);
 
-  console.log('data.animal.description: ', await data.animal.description);
+  console.log('data.animal.description: ', await data.animal.photos);
 
   return (
     <div className='flex flex-wrap items-center content-center max-w-[900px]'>
@@ -62,8 +62,8 @@ export default async function PetPage({ params }) {
           : null}
           <div className='basis-full sm:basis-1/2 pb-4 mb-4 border-b-[1px]'>
             <p className='font-bold tracking-wider'>Contact -</p>
-            { await data.animal.contact.email !== null ? <a href={`mailto:${data.animal.contact.email}`} className='w-full'><FontAwesomeIcon className='inline h-[1.25rem] mr-2' icon={faEnvelope} />{data.animal.contact.email}</a> : null }
-            { await data.animal.contact.phone !== null ? <p className='w-full'><FontAwesomeIcon className='inline h-[1.25rem] mr-2' icon={faPhone} />{data.animal.contact.phone}</p> : null}
+            { await data.animal.contact.email !== null ? <a href={`mailto:${data.animal.contact.email}`} className='w-full'><FontAwesomeIcon className='inline h-[1rem] mr-2' icon={faEnvelope} />{data.animal.contact.email}</a> : null }
+            { await data.animal.contact.phone !== null ? <p className='w-full'><FontAwesomeIcon className='inline h-[1rem] mr-2' icon={faPhone} />{data.animal.contact.phone}</p> : null}
           </div>
         </div>
         <div className='sticky bottom-[1rem] sm:bottom-[4rem] flex items-center justify-end'>

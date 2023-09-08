@@ -346,7 +346,7 @@ export default function Search({ types }) {
   return (
     <div className='basis-full max-w-full'>
       <div id='search-bg' className='bg-gray shadow-lg bg-fixed bg-center bg-no-repeat bg-cover'>
-        <div id='search-container' className='flex flex-col items-center h-[90svh] h-[90vh] max-w-[900px] mx-auto'>
+        <div id='search-container' className='flex flex-col items-center h-[calc(100svh-80px)] h-[calc(100vh-80px)] sm:h-[calc(100svh-90px)] sm:h-[calc(100vh-90px)] max-w-[900px] mx-auto'>
           <div className='basis-full flex flex-wrap flex-col place-content-center'>
             <div id='search-inner-container' className='bg-center bg-no-repeat bg-cover sm:px-8 sm:py-8 rounded-3xl mx-4 sm:mx-auto'>
               <div className='basis-1/2 flex flex-wrap justify-center items-end text-center sm:mx-auto mb-4'>
