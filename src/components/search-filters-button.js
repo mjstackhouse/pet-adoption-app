@@ -18,9 +18,9 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
   const [queryParams, setQueryParams] = useState(searchParameters);
 
   useEffect(() => {
-    // console.log('useEffect');
 
-    // && Object.keys(searchParameters).includes('page') !== true
+    $('html').css('overflow-y', 'visible');
+
     if (Object.keys(searchParameters).length > 0
     && (Object.keys(searchParameters).includes('breed') || Object.keys(searchParameters).includes('age') || Object.keys(searchParameters).includes('size'))) {
 

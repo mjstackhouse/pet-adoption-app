@@ -377,8 +377,8 @@ export default function Search({ types }) {
                           {locationBtnText}
                         </button>
                       </div>
-                      <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl' onClick={handleSubmit}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2' />
+                      <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl group' onClick={handleSubmit}>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2 group-hover:scale-125 transition-transform' />
                         Find your companion
                       </button>
                     </form>

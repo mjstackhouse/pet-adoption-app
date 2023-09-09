@@ -1,5 +1,3 @@
-'use client'
-
 import fetchData from '@/utilities/fetch-data';
 
 export default async function AnimalsNearby({ type, state, city }) {
