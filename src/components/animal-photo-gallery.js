@@ -35,7 +35,7 @@ export default function AnimalPhotoGallery({ photos }) {
   }
 
   return (
-    <div className='basis-full mx-auto flex flex-wrap sm:flex-nowrap'>
+    <div className='w-full max-w-[calc(100vw-4rem)] mx-auto flex flex-wrap sm:flex-nowrap'>
       <div className='h-[50vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col'>
        { photos.map((element, index) => {
           return <button className='my-[0.5vh] mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
@@ -58,13 +58,12 @@ export default function AnimalPhotoGallery({ photos }) {
               })
             }
           </div>
-          {/* h-[calc(97.5vh-10rem-16vh)] xl:h-[calc(97.5vh-10rem)] */}
           <span className='h-[calc(97.5vh-10rem-16vh)] xl:h-auto grow bg-darker-gray'>
             <span className='h-full m-auto flex place-content-center'>
               <img src={fullSelectedImg} className='mx-auto object-contain max-h-full' />
             </span>
           </span>
-          <div className='overflow-x-auto overflow-y-hidden basis-full place-content-center flex xl:hidden flex-row mx-auto'>
+          <div className='w-full overflow-x-auto overflow-y-hidden place-content-center whitespace-nowrap xl:hidden mx-auto'>
             { photos.map((element, index) => {
                 return <button className='my-[2vh] mx-[1vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
               })
@@ -72,7 +71,7 @@ export default function AnimalPhotoGallery({ photos }) {
           </div>
         </div>
       </div>
-      <div className='h-[12vh] overflow-x-auto overflow-y-hidden flex sm:hidden flex-row mx-auto'>
+      <div className='h-[12vh] w-full overflow-x-auto overflow-y-hidden whitespace-nowrap sm:hidden mx-auto'>
        { photos.map((element, index) => {
           return <button className='my-[1vh] mx-[0.5vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })

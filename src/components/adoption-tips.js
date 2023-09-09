@@ -22,7 +22,7 @@ export default function AdoptionTips() {
             </div>
           </div>
           <div className='relative sm:basis-1/2 mb-4 sm:mb-0'>
-            <Image src={adoptionImg} className='relative mx-auto w-auto z-10 border-pink border-2' />
+            <Image src={adoptionImg} className='relative mx-auto w-auto z-10 border-pink border-2 rounded-3xl' />
           </div>
           <Link href='/adoption-tips' className='block sm:hidden mx-auto font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
         </div>
