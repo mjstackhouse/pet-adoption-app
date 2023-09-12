@@ -29,7 +29,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
       $('.favorites-text').css('display', 'none');
     }
     else {
-      $('.like-button').addClass('flex place-items-center font-bold tracking-wider hover:bg-darker-blue hover:shadow-md bg-blue text-black px-4 py-2 mx-auto sm:mx-0 rounded-3xl mb-4');
+      $('.like-button').addClass('flex place-items-center font-bold tracking-wider hover:bg-darker-yellow bg-yellow text-black px-4 py-2 mx-auto xl:mx-0 rounded-3xl mb-4');
       $('.heart-icon').addClass('h-[1.5rem] drop-shadow-md');
       $('.favorites-text').css('display', 'inline');
     }
@@ -95,9 +95,9 @@ export default function LikeButton({ animalId, liked, parameters }) {
   }
 
   return (
-    <button className='like-button' onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>
-      <p className='favorites-text inline font-bold tracking-wider mr-2 hidden'>Add to favorites</p>
-      <FontAwesomeIcon className='heart-icon opacity-50 hover:opacity-100 hover:scale-110 transition-[color] duration-500' icon={faHeart} style={{ color: symbolColor }} />
+    <button className='like-button group' onClick={() => { session ? sendAnimalAndCheckLiked() : sendNoSessionFeedback() }}>
+      <FontAwesomeIcon className='heart-icon opacity-50 group-hover:scale-125 transition-all' icon={faHeart} style={{ color: symbolColor }} />
+      <p className='favorites-text inline font-bold tracking-wider ml-2 hidden group-hover:underline underline-offset-4'>Add to favorites</p>
     </button>
   )
 }

@@ -14,6 +14,8 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   
   const router = useRouter();
 
+  console.log('inside change-page-buttons');
+
   const [changePageBtnHeader, setChangePageBtnHeader] = useState('Continue looking by clicking below');
   const [nextPageNum, setNextPageNum] = useState(searchParameters.hasOwnProperty('page') ? Number(searchParameters.page) + 1 : 2);
   const [previousPageNum, setPreviousPageNum] = useState(searchParameters.hasOwnProperty('page') ? Number(searchParameters.page) - 1 : 0);
@@ -22,6 +24,7 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   const [nextBtnSearchParams, setNextBtnSearchParams] = useState({});
 
   useEffect(() => {
+    console.log('createNewSearchParams(buttonType) - searchParams: ', searchParameters);
     // console.log("searchParameters.hasOwnProperty('page'): ", searchParameters.hasOwnProperty('page'));
     
     createNewSearchParams('previous');
@@ -34,14 +37,10 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
     }
     else {
       $('#previous-page-button').css('display', 'none');
-      // $('#next-page-button').css('flex-basis', '100%');
     }
-
-    console.log('dataLength: ', dataLength);
 
     if (dataLength < 20) {
       $('#next-page-button').css('display', 'none');
-      // $('#previous-page-button').css('flex-basis', '100%');
       setChangePageBtnHeader('No more results matching those filters');
     }
     else {
@@ -67,12 +66,12 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   }
 
   function createNewSearchParams(buttonType) {
+    // console.log('createNewSearchParams(buttonType) - searchParams: ', searchParameters);
 
     if (Object.keys(searchParameters).length > 0
     && (Object.keys(searchParameters).includes('breed') || Object.keys(searchParameters).includes('age') || Object.keys(searchParameters).includes('size'))) {
 
       const queryKeys = Object.keys(searchParameters).slice();
-
       const queryValues = Object.values(searchParameters).slice();
 
       let queryParams = {};
@@ -169,10 +168,10 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
     <div className='w-[100vw] sm:w-[900px] xl:w-[960px] xl:px-8 flex flex-wrap place-items-center text-center mx-4 sm:mx-auto my-4 sm:my-0'>
       {/* <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-4xl tracking-wide mb-4 sm:hidden`}>{changePageBtnHeader}</h1> */}
       <div className='basis-full flex justify-center'>
-        <Link id='previous-page-button' href={ prevBtnSearchParams !== '' ? { query: prevBtnSearchParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { setPreviousPageNum(previousPageNum - 1); setNextPageNum(nextPageNum - 1); }} className='max-w-[50%] font-bold tracking-wider hover:bg-darker-gray bg-white border-2 text-black px-4 py-2 mr-2 sm:mt-8 sm:mb-8 rounded-3xl hover:shadow-md mb-4'>
+        <Link id='previous-page-button' href={ prevBtnSearchParams !== '' ? { query: prevBtnSearchParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { setPreviousPageNum(previousPageNum - 1); setNextPageNum(nextPageNum - 1); }} className='max-w-[50%] font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white border-2 text-black px-4 py-2 mr-2 sm:mt-8 sm:mb-8 rounded-3xl hover:shadow-md mb-4'>
           Previous page
         </Link>
-        <Link id='next-page-button' href={{ query: nextBtnSearchParams }} passHref shallow onClick={() => { setNextPageNum(nextPageNum + 1); setPreviousPageNum(previousPageNum + 1); } } className='max-w-[50%] font-bold tracking-wider hover:bg-darker-gray bg-white border-2 text-black px-4 py-2 ml-2 sm:mt-8 sm:mb-8 rounded-3xl hover:shadow-md mb-4'>
+        <Link id='next-page-button' href={{ query: nextBtnSearchParams }} passHref shallow onClick={() => { setNextPageNum(nextPageNum + 1); setPreviousPageNum(previousPageNum + 1); } } className='max-w-[50%] font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white border-2 text-black px-4 py-2 ml-2 sm:mt-8 sm:mb-8 rounded-3xl hover:shadow-md mb-4'>
           Next page
         </Link>
       </div>

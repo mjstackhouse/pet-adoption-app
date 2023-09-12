@@ -7,16 +7,20 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'blue': '#80DAE0',
-      'darker-blue': '#4ECBD4',
+      'blue': '#0061bd',
+      'darker-blue': '#00305d',
+      'lighter-blue': '#EBFEFF',
       'pink': '#E096C3',
-      'yellow': '#E0D069',
+      'yellow': '#FFE957',
+      'darker-yellow': '#D9C64A',
       'black': '#000000',
       'white': '#FFFFFF',
       'red': '#FC2634',
       'gray': '#EDEDED',
       'darker-gray': '#D9D9D9',
-      'green': '#25B31B'
+      'green': '#25B31B',
+      'purple': '#9C1165',
+      'darker-purple': '#6B0B45'
     },
     screens: {
       'xs': '410px',

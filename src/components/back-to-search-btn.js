@@ -10,8 +10,8 @@ export default function BackToSearchBtn() {
 
   return (
     <div className='basis-full flex'>
-      <button onClick={() => router.back()} className='text-sm sm:text-base hover:underline underline-offset-4 text-black mb-4'>
-        <FontAwesomeIcon icon={faChevronLeft} className='h-[0.875rem] mr-2' />
+      <button onClick={() => router.back()} className='text-sm sm:text-base hover:underline underline-offset-4 text-darker-purple mb-4 group'>
+        <FontAwesomeIcon icon={faChevronLeft} className='h-[0.875rem] mr-2 group-hover:scale-125 transition-all' />
         Back to search
       </button>
     </div>

@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <div className='basis-full max-w-screen flex flex-wrap'>
       <Search types={await types} />
-      <div className='relative bg-yellow max-w-full basis-full'>
+      <div className='relative bg-darker-blue max-w-full basis-full pb-8'>
         <AdoptionTips />
       </div>
     </div>

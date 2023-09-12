@@ -35,8 +35,8 @@ export default function AnimalPhotoGallery({ photos }) {
   }
 
   return (
-    <div className='w-full max-w-[calc(100vw-4rem)] mx-auto flex flex-wrap sm:flex-nowrap'>
-      <div className='h-[50vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col'>
+    <div className='w-full max-w-[calc(100vw-4rem)] xl:max-w-[calc(550px-2rem)] mx-auto flex flex-wrap sm:flex-nowrap xl:flex-wrap xl:place-content-start'>
+      <div className='h-[50vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col xl:hidden'>
        { photos.map((element, index) => {
           return <button className='my-[0.5vh] mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })
@@ -47,7 +47,7 @@ export default function AnimalPhotoGallery({ photos }) {
           <img id='selected-img' src={selectedImg} className='mx-auto object-contain h-[38vh] sm:h-[50vh] relative z-10' />
         </button>
       </div>
-      <div id='selected-img-fullscreen' className='flex place-items-center bg-white fixed top-0 left-0 w-screen h-screen hidden z-40'>
+      <div id='selected-img-fullscreen' className='flex place-items-center bg-white fixed top-0 left-0 bottom-0 right-0 w-screen h-screen hidden z-40'>
         <button id='close-btn' className='fixed top-0 left-0 md:top-[2.5vh] md:left-[2.5vw] mt-4 ml-4 mb-4' onClick={() => closeImg()}>
           <FontAwesomeIcon icon={faXmark} className='h-[2rem] text-black hover:text-darker-gray' />
         </button>
@@ -71,7 +71,7 @@ export default function AnimalPhotoGallery({ photos }) {
           </div>
         </div>
       </div>
-      <div className='h-[12vh] w-full overflow-x-auto overflow-y-hidden whitespace-nowrap sm:hidden mx-auto'>
+      <div className='h-[12vh] w-full overflow-x-auto overflow-y-hidden whitespace-nowrap sm:hidden xl:block mx-auto'>
        { photos.map((element, index) => {
           return <button className='my-[1vh] mx-[0.5vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })

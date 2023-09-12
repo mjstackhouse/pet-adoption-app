@@ -5,7 +5,7 @@ import loadAuto from '@/utilities/google-api';
 import fetchLocation from '@/utilities/fetch-location';
 import fetchData from '@/utilities/fetch-data';
 import Image from 'next/image';
-import yellowWave2 from '../../public/yellow-wave-2.svg';
+import yellowWave2 from '../../public/blue-wave-2.svg';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch, faLocationArrow, faMagnifyingGlass, faPaw, faRightLong } from '@fortawesome/free-solid-svg-icons';
@@ -352,7 +352,7 @@ export default function Search({ types }) {
               <div className='basis-1/2 flex flex-wrap justify-center items-end text-center sm:mx-auto mb-4'>
                 <div id='intro-heading-container' className='text-white relative'>
                   <h1 id='intro-heading' className={`${bree.className} font-bold text-[2.5rem] xs:text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-tight tracking-wider drop-shadow-2xl mb-2 md:mb-4`}>
-                    Welcome to PawfectMatch
+                    Welcome to AnimalUnity
                   </h1>
                   <h2 className='text-base sm:text-2xl leading-relaxed tracking-wide drop-shadow-lg mx-4 sm:mx-auto'>
                     Where loving homes and animals in need find their perfect companionship
@@ -363,21 +363,32 @@ export default function Search({ types }) {
                 <div className='flex flex-wrap max-w-fit flex-col px-2 py-4 sm:px-6 sm:py-8 mx-auto items-center justify-center'>
                   <div>
                     <form method='get' action={`/search/${animalType}/${state}/${city}`} className='flex flex-wrap items-center justify-center max-w-[100%]'>
-                      <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); setSearchBackground(e.target.value); } } required>
+                      {/* <select id='select' className='text-base h-[2.5rem] max-w-[90%] bg-white basis-full text-black mx-4 mb-4 sm:mr-4 px-3 py-1 rounded-3xl' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); setSearchBackground(e.target.value); } } required>
                         <option value=''>Select an animal type</option>
                         { types.types.map((element) => {
                           return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
                         }) }
-                      </select>
+                      </select> */}
+                      <div className='basis-full sm:mx-auto mb-4'>
+                        <div className='relative min-w-[250px] max-w-[90%] height-[50px] mx-auto'>
+                          <select id='select' className='appearance-none w-full text-base h-[2.5rem] bg-white basis-full text-black px-3 py-1 rounded-3xl' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); setSearchBackground(e.target.value); } } required>
+                            <option value=''>Select an animal type</option>
+                            { types.types.map((element) => {
+                              return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
+                            }) }
+                          </select>
+                          <span className='custom-arrow absolute top-0 right-0 block bg-yellow h-full w-16 pointer-events-none rounded-r-3xl'></span>
+                        </div>
+                      </div>
                       <div id='location-search-container' className='relative basis-full max-w-[90%] flex mx-4 mb-4'>
                         <input id='autocomplete' className='text-base h-[2.5rem] basis-full text-black px-3 py-1 rounded-3xl' required></input>
-                        <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
+                        <button type='button' id='location-btn' onClick={() => addCurrentLocation()} className='group text-left absolute top-[2.5rem] shadow-md bg-white text-base h-[2.5rem] w-[100%] text-black px-3 py-1 rounded-3xl hidden'>
                           <FontAwesomeIcon id='loading-icon' icon={faCircleNotch} className='h-[1rem] mr-2 animate-spin' />
-                          <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden' />
+                          <FontAwesomeIcon id='location-icon' icon={faLocationArrow} className='h-[1rem] mr-2 hidden group-hover:scale-125 transition-transform' />
                           {locationBtnText}
                         </button>
                       </div>
-                      <button id='search-btn' type='submit' className='font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl group' onClick={handleSubmit}>
+                      <button id='search-btn' type='submit' className='font-bold tracking-wider bg-yellow hover:bg-darker-yellow hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl group' onClick={handleSubmit}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} className='h-[1rem] mr-2 group-hover:scale-125 transition-transform' />
                         Find your companion
                       </button>
@@ -402,48 +413,48 @@ export default function Search({ types }) {
           </div>
           <div className='md:basis-full flex flex-wrap'>
             <span className='basis-1/2 md:basis-1/4 pr-2 md:pr-4 mb-4 md:mb-8'>
-              <Link href={`/animal/${animalsNearby1Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+              <Link href={`/animal/${animalsNearby1Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md group'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby1Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-1-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-1-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center group-hover:underline underline-offset-4`}>
                     {animalsNearby1Name}
                   </p>
                 </div>
               </Link>
             </span>
             <span className='basis-1/2 md:basis-1/4 pl-2 md:pl-0 md:pr-4 mb-4'>
-              <Link href={`/animal/${animalsNearby2Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+              <Link href={`/animal/${animalsNearby2Id}`} className='animals-nearby-link pointer-events-none animate-pulse flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md group'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby2Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-2-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-2-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center group-hover:underline underline-offset-4`}>
                     {animalsNearby2Name}
                   </p>
                 </div>
               </Link>
             </span>
             <span className='basis-1/2 md:basis-1/4 pr-2 md:pr-4 flex md:mb-8'>
-              <Link href={`/animal/${animalsNearby3Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+              <Link href={`/animal/${animalsNearby3Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md group'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby3Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-3-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-3-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center group-hover:underline underline-offset-4`}>
                     {animalsNearby3Name}
                   </p>
                 </div>
               </Link>
             </span>
             <span className='basis-1/2 pl-2 md:pl-0 md:pr-4 flex mb-8 md:hidden'>
-              <Link href={`/animal/${animalsNearby4Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md'>
+              <Link href={`/animal/${animalsNearby4Id}`} className='animals-nearby-link pointer-events-none animate-pulse grow flex flex-col flex-wrap items-center text-ellipsis h-[32vh] overflow-hidden bg-darker-gray rounded-3xl hover:shadow-md group'>
                 <div className='h-[25vh] flex self-start'>
                   <img className='grow object-cover' src={animalsNearby4Img} />
                 </div>
                 <div className='grow flex items-center'>
-                  <p id='animals-nearby-4-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center`}>
+                  <p id='animals-nearby-4-name' className={`grow ${bree.className} font-bold text-xl tracking-wide text-ellipsis whitespace-nowrap overflow-hidden w-[30vw] md:w-[150px] mx-auto my-auto text-center group-hover:underline underline-offset-4`}>
                     {animalsNearby4Name}
                   </p>
                 </div>
@@ -451,7 +462,7 @@ export default function Search({ types }) {
             </span>
             <span className='basis-full md:basis-1/4 flex md:inline-flex mb-4 md:mb-8 rounded-3xl'>
               <form className='flex flex-col basis-full' action={`/search/${animalType}/${state}/${city}`} method='GET'>
-                <button id='animals-nearby-btn' className='md:text-4xl grow flex flex-col flex-wrap place-content-center disabled:bg-darker-gray disabled:text-[#B5B5B5] mx-auto text-left self-center font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl'>
+                <button id='animals-nearby-btn' className='md:text-4xl grow flex flex-col flex-wrap place-content-center disabled:bg-darker-gray disabled:text-[#B5B5B5] mx-auto text-left self-center font-bold tracking-wider bg-yellow hover:bg-darker-yellow hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl'>
                   Meet more animals nearby
                   {/* <FontAwesomeIcon icon={faRightLong} className='inline sm:blockh-[1.5rem] sm:h-[2.5rem]' /> */}
                 </button>

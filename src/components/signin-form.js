@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faXmark } from '@fortawesome/free-solid-svg-icons';
 import $ from 'jquery';
-import { Bree_Serif } from 'next/font/google';
+import { Bree_Serif, Roboto } from 'next/font/google';
 
 const bree = Bree_Serif({ weight: '400', subsets: ['latin'] });
+const roboto = Roboto({ weight: '500', subsets: ['latin'] });
 
 export default function SigninForm({ parameters }) {
 
@@ -60,19 +61,19 @@ export default function SigninForm({ parameters }) {
           Sign in to favorite animals
       </h1>
       <div className='basis-full text-center mb-6'>
-        <button id='google-signin-btn' className='sm:mr-2 block sm:inline font-bold tracking-wider bg-blue hover:bg-darker-blue hover:shadow-md hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl mb-4 mx-auto' onClick={() => { callbackUrl !== null ? signIn('google', { callbackUrl }) : signIn('google') } }>
-          <FontAwesomeIcon icon={faGoogle} className='h-[1rem] mr-2' />
-          Continue with Google
+        <button id='google-signin-btn' className={`${roboto.className} sm:mr-2 block sm:inline font-bold tracking-wider bg-white shadow-md hover:bg-darker-gray hover:shadow-md hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl mb-4 mx-auto`} onClick={() => { callbackUrl !== null ? signIn('google', { callbackUrl }) : signIn('google') } }>
+          <img src='/google-logo-transparent-bg.png' className='inline h-[1.25rem] mr-4 align-text-bottom' />
+          <span>Sign in with Google</span>
         </button>
-        <button id='facebook-signin-btn' className='sm:ml-2 block sm:inline font-bold tracking-wider bg-blue hover:bg-darker-blue hover:shadow-md hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl mx-auto' onClick={() => { callbackUrl !== null ? signIn('facebook', { callbackUrl }) : signIn('facebook') }}>
-          <FontAwesomeIcon icon={faFacebook} className='h-[1rem] mr-2' />
+        <button id='facebook-signin-btn' className='sm:ml-2 block sm:inline font-bold tracking-wider bg-[#1877F2] hover:bg-darker-blue hover:shadow-md hover:underline underline-offset-4 text-white px-4 py-2 rounded-3xl mx-auto' onClick={() => { callbackUrl !== null ? signIn('facebook', { callbackUrl }) : signIn('facebook') }}>
+          <FontAwesomeIcon icon={faFacebook} className='h-[1.45rem] mr-2 align-bottom' />
           Continue with Facebook
         </button>
       </div>
       <div className='basis-full flex justify-center items-center text-center mb-6'>
-        <span className='grow border-b-2 border-pink'></span>
+        <span className='grow border-b-2 border-darker-gray'></span>
         <span className='mx-4'>or</span>
-        <span className='grow border-b-2 border-pink'></span>
+        <span className='grow border-b-2 border-darker-gray'></span>
       </div>
       <form method='post' className='basis-full flex flex-wrap justify-start items-center'>
         <div className='basis-full flex flex items-center text-center mb-6'>
