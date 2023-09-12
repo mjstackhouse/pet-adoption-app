@@ -15,16 +15,16 @@ export default function AdoptionTips() {
               <p className={`${bree.className} font-bold text-4xl xs:text-5xl tracking-wide mb-2 sm:mb-4`}>
                 First time adopting?
               </p>
-              <p className='text-base sm:text-xl md:text-2xl leading-relaxed tracking-wide sm:mb-8'>
+              <p className='text-base sm:text-lg lg:text-2xl leading-relaxed tracking-wide sm:mb-8'>
                 We're here to help you through this process with tips and advice.
               </p>
-              <Link href='/adoption-tips' className='hidden sm:inline relative font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
+              <Link href='/adoption-tips' className='hidden sm:inline relative font-bold tracking-wider bg-yellow hover:bg-darker-yellow hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
             </div>
           </div>
           <div className='relative sm:basis-1/2 mb-4 sm:mb-0'>
-            <Image src={adoptionImg} className='relative mx-auto w-auto z-10 border-pink border-2 rounded-3xl' />
+            <Image src={adoptionImg} className='relative mx-auto w-auto z-10 rounded-[0.5rem]' />
           </div>
-          <Link href='/adoption-tips' className='block sm:hidden mx-auto font-bold tracking-wider bg-blue hover:bg-darker-blue hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
+          <Link href='/adoption-tips' className='block sm:hidden mx-auto font-bold tracking-wider bg-yellow hover:bg-darker-yellow hover:underline underline-offset-4 text-black px-4 py-2 rounded-3xl z-10'>Learn more</Link>
         </div>
       </div>
     // </div>
