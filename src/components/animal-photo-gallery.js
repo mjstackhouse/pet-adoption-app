@@ -35,7 +35,7 @@ export default function AnimalPhotoGallery({ photos }) {
   }
 
   return (
-    <div className='w-full max-w-[calc(100vw-4rem)] xl:max-w-[calc(550px-2rem)] mx-auto flex flex-wrap sm:flex-nowrap xl:flex-wrap xl:place-content-start'>
+    <div className='xl:sticky w-full max-w-[calc(100vw-4rem)] xl:max-w-[calc(550px-2rem)] mx-auto flex flex-wrap sm:flex-nowrap xl:flex-wrap xl:place-content-start'>
       <div className='h-[50vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col xl:hidden'>
        { photos.map((element, index) => {
           return <button className='my-[0.5vh] mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>

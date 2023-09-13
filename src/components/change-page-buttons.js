@@ -165,8 +165,7 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   // The page numbers are not getting reset when filters are added; they *need* to be reset for what is now a new search.
 
   return (
-    <div className='w-[100vw] sm:w-[900px] xl:w-[960px] xl:px-8 flex flex-wrap place-items-center text-center mx-4 sm:mx-auto my-4 sm:my-0'>
-      {/* <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-4xl tracking-wide mb-4 sm:hidden`}>{changePageBtnHeader}</h1> */}
+    <div className='w-full sm:w-[900px] xl:w-[960px] xl:px-8 flex flex-wrap place-items-center text-center mx-4 sm:mx-auto my-4 sm:my-0'>
       <div className='basis-full flex justify-center'>
         <Link id='previous-page-button' href={ prevBtnSearchParams !== '' ? { query: prevBtnSearchParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { setPreviousPageNum(previousPageNum - 1); setNextPageNum(nextPageNum - 1); }} className='max-w-[50%] font-bold tracking-wider hover:bg-darker-gray hover:underline underline-offset-4 bg-white border-2 text-black px-4 py-2 mr-2 sm:mt-8 sm:mb-8 rounded-3xl hover:shadow-md mb-4'>
           Previous page

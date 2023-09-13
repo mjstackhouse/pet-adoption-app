@@ -24,7 +24,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
     }
 
     if (parameters.hasOwnProperty('city')) {
-      $('.like-button').addClass('absolute top-[1.5%] right-[3%] sm:top-[5%] sm:right-[7.5%] flex place-items-center bg-darker-gray p-4 rounded-full');
+      $('.like-button').addClass('absolute top-[0.6rem] right-[0.6rem] md:top-[0.6rem] md:right-[0.6rem] flex place-items-center bg-yellow p-4 rounded-full');
       $('.heart-icon').addClass('h-[3.5rem] sm:h-[3rem]');
       $('.favorites-text').css('display', 'none');
     }

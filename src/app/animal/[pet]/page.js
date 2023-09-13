@@ -47,7 +47,7 @@ export default async function PetPage({ params }) {
             <p className='text-left'><span className='font-bold tracking-wider text-left'>About Me</span></p>
             { await data.animal.description !== null ? <p className='text-left'>{data.animal.description}</p> : null } */}
           </div>
-          <div className='basis-full xl:basis-1/2 xl:pl-8 xl:h-[62vh] overflow-y-auto'>
+          <div className='basis-full xl:basis-1/2 xl:pl-8'>
             <div className='basis-full text-center'>
               <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-4xl mb-2 sm:mb-4 leading-snug tracking-wide text-left`}>{await data.animal.name.toUpperCase()}</h1>
               {/* <p className='text-left'><span className='font-bold tracking-wider text-left'>About Me</span></p> */}

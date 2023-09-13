@@ -7,7 +7,7 @@ import { faFacebook, faTwitter, faInstagram, faYoutube } from '@fortawesome/free
 
 export default function Footer() {
   return (
-    <div className='self-end h-[80px] sm:h-[90px] basis-full max-w-full bg-darker-gray flex place-content-center'>
+    <div className='self-end h-[80px] sm:h-[90px] basis-full max-w-full bg-white flex place-content-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] relative z-30'>
       <div className='flex flex-row grow items-center justify-between mx-4 sm:mx-auto sm:max-w-[600px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1100px]'>
         <span className='text-black flex flex-wrap'>
           <Link href='/' className='mr-4 mb-[0.25rem] sm:mb-2'>
