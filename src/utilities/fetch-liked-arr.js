@@ -30,12 +30,12 @@ export default async function fetchLikedArr() {
   else {
     for (let i = 0; i < await likedAnimalsIds.length; i++) {
       const info = await (async () => {
-        const data = await fetchData(await likedAnimalsIds[i]);
+        // const data = await fetchData(await likedAnimalsIds[i]);
   
-        if (data !== 'Not found') {
-          likedAnimalsInfo.push(await data.animal);
-        }
-        else likedAnimalsInfo.push('Not found');
+        // if (data !== 'Not found') {
+        //   likedAnimalsInfo.push(await data.animal);
+        // }
+        // else likedAnimalsInfo.push('Not found');
   
         if (likedAnimalsInfo.length === await likedAnimalsIds.length) {
           console.log('likedAnimalsInfo.isArray(): ', Array.isArray(likedAnimalsInfo));

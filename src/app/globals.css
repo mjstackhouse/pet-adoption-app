@@ -63,7 +63,7 @@ body {
 }
 
 #search-bg {
-  background-image: url('../../public/dog-bg-mobile.jpg');
+  background-image: url('../../public/dog-bg-mobile-2.jpg');
   transition: background-image 1s linear 0.5s;
 }
 
@@ -121,17 +121,17 @@ body {
 }
 
 .custom-arrow::before {
-  border-left: 0.42rem solid transparent;
-  border-right: 0.42rem solid transparent;
-  border-bottom: 0.42rem solid white;
-  top: 38%;
+  border-left: 0.3rem solid transparent;
+  border-right: 0.3rem solid transparent;
+  border-bottom: 0.3rem solid white;
+  top: 39%;
 }
 
 .custom-arrow::after {
-  border-left: 0.42rem solid transparent;
-  border-right: 0.42rem solid transparent;
-  border-top: 0.42rem solid white;
-  top: 62%;
+  border-left: 0.3rem solid transparent;
+  border-right: 0.3rem solid transparent;
+  border-top: 0.3rem solid white;
+  top: 61%;
 }
 
 #loading-hand {

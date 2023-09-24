@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   const body = await request.json();
-  const addResponse = await addLike(body.animal, body.liked);
+
+  const addResponse = await addLike(body.animalInfo);
 
   console.log('addResponse: ', await addResponse);
 

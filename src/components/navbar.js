@@ -19,8 +19,8 @@ export default function Navbar() {
 
   return (
     <div className='basis-full flex items-center justify-evenly bg-white text-white z-20 shadow-md'>
-      <nav className='flex basis-full sm:max-w-[600px] md:max-w-[700px] lg:max-w-[900px] xl:max-w-[1100px]'>
-        <ul className='basis-full flex items-center justify-evenly h-16 mx-4 sm:mx-8 md:mx-0'>
+      <nav className='flex basis-full sm:max-w-[600px] md:max-w-[700px] lg:max-w-[900px]  xl:max-w-[1280px]'>
+        <ul className='basis-full flex items-center justify-evenly h-16 mx-4 sm:mx-8 md:mx-0 xl:mx-8'>
           <li className='basis-1/2 flex'>
             <Link href='/' className={`${philosopher.className}`}>
               <Image src={logo} className='h-[1.5rem] sm:h-[2.25rem] w-auto' />

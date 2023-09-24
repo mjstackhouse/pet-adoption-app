@@ -35,24 +35,15 @@ export default async function PetPage({ params }) {
         <div className='flex flex-wrap bg-white px-4 sm:px-8 py-4 sm:py-8 min-h-[calc(100svh-160px)] min-h-[calc(100vh-160px)] sm:min-h-[calc(100svh-180px)] sm:min-h-[calc(100vh-180px)]'>
           <BackToSearchBtn />
           <div className='basis-full xl:basis-1/2 text-center mb-0 sm:mb-4 flex flex-col'>
-            {/* <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-4xl mb-4 leading-snug tracking-wide`}>{await data.animal.name.toUpperCase()}</h1> */}
             <div className='flex justify-start bg-local w-full h-[50vh] xl:h-auto grow mb-2 sm:mb-4'>
-              {/* { await data.animal.photos.length > 0 ? data.animal.photos.map((element) => {
-                return <img src={element.large !== null ? element.large : null} className='basis-full w-full shadow-lg mx-4 my-4 object-cover' />
-              }) : <img src='https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg' className='basis-full w-full shadow-lg my-4 object-cover' /> } */}
-              { await data.animal.photos.length > 0 ? <AnimalPhotoGallery photos={data.animal.photos} /> : <img src='https://pet-adoption-app.s3.us-west-1.amazonaws.com/no-photo-image.jpg' className='basis-full w-full shadow-lg my-4 object-cover' /> }
+              { await data.animal.photos.length > 0 ? <AnimalPhotoGallery photos={data.animal.photos} /> : <div className='w-full'><div className='basis-full overflow-hidden w-full h-[50vh] flex items-center justify-center bg-gray relative'><div className='absolute inset-0 flex items-center justify-center'><p className='basis-full bg-black py-2 text-white font-bold tracking-wider drop-shadow-lg'>No Photos Available</p></div><img src='/no-photos-img-2.jpg'/></div></div> }
             </div>
-            {/* <span className='hidden xl:block'><LikeButton parameters={params} animalId={data.animal.id} liked={ userLikes !== undefined ? (userLikes.includes(data.animal.id) === true ? true : false) : false } /></span> */}
-            {/* <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-4xl mb-2 sm:mb-4 leading-snug tracking-wide text-left`}>{await data.animal.name.toUpperCase()}</h1>
-            <p className='text-left'><span className='font-bold tracking-wider text-left'>About Me</span></p>
-            { await data.animal.description !== null ? <p className='text-left'>{data.animal.description}</p> : null } */}
           </div>
           <div className='basis-full xl:basis-1/2 xl:pl-8'>
-            <div className='basis-full text-center'>
-              <h1 className={`${bree.className} basis-full font-bold text-3xl sm:text-4xl mb-2 sm:mb-4 leading-snug tracking-wide text-left`}>{await data.animal.name.toUpperCase()}</h1>
-              {/* <p className='text-left'><span className='font-bold tracking-wider text-left'>About Me</span></p> */}
-              { await data.animal.description !== null ? <div className='pb-4 mb-4 border-b-[1px] border-darker-gray'><p className='text-left'><span className='font-bold tracking-wider text-left'>About Me</span></p><p className='text-left'>{description}</p></div> : null }
-              {/* <span className='hidden xl:block'><LikeButton parameters={params} animalId={data.animal.id} liked={ userLikes !== undefined ? (userLikes.includes(data.animal.id) === true ? true : false) : false } /></span> */}
+            <div className='basis-full text-center border-b-[1px] border-darker-gray pb-4 mb-4'>
+              <h1 className={`${bree.className} text-darker-purple basis-full font-bold text-3xl sm:text-4xl mb-2 sm:mb-4 leading-snug tracking-wide text-left`}>{await data.animal.name.toUpperCase()}</h1>
+              { await data.animal.description !== null ? <div className='mb-4'><p className='text-left'><span className='font-bold tracking-wider text-left'>About Me</span></p><p id='animal-description' className='text-left relative'>{description}</p></div> : null }
+              { await data.animal.description !== null ? <div className='basis-full text-left'><Link className='font-bold tracking-wider underline underline-offset-4 hover:text-darker-purple' href={data.animal.url} target='_blank'>Learn more about <span className='text-darker-purple'>{data.animal.name}</span> on petfinder.com</Link></div> : null }
             </div>
             <div className='basis-full sm:basis-1/2 flex flex-wrap pb-4 mb-4 border-b-[1px] border-darker-gray'>
                 <p className='basis-full'><span className='font-bold tracking-wider'>Breed </span>- </p>
@@ -86,8 +77,7 @@ export default async function PetPage({ params }) {
             <span className='hidden xl:block'><LikeButton parameters={params} animalId={data.animal.id} liked={ userLikes !== undefined ? (userLikes.includes(data.animal.id) === true ? true : false) : false } /></span>
           </div>
         </div>
-        <div className='fixed bottom-[1rem] left-0 right-0 sm:bottom-[4rem] flex items-center justify-center xl:hidden'>
-          {/* <SignInButtonPopup parameters={params} /> */}
+        <div className='fixed bottom-[1rem] left-0 right-0 sm:bottom-[90px] flex items-center justify-center z-40 xl:hidden'>
           <LikeButton parameters={params} animalId={data.animal.id} liked={ userLikes !== undefined ? (userLikes.includes(data.animal.id) === true ? true : false) : false } />        
         </div>
       </div>

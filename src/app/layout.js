@@ -15,7 +15,7 @@ export default function RootLayout({ children, params }) {
       <body className='relative max-w-screen flex flex-wrap flex-col justify-center text-black'>
         <Provider>
           <SigninForm parameters={params} />
-          <div id='inner-body-container' className='relative max-w-full flex flex-wrap flex-row items-start justify-center bg-gray h-[100svh] h-[100vh]'>
+          <div id='inner-body-container' className='relative max-w-full flex flex-wrap flex-row items-start justify-center bg-gray'>
             <div className='h-[80px] sm:h-[90px] basis-full flex self-start max-w-full'>
               <Navbar />
             </div>

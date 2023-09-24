@@ -20,13 +20,15 @@ export default function SignInButton() {
     if (navState === 'closed') {
       // $('#account-nav-container').animate({ width: 'fit-content'}, 750);
       $('#nav-button').animate({ transform: 'rotate(90deg)'}, 750);
-      $('#account-nav-container').animate({ height: '120px', opacity: '1.0'}, 350);
+      $('#account-nav-container').css('display', 'flex');
+      $('#account-nav-container').animate({ height: '83px', opacity: '1.0'}, 350);
       $('body').css('touch-action', 'none');
       setNavState('open');
     }
     else {
       // $('#account-nav-container').animate({ width: '0'}, 750);
       $('#account-nav-container').animate({ height: '0px', opacity: '0'}, 350);
+      $('#account-nav-container').css('display', 'none');
       $('body').css('touch-action', 'auto');
       setNavState('closed');
     }
@@ -40,16 +42,16 @@ export default function SignInButton() {
             <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue hover:text-darker-blue' />
           {/* { session.user.image ? <img className='h-[2rem] rounded-3xl' src={session.user.image} /> : <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue' />} */}
           </button>
-          <div id='account-nav-container' className='absolute bg-blue w-[140px] text-white top-[60px] sm:top-[65px] right-0 flex text-right shadow-lg -z-10 px-4 rounded-b-3xl'>
+          <div id='account-nav-container' className='absolute bg-blue w-[140px] text-white top-[60px] sm:top-[65px] right-0 hidden text-right shadow-lg -z-10 px-4 rounded-b-3xl'>
             <div className='basis-full leading-loose mt-2'>
               <Link href='/account/favorites' className='flex justify-between items-center hover:text-darker-gray hover:underline underline-offset-4 group' onClick={() => openOrCloseAccountNav()}>
                 <FontAwesomeIcon icon={faHeart} className='h-[1.25rem] mr-2 group-hover:scale-125 transition-transform' />
                 Favorites
               </Link>
-              <Link href='/account' className='flex justify-between items-center hover:text-darker-gray hover:underline underline-offset-4 group' onClick={() => openOrCloseAccountNav()}>
+              {/* <Link href='/account' className='flex justify-between items-center hover:text-darker-gray hover:underline underline-offset-4 group' onClick={() => openOrCloseAccountNav()}>
                 <FontAwesomeIcon icon={faCircleUser} className='h-[1.25rem] mr-2 group-hover:scale-125 transition-transform' />
                 Account
-              </Link>
+              </Link> */}
               {/* <div className='group hover:bg-gray'> */}
               <button className='group w-full text-right flex justify-between items-center  hover:text-darker-gray hover:underline underline-offset-4' onClick={() => { openOrCloseAccountNav(); signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})} }>
                 <FontAwesomeIcon icon={faArrowRightFromBracket} className='h-[1.25rem] mr-2 group-hover:scale-125 transition-transform' />
