@@ -6,9 +6,9 @@ import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function LikeButton({ animalId, liked, parameters }) {
+export default function LikeButton({ animalInfo, liked, parameters }) {
 
-  // console.log('parameters: ', parameters);
+  console.log('liked: ', liked);
   
   const [symbolColor, setSymbolColor] = useState(null);
   const [likedStatus, setLikedStatus] = useState(liked);
@@ -24,7 +24,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
     }
 
     if (parameters.hasOwnProperty('city')) {
-      $('.like-button').addClass('absolute top-[1.5%] right-[3%] sm:top-[5%] sm:right-[7.5%] flex place-items-center bg-darker-gray p-4 rounded-full');
+      $('.like-button').addClass('absolute top-[0.6rem] right-[0.6rem] md:top-[0.6rem] md:right-[0.6rem] flex place-items-center bg-yellow p-4 rounded-full z-10');
       $('.heart-icon').addClass('h-[3.5rem] sm:h-[3rem]');
       $('.favorites-text').css('display', 'none');
     }
@@ -33,7 +33,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
       $('.heart-icon').addClass('h-[1.5rem] drop-shadow-md');
       $('.favorites-text').css('display', 'inline');
     }
-  }, []);
+  }, [liked, parameters, animalInfo]);
 
   function checkLikedStatus() {
     if (likedStatus === true) {
@@ -46,7 +46,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
     }
   }
 
-  function sendAnimalId(id) {
+  function sendAnimalInfo(animalInfo) {
     fetch('../../../api/db', {
       method: 'POST',
       mode: 'cors',
@@ -54,7 +54,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ animal : id })
+      body: JSON.stringify({ animalInfo: animalInfo })
     })
     .then((response) => {
       return response;
@@ -65,7 +65,7 @@ export default function LikeButton({ animalId, liked, parameters }) {
   }
   
   function sendAnimalAndCheckLiked() {
-    sendAnimalId(animalId);
+    sendAnimalInfo(animalInfo);
     checkLikedStatus();
   }
 

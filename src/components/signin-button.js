@@ -1,7 +1,8 @@
 'use client'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -14,16 +15,20 @@ export default function SignInButton() {
   if (session) console.log('session: ', session);
 
   function openOrCloseAccountNav() {
+    console.log('navState: ', navState);
+
     if (navState === 'closed') {
       // $('#account-nav-container').animate({ width: 'fit-content'}, 750);
       $('#nav-button').animate({ transform: 'rotate(90deg)'}, 750);
-      $('#account-nav-container').animate({ right: '0', opacity: '1.0'}, 350);
+      $('#account-nav-container').css('display', 'flex');
+      $('#account-nav-container').animate({ height: '83px', opacity: '1.0'}, 350);
       $('body').css('touch-action', 'none');
       setNavState('open');
     }
     else {
       // $('#account-nav-container').animate({ width: '0'}, 750);
-      $('#account-nav-container').animate({ right: '-50vw', opacity: '0'}, 350);
+      $('#account-nav-container').animate({ height: '0px', opacity: '0'}, 350);
+      $('#account-nav-container').css('display', 'none');
       $('body').css('touch-action', 'auto');
       setNavState('closed');
     }
@@ -32,18 +37,27 @@ export default function SignInButton() {
   return(
     <div>
       {session ? (
-        <div>
+        <div className='relative isolate'>
           <button id='nav-button' className='text-4xl' onClick={() => openOrCloseAccountNav()}>
             <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue hover:text-darker-blue' />
           {/* { session.user.image ? <img className='h-[2rem] rounded-3xl' src={session.user.image} /> : <FontAwesomeIcon icon={faCircleUser} className='h-[2rem] text-blue' />} */}
           </button>
-          <div id='account-nav-container' className='flex text-right shadow-md z-20 pb-2'>
-            <div className='basis-full mx-4 md:mx-16 leading-loose'>
-              <Link href='/account/favorites' className='hover:text-darker-gray hover:underline underline-offset-4'>Favorites</Link>
-              <Link href='/account' className='block hover:text-darker-gray hover:underline underline-offset-4'>Account</Link>
-              <div>
-                <button className='hover:text-darker-gray hover:underline underline-offset-4' onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})}>Sign Out</button>
-              </div>
+          <div id='account-nav-container' className='absolute bg-blue w-[140px] text-white top-[60px] sm:top-[65px] right-0 hidden text-right shadow-lg -z-10 px-4 rounded-b-3xl'>
+            <div className='basis-full leading-loose mt-2'>
+              <Link href='/account/favorites' className='flex justify-between items-center hover:text-darker-gray hover:underline underline-offset-4 group' onClick={() => openOrCloseAccountNav()}>
+                <FontAwesomeIcon icon={faHeart} className='h-[1.25rem] mr-2 group-hover:scale-125 transition-transform' />
+                Favorites
+              </Link>
+              {/* <Link href='/account' className='flex justify-between items-center hover:text-darker-gray hover:underline underline-offset-4 group' onClick={() => openOrCloseAccountNav()}>
+                <FontAwesomeIcon icon={faCircleUser} className='h-[1.25rem] mr-2 group-hover:scale-125 transition-transform' />
+                Account
+              </Link> */}
+              {/* <div className='group hover:bg-gray'> */}
+              <button className='group w-full text-right flex justify-between items-center  hover:text-darker-gray hover:underline underline-offset-4' onClick={() => { openOrCloseAccountNav(); signOut({callbackUrl: `${process.env.NEXT_PUBLIC_URL}`})} }>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} className='h-[1.25rem] mr-2 group-hover:scale-125 transition-transform' />
+                Sign Out
+              </button>
+              {/* </div> */}
             </div>
           </div>
         </div>

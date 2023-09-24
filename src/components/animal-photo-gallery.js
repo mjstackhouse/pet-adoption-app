@@ -36,42 +36,42 @@ export default function AnimalPhotoGallery({ photos }) {
 
   return (
     <div className='w-full max-w-[calc(100vw-4rem)] xl:max-w-[calc(550px-2rem)] mx-auto flex flex-wrap sm:flex-nowrap xl:flex-wrap xl:place-content-start'>
-      <div className='h-[50vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col xl:hidden'>
+      <div className='h-[50vh] gap-y-[1vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col xl:hidden'>
        { photos.map((element, index) => {
-          return <button className='my-[0.5vh] mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+          return <button className='mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })
         }
       </div>
-      <div className='h-[38vh] sm:h-[50vh] relative flex place-content-center grow bg-darker-gray'>
-        <button onClick={() => fullscreenImg()}>
-          <img id='selected-img' src={selectedImg} className='mx-auto object-contain h-[38vh] sm:h-[50vh] relative z-10' />
+      <div className='h-[38vh] sm:h-[50vh] relative flex place-content-center grow bg-darker-blue'>
+        <button className='w-full m-auto flex place-content-center' onClick={() => fullscreenImg()}>
+          <img id='selected-img' src={selectedImg} className='mx-auto object-contain h-[38vh] sm:h-[50vh] max-h-full grow relative z-10' />
         </button>
       </div>
-      <div id='selected-img-fullscreen' className='flex place-items-center bg-white fixed top-0 left-0 bottom-0 right-0 w-screen h-screen hidden z-40'>
+      <div id='selected-img-fullscreen' className='flex place-items-center bg-white fixed inset-0 w-screen h-screen hidden z-50'>
         <button id='close-btn' className='fixed top-0 left-0 md:top-[2.5vh] md:left-[2.5vw] mt-4 ml-4 mb-4' onClick={() => closeImg()}>
           <FontAwesomeIcon icon={faXmark} className='h-[2rem] text-black hover:text-darker-gray' />
         </button>
-        <div className='w-screen h-[calc(97.5vh-10rem)] md:w-[calc(97.5vw-9rem)] md:h-[calc(97.5vh-3rem)] flex flex-wrap xl:flex-nowrap m-auto place-content-center'>
-          <div className='overflow-x-hidden overflow-y-auto hidden xl:flex flex-col'>
+        <div className='w-screen h-[calc(97.5vh-10rem)] md:w-[calc(97.5vw-9rem)] md:h-[calc(97.5vh-3rem)] flex flex-wrap m-auto place-content-center'>
+          <div id='fullscreen-thumbnails-column' className='h-full w-[18vh)] gap-y-[1.5vh] overflow-x-hidden overflow-y-auto whitespace-nowrap hidden xl:flex flex-col'>
             { photos.map((element, index) => {
-                return <button className='my-[1vh] mx-[1.5vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+                return <button className='mx-[1.5vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
               })
             }
           </div>
-          <span className='h-[calc(97.5vh-10rem-16vh)] xl:h-auto grow bg-darker-gray'>
+          <span className='h-[calc(97.5vh-10rem-16vh)] xl:h-auto max-h-full grow bg-darker-gray'>
             <span className='h-full m-auto flex place-content-center'>
               <img src={fullSelectedImg} className='mx-auto object-contain max-h-full' />
             </span>
           </span>
-          <div className='w-full overflow-x-auto overflow-y-hidden place-content-center whitespace-nowrap xl:hidden mx-auto'>
+          <div id='fullscreen-thumbnails-row' className='w-full gap-x-[2vh] flex overflow-x-auto overflow-y-hidden place-content-center whitespace-nowrap xl:hidden'>
             { photos.map((element, index) => {
-                return <button className='my-[2vh] mx-[1vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+                return <button className='my-[2vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
               })
             }
           </div>
         </div>
       </div>
-      <div className='h-[12vh] w-full overflow-x-auto overflow-y-hidden whitespace-nowrap sm:hidden xl:block mx-auto'>
+      <div className='bg-white h-[12vh] w-full overflow-x-auto overflow-y-hidden whitespace-nowrap sm:hidden xl:block mx-auto'>
        { photos.map((element, index) => {
           return <button className='my-[1vh] mx-[0.5vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })

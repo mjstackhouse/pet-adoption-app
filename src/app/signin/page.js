@@ -9,7 +9,7 @@ export default function SigninPage({ params }) {
   console.log('SigninPage params: ', params);
 
   return (
-    <div className='bg-gray mx-auto h-[90vh] flex flex-wrap flex-col justify-center items-center'>
+    <div className='bg-gray mx-auto h-[calc(100svh-80px)] h-[calc(100vh-80px)] sm:h-[calc(100svh-90px)] sm:h-[calc(100vh-90px)] flex flex-wrap flex-col justify-center items-center'>
       <div className='flex justify-center'>
         <h1 id='intro-heading' className={`${bree.className} mx-auto font-bold text-3xl sm:text-4xl leading-loose tracking-wide mb-8`}>
           Sign in to your account

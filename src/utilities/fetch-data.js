@@ -90,6 +90,7 @@ export default async function fetchData(...args) {
       }
     });
   }
+  // Retrieve all animal types
   else {
     dataResponse = await fetch('https://api.petfinder.com/v2/types', {
       method: 'GET',
