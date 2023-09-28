@@ -100,8 +100,6 @@ export default async function fetchData(...args) {
     });
   }
 
-  // console.log('dataResponse: ', dataResponse);
-
   if (await !dataResponse.ok) {
     if (dataResponse.status === 404) {
       console.log('404');

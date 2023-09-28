@@ -45,7 +45,7 @@ export default async function Pets({ params, searchParams }) {
                     <Link href={`/animal/${element.id}`} className='basis-full flex flex-wrap content-normal bg-transparent items-center group'>
                       <div className='self-start basis-full flex h-[60vh] md:h-[33vh] lg:h-[33vh] overflow-hidden relative'>
                         {element.primary_photo_cropped === null ? <div className='absolute inset-0 flex items-center justify-center'><p className='basis-full bg-black py-2 text-white font-bold tracking-wider drop-shadow-lg'>No Photo Available</p></div> : null}
-                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : noPhotosImg} className='grow object-cover object-center h-[60vh] md:h-[33vh] lg:h-[33vh] m-auto' />
+                        <img src={element.primary_photo_cropped !== null ? element.primary_photo_cropped.medium : noPhotosImg} alt={`${element.age.toLowerCase()} ${element.gender.toLowerCase()} ${element.breeds.primary.toLowerCase()}`} className='grow object-cover object-center h-[60vh] md:h-[33vh] lg:h-[33vh] m-auto' />
                       </div>
                       <div className='justify-self-start mx-auto group-hover:underline underline-offset-4 py-4'>
                         <div className={`${bree.className} text-darker-purple font-bold mx-auto text-ellipsis whitespace-nowrap overflow-hidden w-[80vw] md:w-[175px] lg:w-[200px] text-3xl`}>{element.name.toUpperCase()}</div>
