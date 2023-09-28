@@ -36,7 +36,7 @@ export default async function PetPage({ params }) {
           <BackToSearchBtn />
           <div className='basis-full xl:basis-1/2 text-center mb-0 sm:mb-4 flex flex-col'>
             <div className='flex justify-start bg-local w-full h-[50vh] xl:h-auto grow mb-2 sm:mb-4'>
-              { await data.animal.photos.length > 0 ? <AnimalPhotoGallery photos={data.animal.photos} /> : <div className='w-full'><div className='basis-full overflow-hidden w-full h-[50vh] flex items-center justify-center bg-gray relative'><div className='absolute inset-0 flex items-center justify-center'><p className='basis-full bg-black py-2 text-white font-bold tracking-wider drop-shadow-lg'>No Photos Available</p></div><img src='/no-photos-img-2.jpg'/></div></div> }
+              { await data.animal.photos.length > 0 ? <AnimalPhotoGallery photos={data.animal.photos} altInfo={description} /> : <div className='w-full'><div className='basis-full overflow-hidden w-full h-[50vh] flex items-center justify-center bg-gray relative'><div className='absolute inset-0 flex items-center justify-center'><p className='basis-full bg-black py-2 text-white font-bold tracking-wider drop-shadow-lg'>No Photos Available</p></div><img src='/no-photos-img-2.jpg'/></div></div> }
             </div>
           </div>
           <div className='basis-full xl:basis-1/2 xl:pl-8'>
