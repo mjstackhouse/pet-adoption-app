@@ -66,7 +66,7 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
     })
 
     $('html').css('overflow-y', 'visible');
-  }, [searchParameters, parameters]);
+  }, [searchParameters, parameters, searchParams]);
 
   function scrollToStart() {
     const petLinksContainer = document.getElementById('pet-links-container');
@@ -135,7 +135,7 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
               <select id='age' className='appearance-none w-full text-base h-[2.5rem] bg-white basis-full text-black px-3 py-1 rounded-3xl group-hover:brightness-90' value={breed} onChange={e => {setBreed(e.target.value); addToQueryParams('breed', e.target.value);}} required>
                 <option value=''>Any breed</option>
                 { breeds.breeds.map((element) => {
-                  return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
+                  return <option key={`${element.name.toLowerCase()}`} value={`${element.name.toLowerCase()}`}>{element.name}</option>
                 })}
               </select>
               <span className='custom-arrow absolute top-0 right-0 block bg-blue h-full w-16 pointer-events-none rounded-r-3xl group-hover:brightness-90'></span>
@@ -171,7 +171,6 @@ export default function SearchFiltersButton({ parameters, breeds, searchParamete
             <span className='relative h-[1.5rem] w-[1.5rem] mr-4'>
               <input id='house_trained' type='checkbox' className='w-full h-full absolute accent-blue' name='house_trained' value={houseTrained} onChange={e => { { e.target.value === 'false' ? setHouseTrained('true') : setHouseTrained('false')}; { e.target.value === 'false' ? addToQueryParams('house_trained', 'true') : addToQueryParams('house_trained', 'false')};}} />
             </span>
-            {/* <input id='house_trained' type='checkbox' className='mr-2 w-full h-full absolute accent-yellow' name='house_trained' value={houseTrained} onChange={e => { { e.target.value === 'false' ? setHouseTrained('true') : setHouseTrained('false')}; { e.target.value === 'false' ? addToQueryParams('house_trained', 'true') : addToQueryParams('house_trained', 'false')};}} /> */}
             <label htmlFor='house_trained' className={`inline text-left text-black font-bold tracking-wider`}>House-Trained</label>
           </div>
           <Link id='update-filters-btn' href={ Object.keys(queryParams).length !== 0 ? { query: queryParams } : `/search/${parameters.pets}/${parameters.state}/${parameters.city}` } passHref shallow onClick={() => { closeFilters(); scrollToStart(); }} className='flex items-center group font-bold tracking-wider hover:underline underline-offset-4 bg-yellow hover:bg-darker-yellow text-black px-4 py-2 mx-auto rounded-3xl hover:shadow-md mb-4'>

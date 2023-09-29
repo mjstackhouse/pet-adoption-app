@@ -13,14 +13,14 @@ export default function AdoptionTipsPage() {
             Tips for First-Time Animal Adopters:
           </h1>
           <h2 className='font-bold text-base sm:text-2xl leading-relaxed tracking-wide'>
-          Welcoming a Furry Friend into Your Home
+            Welcoming a Furry Friend into Your Home
           </h2>
         </div>
         <div className='bg-white rounded-b-3xl px-4 sm:px-8 py-4 sm:py-8'>
           <Image src={adoptionImg} className='object-cover relative mb-4 sm:mb-8' />
           <div className='bg-white'>
             <p className='mb-4'>
-            Adopting an animal can be a deeply rewarding experience, bringing joy, companionship, and unconditional love into your life. However, being a responsible pet owner comes with its fair share of challenges and responsibilities. Whether you're adopting a dog, cat, rabbit, or any other animal, here are some valuable tips and advice to help you create a loving and nurturing environment for your new furry family member.
+              Adopting an animal can be a deeply rewarding experience, bringing joy, companionship, and unconditional love into your life. However, being a responsible pet owner comes with its fair share of challenges and responsibilities. Whether you&#39;re adopting a dog, cat, rabbit, or any other animal, here are some valuable tips and advice to help you create a loving and nurturing environment for your new furry family member.
             </p>
             <ol type='1'>
               <li className='mb-4'>
@@ -33,7 +33,7 @@ export default function AdoptionTipsPage() {
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Commitment and Time:</p>
-                <p>Owning a pet is a long-term commitment, sometimes spanning over a decade or more. Be prepared to invest time, effort, and love into your pet's well-being, including daily exercise, playtime, training, and regular vet check-ups.</p>
+                <p>Owning a pet is a long-term commitment, sometimes spanning over a decade or more. Be prepared to invest time, effort, and love into your pet&#39;s well-being, including daily exercise, playtime, training, and regular vet check-ups.</p>
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Patience and Understanding:</p>
@@ -45,7 +45,7 @@ export default function AdoptionTipsPage() {
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Nutrition and Health:</p>
-                <p>Provide a balanced and appropriate diet for your pet's age, size, and specific dietary needs. Regular visits to the veterinarian are essential to keep them healthy and up-to-date on vaccinations, parasite control, and preventive care.</p>
+                <p>Provide a balanced and appropriate diet for your pet&#39;s age, size, and specific dietary needs. Regular visits to the veterinarian are essential to keep them healthy and up-to-date on vaccinations, parasite control, and preventive care.</p>
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Bonding and Affection:</p>
@@ -61,7 +61,7 @@ export default function AdoptionTipsPage() {
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Be Financially Prepared:</p>
-                <p>Pet ownership comes with expenses like food, grooming, toys, medical care, and unexpected emergencies. Ensure you have a budget in place to meet your pet's needs throughout their lifetime.</p>
+                <p>Pet ownership comes with expenses like food, grooming, toys, medical care, and unexpected emergencies. Ensure you have a budget in place to meet your pet&#39;s needs throughout their lifetime.</p>
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Spaying/Neutering:</p>
@@ -69,7 +69,7 @@ export default function AdoptionTipsPage() {
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Adoption Considerations:</p>
-                <p>Adopt from a reputable shelter or rescue organization. They can provide valuable information about the pet's background, behavior, and health status.</p>
+                <p>Adopt from a reputable shelter or rescue organization. They can provide valuable information about the pet&#39;s background, behavior, and health status.</p>
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Be Mindful of Allergies:</p>
@@ -81,7 +81,7 @@ export default function AdoptionTipsPage() {
               </li>
               <li className='mb-4'>
                 <p className='font-bold tracking-wide'>Enjoy the Journey:</p>
-                <p>Embrace the joy and love that comes with pet ownership. Cherish the unforgettable moments and memories you'll create with your new companion.</p>
+                <p>Embrace the joy and love that comes with pet ownership. Cherish the unforgettable moments and memories you&#39;ll create with your new companion.</p>
               </li>
             </ol>
             <p>

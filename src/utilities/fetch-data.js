@@ -26,9 +26,6 @@ export default async function fetchData(...args) {
 
   tokenObj2 = await fetchToken();
 
-  console.log('tokenObj2: ', tokenObj2);
-  console.log('...args: ', [...args]);
-
   let dataResponse;
 
   // Retrieve type of animal in city/state
@@ -52,8 +49,6 @@ export default async function fetchData(...args) {
   // Retrieve filtered animal results
   else if ([...args].length === 5) {
     if (typeof args[4] === 'object') {
-      console.log('args[4]: ', args[4]);
-
       const queryKeys = Object.keys(args[4]).slice();
       const queryValues = Object.values(args[4]).slice();
 
@@ -71,8 +66,6 @@ export default async function fetchData(...args) {
         });
       }
       else {
-        console.log('limit=50');
-
         dataResponse = await fetch(`https://api.petfinder.com/v2/animals?type=${args[0]}&location=${args[2]}, ${args[1]}&page=${args[3]}&limit=${args[4]}`, {
           method: 'GET',
           headers: {
@@ -107,7 +100,6 @@ export default async function fetchData(...args) {
     }
     else if (dataResponse.status === 401) {
       console.log('401');
-      // fetchData(...args);
       return 'Not found';
     }
     else if (dataResponse.status === 400) {
@@ -121,8 +113,6 @@ export default async function fetchData(...args) {
   }
     
   const data = await dataResponse.json();
-
-  // console.log('data: ', await data);
 
   return await data;
 }
