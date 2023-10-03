@@ -1,12 +1,11 @@
 import fetchData from '../../../utilities/fetch-data';
 import checkLiked from '@/utilities/check-liked';
 import LikeButton from '@/components/like-button';
-import SignInButtonPopup from '@/components/signin-button-popup';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Bree_Serif } from 'next/font/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faX, faEnvelope, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEnvelope, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
 import AnimalPhotoGallery from '@/components/animal-photo-gallery';
 import Link from 'next/link';
 import BackToSearchBtn from '@/components/back-to-search-btn';
@@ -23,8 +22,6 @@ export default async function PetPage({ params }) {
 
   const data = await fetchData(params.pet);
 
-  console.log('data: ', await data);
-  
   let description;
 
   if (await data.animal.description !== null) {

@@ -1,12 +1,9 @@
 import fetchData from '../../../../../utilities/fetch-data';
 import checkLiked from '@/utilities/check-liked';
 import Link from 'next/link';
-import SwipeButton from '@/components/swipe-button';
 import LikeButton from '@/components/like-button';
-import SigninForm from '@/components/signin-form';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import SignInButtonPopup from '@/components/signin-button-popup';
 import ChangePageButtons from '@/components/change-page-buttons';
 import SearchFiltersButton from '@/components/search-filters-button';
 import { Bree_Serif } from 'next/font/google';
