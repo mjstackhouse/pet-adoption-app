@@ -65,10 +65,10 @@ export default function SigninForm({ parameters }) {
           <img src='/google-logo-transparent-bg.png' className='inline h-[1.25rem] mr-4 align-text-bottom' />
           <span>Sign in with Google</span>
         </button>
-        <button id='facebook-signin-btn' className='sm:ml-2 block sm:inline font-bold tracking-wider bg-[#1877F2] hover:bg-darker-blue hover:shadow-md hover:underline underline-offset-4 text-white px-4 py-2 rounded-3xl mx-auto' onClick={() => { callbackUrl !== null ? signIn('facebook', { callbackUrl }) : signIn('facebook') }}>
+        {/* <button id='facebook-signin-btn' className='sm:ml-2 block sm:inline font-bold tracking-wider bg-[#1877F2] hover:bg-darker-blue hover:shadow-md hover:underline underline-offset-4 text-white px-4 py-2 rounded-3xl mx-auto' onClick={() => { callbackUrl !== null ? signIn('facebook', { callbackUrl }) : signIn('facebook') }}>
           <FontAwesomeIcon icon={faFacebook} className='h-[1.45rem] mr-2 align-bottom' />
           Continue with Facebook
-        </button>
+        </button> */}
       </div>
       <div className='basis-full flex justify-center items-center text-center mb-6'>
         <span className='grow border-b-2 border-darker-gray'></span>
