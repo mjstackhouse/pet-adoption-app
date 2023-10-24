@@ -219,8 +219,6 @@ export default function Search({ types }) {
     $('#animals-nearby-btn').attr('disabled', 'true');
     $('.animals-nearby-link').addClass('animate-pulse');
 
-    console.log('type argument: ', type);
-
     const spaceRegex = /\s+/;
     let noSpacesType = '';
 
@@ -238,12 +236,8 @@ export default function Search({ types }) {
       body: JSON.stringify({ type : noSpacesType !== '' ? noSpacesType : type, state : stateArg, city: cityArg })
     })
     .then(async (response) => {
-      console.log('response: ', response);
-
       const responseData = await response.json();
       let responseDataArr = [];
-
-      console.log('responseData: ', responseData);
 
       if (responseData.animals.length === 0) {
         $('#animals-nearby-btn').attr('disabled', 'true');
@@ -309,7 +303,7 @@ export default function Search({ types }) {
       return response;
     })
     .catch((error) => {
-      return console.log(error);
+      return console.error(error);
     })
   }
 
@@ -373,7 +367,7 @@ export default function Search({ types }) {
                           <select id='select' className='appearance-none w-full text-base h-[2.5rem] bg-white basis-full text-black px-3 py-1 group-hover:brightness-90' value={animalType} onChange={e => { setAnimalType(e.target.value); fetchAnimalsNearby(e.target.value, state, city); setSearchBackground(e.target.value); } } required>
                             <option value=''>Select an animal type</option>
                             { types.types.map((element) => {
-                              return <option value={`${element.name.toLowerCase()}`}>{element.name}</option>
+                              return <option key={`${element.name.toLowerCase()}`} value={`${element.name.toLowerCase()}`}>{element.name}</option>
                             }) }
                           </select>
                           <span id='search-dropdown' className='custom-arrow absolute top-0 right-0 block bg-blue h-full w-16 pointer-events-none rounded-r-3xl group-hover:brightness-90'></span>

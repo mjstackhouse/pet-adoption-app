@@ -1,12 +1,11 @@
 import fetchData from '../../../utilities/fetch-data';
 import checkLiked from '@/utilities/check-liked';
 import LikeButton from '@/components/like-button';
-import SignInButtonPopup from '@/components/signin-button-popup';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Bree_Serif } from 'next/font/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faX, faEnvelope, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEnvelope, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
 import AnimalPhotoGallery from '@/components/animal-photo-gallery';
 import Link from 'next/link';
 import BackToSearchBtn from '@/components/back-to-search-btn';
@@ -22,7 +21,7 @@ export default async function PetPage({ params }) {
   if (session) userLikes = await checkLiked();
 
   const data = await fetchData(params.pet);
-  
+
   let description;
 
   if (await data.animal.description !== null) {
@@ -78,7 +77,7 @@ export default async function PetPage({ params }) {
           </div>
         </div>
         <div className='fixed bottom-[1rem] left-0 right-0 sm:bottom-[90px] flex items-center justify-center z-40 xl:hidden'>
-          <LikeButton parameters={params} animalId={data.animal.id} liked={ userLikes !== undefined ? (userLikes.includes(data.animal.id) === true ? true : false) : false } />        
+          <LikeButton parameters={params} animalInfo={{ id: data.animal.id, info: { name: data.animal.name, photo: data.animal.primary_photo_cropped !== null ? data.animal.primary_photo_cropped : null, breed: `${data.animal.breeds.primary}${data.animal.breeds.secondary !== null ? ' Mix' : ''}`, ageGenderSpecies: `${data.animal.age} ${data.animal.gender} ${data.animal.species}`} }} liked={ userLikes !== undefined ? ((userLikes.filter((e) => e.id === data.animal.id)).length > 0 ? true : false) : false } />
         </div>
       </div>
     </div>

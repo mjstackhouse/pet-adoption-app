@@ -7,7 +7,7 @@ export default async function addLike(animalInfo) {
   const db = (await clientPromise).db('PetAdoptionUsers');
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect('/signin?callbackUrl=/account');
+  if (!session) redirect('/signin?callbackUrl=/');
   else {
     const userCursor = await db.collection('users').findOne({ 'email' : session.user.email });
 

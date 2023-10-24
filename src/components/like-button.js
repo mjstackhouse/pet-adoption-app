@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function LikeButton({ animalInfo, liked, parameters }) {
-
-  console.log('liked: ', liked);
   
   const [symbolColor, setSymbolColor] = useState(null);
   const [likedStatus, setLikedStatus] = useState(liked);
@@ -60,7 +58,7 @@ export default function LikeButton({ animalInfo, liked, parameters }) {
       return response;
     })
     .catch((error) => {
-      return console.log(error);
+      return console.error(error);
     })
   }
   

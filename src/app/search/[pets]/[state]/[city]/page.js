@@ -1,12 +1,9 @@
 import fetchData from '../../../../../utilities/fetch-data';
 import checkLiked from '@/utilities/check-liked';
 import Link from 'next/link';
-import SwipeButton from '@/components/swipe-button';
 import LikeButton from '@/components/like-button';
-import SigninForm from '@/components/signin-form';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import SignInButtonPopup from '@/components/signin-button-popup';
 import ChangePageButtons from '@/components/change-page-buttons';
 import SearchFiltersButton from '@/components/search-filters-button';
 import { Bree_Serif } from 'next/font/google';
@@ -39,7 +36,7 @@ export default async function Pets({ params, searchParams }) {
       <SearchFiltersButton parameters={params} searchParameters={searchParams} breeds={breedData} />
       <div id='pet-links-container' className='relative gap-y-8 md:gap-x-8 py-8 px-8 w-[100vw] md:max-w-[768px] lg:max-w-[960px] xl:w-[960px] xl:min-h-[calc(100vh-180px)] flex flex-wrap items-center overflow-x-hidden text-black self-start z-10 md:z-0'>
         { await data.animals.length > 0 ? await data.animals.map((element) => {
-          return <div id='pet-link' className='relative md:w-[336px] lg:w-[277px]'>
+          return <div key={data.animals.id} className='relative md:w-[336px] lg:w-[277px]'>
                   <div className='relative flex flex-wrap bg-white md:flex-col md:w-auto justify-center items-center min-h-[330px] md:max-h-[500px] text-center hover:shadow-md rounded-3xl overflow-y-hidden'>
                     <LikeButton parameters={params} animalInfo={{ id: element.id, info: { name: element.name, photo: element.primary_photo_cropped !== null ? element.primary_photo_cropped : null, breed: `${element.breeds.primary}${element.breeds.secondary !== null ? ' Mix' : ''}`, ageGenderSpecies: `${element.age} ${element.gender} ${element.species}`} }} liked={ userLikes !== undefined ? ((userLikes.filter((e) => e.id === element.id)).length > 0 ? true : false) : false } />
                     <Link href={`/animal/${element.id}`} className='basis-full flex flex-wrap content-normal bg-transparent items-center group'>

@@ -14,8 +14,6 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   
   const router = useRouter();
 
-  console.log('inside change-page-buttons');
-
   const [changePageBtnHeader, setChangePageBtnHeader] = useState('Continue looking by clicking below');
   const [nextPageNum, setNextPageNum] = useState(searchParameters.hasOwnProperty('page') ? Number(searchParameters.page) + 1 : 2);
   const [previousPageNum, setPreviousPageNum] = useState(searchParameters.hasOwnProperty('page') ? Number(searchParameters.page) - 1 : 0);
@@ -24,8 +22,6 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   const [nextBtnSearchParams, setNextBtnSearchParams] = useState({});
 
   useEffect(() => {
-    console.log('createNewSearchParams(buttonType) - searchParams: ', searchParameters);
-    // console.log("searchParameters.hasOwnProperty('page'): ", searchParameters.hasOwnProperty('page'));
     
     createNewSearchParams('previous');
     createNewSearchParams('next');
@@ -66,8 +62,6 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
   }
 
   function createNewSearchParams(buttonType) {
-    // console.log('createNewSearchParams(buttonType) - searchParams: ', searchParameters);
-
     if (Object.keys(searchParameters).length > 0
     && (Object.keys(searchParameters).includes('breed') || Object.keys(searchParameters).includes('age') || Object.keys(searchParameters).includes('size'))) {
 
@@ -81,8 +75,6 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
           queryParams[queryKeys[i]] = queryValues[i];
         }
       }
-
-      console.log('queryParams: ', queryParams);
 
       if (buttonType === 'previous') {
         if (Object.keys(searchParameters).includes('page')) {
@@ -137,8 +129,6 @@ export default function ChangePageButtons({ parameters, searchParameters, dataLe
         else {
           queryParams.page = 0;
         }
-
-        console.log('parameters: ', parameters);
 
         if (!(Object.keys(queryParams).includes('page'))) setPrevBtnSearchParams('');
         else setPrevBtnSearchParams(queryParams);

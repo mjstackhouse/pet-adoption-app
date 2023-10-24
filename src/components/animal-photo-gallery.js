@@ -38,7 +38,7 @@ export default function AnimalPhotoGallery({ photos, altInfo }) {
     <div className='w-full max-w-[calc(100vw-4rem)] xl:max-w-[calc(550px-2rem)] mx-auto flex flex-wrap sm:flex-nowrap xl:flex-wrap xl:place-content-start'>
       <div className='h-[50vh] gap-y-[1vh] overflow-x-hidden overflow-y-auto hidden sm:flex flex-col xl:hidden'>
        { photos.map((element, index) => {
-          return <button className='mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+          return <button key={index} className='mx-[1vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })
         }
       </div>
@@ -54,7 +54,7 @@ export default function AnimalPhotoGallery({ photos, altInfo }) {
         <div className='w-screen h-[calc(97.5vh-10rem)] md:w-[calc(97.5vw-9rem)] md:h-[calc(97.5vh-3rem)] flex flex-wrap xl:flex-nowrap m-auto place-content-center'>
           <div id='fullscreen-thumbnails-column' className='mr-[1.5vh] h-full w-[16.5vh] gap-y-[1.5vh] overflow-x-hidden overflow-y-auto whitespace-nowrap hidden xl:flex flex-col'>
             { photos.map((element, index) => {
-                return <button className='h-[15vh] w-[15vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+                return <button key={index} className='h-[15vh] w-[15vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
               })
             }
           </div>
@@ -65,7 +65,7 @@ export default function AnimalPhotoGallery({ photos, altInfo }) {
           </span>
           <div id='fullscreen-thumbnails-row' className='w-full gap-x-[2vh] flex overflow-x-auto overflow-y-hidden place-content-center whitespace-nowrap xl:hidden'>
             { photos.map((element, index) => {
-                return <button className='my-[2vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+                return <button key={index} className='my-[2vh] h-[15vh] w-[15vh] max-h-full max-w-full overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
               })
             }
           </div>
@@ -73,7 +73,7 @@ export default function AnimalPhotoGallery({ photos, altInfo }) {
       </div>
       <div className='bg-white h-[12vh] w-full overflow-x-auto overflow-y-hidden whitespace-nowrap sm:hidden xl:block mx-auto'>
        { photos.map((element, index) => {
-          return <button className='my-[1vh] mx-[0.5vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
+          return <button key={index} className='my-[1vh] mx-[0.5vh] h-[10vh] w-[10vh] overflow-hidden' onClick={(e) => { setSelectedImg(element.large); setFullSelectedImg(element.full); updateThumbnailOpacity(e.target.id) }}><img id={'thumbnail-' + index} src={element.small !== null ? element.small : null} alt={`${altInfo}`} className={`${'thumbnail-' + index} thumbnail w-full h-full object-cover hover:object-scale-down`}/></button>
         })
         }
       </div>
